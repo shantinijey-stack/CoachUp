@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply font-body text-deepsea antialiased;
+    background: linear-gradient(160deg, #fff9f0 0%, #fdeedd 45%, #e6f7f5 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
