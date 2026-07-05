@@ -44,6 +44,7 @@ export default function QuestQuestion({
   onNext,
   onBack,
   progress,
+  extra,
 }: QuestQuestionProps) {
   return (
     <Screen
@@ -77,6 +78,8 @@ export default function QuestQuestion({
         </div>
         <SpeechBubble>{scene}</SpeechBubble>
       </div>
+
+      {extra}
 
       {question && (
         <p className="font-display font-bold text-deepsea/80 mb-3">{question}</p>

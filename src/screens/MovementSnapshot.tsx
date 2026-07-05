@@ -1,3 +1,5 @@
+import ActivityGuide from "../components/ActivityGuide";
+import TimerBox from "../components/TimerBox";
 import { MOVEMENT_ACTIVITIES } from "../data/content";
 import type { AgeBand, Answers, Level } from "../types";
 import QuestQuestion from "./QuestQuestion";
@@ -31,6 +33,12 @@ export default function MovementSnapshot({
       title={activity.title}
       scene={activity.scene}
       question={activity.question}
+      extra={
+        <>
+          <ActivityGuide activity={activity} />
+          <TimerBox timer={activity.timer} />
+        </>
+      }
       options={activity.options.map((o) => ({
         id: String(o.level),
         emoji: o.emoji,
