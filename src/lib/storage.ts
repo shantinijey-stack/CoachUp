@@ -24,6 +24,9 @@ export const INITIAL_STATE: AppState = {
   courage: {},
   seenBadges: [],
   questLevels: {},
+  season: 1,
+  seasonHistory: [],
+  champion: false,
 };
 
 export function loadState(): AppState {
@@ -49,6 +52,10 @@ export function loadState(): AppState {
       courage: { ...parsed.courage },
       seenBadges: Array.isArray(parsed.seenBadges) ? parsed.seenBadges : [],
       questLevels: { ...parsed.questLevels },
+      season: parsed.season ?? 1,
+      seasonHistory: Array.isArray(parsed.seasonHistory) ? parsed.seasonHistory : [],
+      lastGradMovement: parsed.lastGradMovement,
+      champion: !!parsed.champion,
     };
   } catch {
     return INITIAL_STATE;

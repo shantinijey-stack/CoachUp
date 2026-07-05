@@ -68,7 +68,8 @@ export type Screen =
   | "dashboard"
   | "plan"
   | "badges"
-  | "growth";
+  | "growth"
+  | "graduation";
 
 export interface AppState {
   screen: Screen;
@@ -88,6 +89,22 @@ export interface AppState {
   seenBadges: string[];
   /** Per-quest training level: quest id → 1 Rookie / 2 Pro / 3 Master. */
   questLevels: Record<string, QuestLevel>;
+  /** Current season: 1 Rookie / 2 Pro / 3 Master. */
+  season: number;
+  /** Archived stats from graduated seasons (keeps badges permanent). */
+  seasonHistory: SeasonRecord[];
+  /** Movement marks from the last passed graduation — the next baseline. */
+  lastGradMovement?: Record<Domain, Level>;
+  /** Completed the Master Season graduation. */
+  champion: boolean;
+}
+
+export interface SeasonRecord {
+  season: number;
+  quests: number;
+  weeks: number;
+  courage: number;
+  checkIns: number;
 }
 
 export type QuestLevel = 1 | 2 | 3;

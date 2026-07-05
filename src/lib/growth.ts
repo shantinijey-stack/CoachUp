@@ -42,6 +42,8 @@ export interface GrowthReportData {
   courageStrengths: string[];
   growth: { emoji: string; title: string; detail: string };
   exploreOptions: ExploreOption[];
+  /** Champion-only: real-world sport doors matched to top strengths. */
+  sportDoors?: ExploreOption[];
   effort: { quests: number; courage: number; weeks: number; checkIns: number };
 }
 
@@ -62,6 +64,29 @@ const FAMILY: Record<Domain, ExploreOption> = {
     emoji: "🧗",
     title: "The Balance & Body-Control family",
     examples: "climbing, gymnastics-style movement, martial-arts-style play, yoga adventures",
+  },
+};
+
+/**
+ * Champion-only sport doors. Named sports appear ONLY after the full
+ * three-season journey, as invitations grounded in demonstrated
+ * strengths — plural options, never a single prediction.
+ */
+const SPORT_DOORS: Record<Domain, ExploreOption> = {
+  locomotor: {
+    emoji: "⚡",
+    title: "Doors where Zoom Power shines",
+    examples: "athletics, football, tag rugby, tennis, dodgeball",
+  },
+  objectControl: {
+    emoji: "🎯",
+    title: "Doors where Ball Magic shines",
+    examples: "volleyball, basketball, cricket, handball, badminton",
+  },
+  stability: {
+    emoji: "🧗",
+    title: "Doors where Balance Power shines",
+    examples: "gymnastics, climbing, martial arts, skateboarding, surfing",
   },
 };
 
@@ -94,6 +119,7 @@ export function buildGrowthReport(
   courage: Record<number, CourageAnswer>,
   questLevels: Record<string, QuestLevel>,
   checkIns: Record<number, Level>,
+  opts: { champion?: boolean; history?: { quests: number; weeks: number; courage: number; checkIns: number } } = {},
 ): GrowthReportData {
   // Combine the Discovery Day score with trained quest levels so the
   // report reflects both the starting spark and the practice since.
@@ -143,10 +169,15 @@ export function buildGrowthReport(
     [0, 1, 2].every((q) => planProgress[`w${w}-q${q}`]),
   ).length;
 
+  const history = opts.history ?? { quests: 0, weeks: 0, courage: 0, checkIns: 0 };
+
   return {
-    trainerLevel: trainerLevelFor(questLevels),
+    trainerLevel: opts.champion
+      ? { name: "CoachUp Champion", emoji: "🏆", blurb: "Every season conquered — a true movement adventurer!" }
+      : trainerLevelFor(questLevels),
     strengths: [strengthFor(top1.domain), strengthFor(top2.domain)],
     courageStrengths,
+    sportDoors: opts.champion ? [SPORT_DOORS[top1.domain], SPORT_DOORS[top2.domain]] : undefined,
     growth: {
       emoji: DOMAIN_INFO[lowest].emoji,
       title: `${DOMAIN_INFO[lowest].kidName} — the next quest`,
@@ -154,10 +185,10 @@ export function buildGrowthReport(
     },
     exploreOptions,
     effort: {
-      quests: Object.values(planProgress).filter(Boolean).length,
-      courage: Object.values(courage).filter((c) => c?.missionDone).length,
-      weeks,
-      checkIns: Object.keys(checkIns).length,
+      quests: Object.values(planProgress).filter(Boolean).length + history.quests,
+      courage: Object.values(courage).filter((c) => c?.missionDone).length + history.courage,
+      weeks: weeks + history.weeks,
+      checkIns: Object.keys(checkIns).length + history.checkIns,
     },
   };
 }

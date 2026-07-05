@@ -209,7 +209,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
   ],
 };
 
-/** Fun names for the 12 weeks of the journey — shared across modules. */
+/** Fun names for the 12 weeks of each season — shared across modules. */
 export const WEEK_THEMES: { title: string; emoji: string }[] = [
   { title: "The First Spark", emoji: "✨" },
   { title: "The Bouncy Trail", emoji: "🦘" },
@@ -224,3 +224,39 @@ export const WEEK_THEMES: { title: string; emoji: string }[] = [
   { title: "The Master Quest", emoji: "👑" },
   { title: "The Grand Festival", emoji: "🎪" },
 ];
+
+const WEEK_THEMES_PRO: { title: string; emoji: string }[] = [
+  { title: "The Turbo Spark", emoji: "⚡" },
+  { title: "The Double Dare", emoji: "🎲" },
+  { title: "The Slick Moves", emoji: "🕺" },
+  { title: "The Pro Badge", emoji: "🎖️" },
+  { title: "The Combo Craft", emoji: "🧩" },
+  { title: "The Sharp Eye", emoji: "🦅" },
+  { title: "The Boss Level", emoji: "🎮" },
+  { title: "The Blazing Star", emoji: "🌠" },
+  { title: "The Iron Path", emoji: "🛤️" },
+  { title: "The Storm Rider", emoji: "🌊" },
+  { title: "The Elite Quest", emoji: "🗡️" },
+  { title: "The Pro Festival", emoji: "🎆" },
+];
+
+const WEEK_THEMES_MASTER: { title: string; emoji: string }[] = [
+  { title: "The Master Key", emoji: "🗝️" },
+  { title: "The Silent Ninja", emoji: "🥷" },
+  { title: "The Perfect Ten", emoji: "🔟" },
+  { title: "The Gold Standard", emoji: "🏵️" },
+  { title: "The Legend Trail", emoji: "🐉" },
+  { title: "The Laser Focus", emoji: "🎯" },
+  { title: "The Summit Push", emoji: "🏔️" },
+  { title: "The Diamond Move", emoji: "💎" },
+  { title: "The Final Form", emoji: "🦋" },
+  { title: "The Hall of Fame", emoji: "🏛️" },
+  { title: "The Victory March", emoji: "🥁" },
+  { title: "The Grand Finale", emoji: "🎇" },
+];
+
+export const WEEK_THEMES_BY_SEASON: Record<number, { title: string; emoji: string }[]> = {
+  1: WEEK_THEMES,
+  2: WEEK_THEMES_PRO,
+  3: WEEK_THEMES_MASTER,
+};

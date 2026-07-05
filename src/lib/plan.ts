@@ -1,13 +1,17 @@
 import { MODULES } from "../data/content";
-import { QUESTS, WEEK_THEMES, type Quest } from "../data/quests";
-import type { ComfortStyle, DnaResult, Domain, Level, SocialStyle } from "../types";
+import { QUESTS, WEEK_THEMES_BY_SEASON, type Quest } from "../data/quests";
+import type { ComfortStyle, DnaResult, Domain, Level, QuestLevel, SocialStyle } from "../types";
 
 export interface PlanQuest {
   /** Stable key used for progress persistence, e.g. "w3-q1". */
   key: string;
   quest: Quest;
-  /** Final-phase quests unlock their harder twist. */
-  levelUp: boolean;
+  /**
+   * Minimum twist tier this slot plays at (1 base / 2 pro / 3 master).
+   * Rookie Season ramps to Pro in weeks 9–12; Pro Season plays Pro
+   * throughout and ramps to Master; Master Season is Master everywhere.
+   */
+  tierFloor: QuestLevel;
 }
 
 export interface PlanWeek {
@@ -64,12 +68,18 @@ function domainPattern(week: number, strength: Domain, growth: Domain, third: Do
   return [growth, strength, third];
 }
 
+function tierFloorFor(season: number, week: number): QuestLevel {
+  if (season >= 3) return 3;
+  if (season === 2) return week >= 9 ? 3 : 2;
+  return week >= 9 ? 2 : 1;
+}
+
 /**
- * Builds the deterministic 12-week plan from a DNA result. The same
- * result always produces the same plan (no randomness), so the journey
- * stays stable across sessions.
+ * Builds the deterministic 12-week plan from a DNA result and season.
+ * The same inputs always produce the same plan (no randomness), so the
+ * journey stays stable across sessions.
  */
-export function generatePlan(result: DnaResult): TrainingPlan {
+export function generatePlan(result: DnaResult, season: number = 1): TrainingPlan {
   const { strengthDomain: strength, growthDomain: growth } = result;
   const third = (["locomotor", "objectControl", "stability"] as Domain[]).find(
     (d) => d !== strength && d !== growth,
@@ -88,11 +98,11 @@ export function generatePlan(result: DnaResult): TrainingPlan {
     return quest;
   };
 
+  const themes = WEEK_THEMES_BY_SEASON[Math.min(3, Math.max(1, season))];
   const weeks: PlanWeek[] = Array.from({ length: 12 }, (_, i) => {
     const week = i + 1;
     const phase = mod.weeks[Math.min(2, Math.floor(i / 4))];
-    const theme = WEEK_THEMES[i];
-    const isFinalPhase = week >= 9;
+    const theme = themes[i];
 
     return {
       week,
@@ -104,7 +114,7 @@ export function generatePlan(result: DnaResult): TrainingPlan {
       quests: domainPattern(week, strength, growth, third).map((domain, q) => ({
         key: `w${week}-q${q}`,
         quest: nextQuest(domain),
-        levelUp: isFinalPhase,
+        tierFloor: tierFloorFor(season, week),
       })),
     };
   });

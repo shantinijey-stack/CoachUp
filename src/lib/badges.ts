@@ -33,6 +33,10 @@ export interface BadgeInputs {
   planProgress: Record<string, boolean>;
   courage: Record<number, CourageAnswer>;
   checkIns: Record<number, Level>;
+  /** Totals from previous (graduated) seasons — badges never regress. */
+  historyQuests?: number;
+  historyCourage?: number;
+  historyCheckIns?: number;
 }
 
 const weekComplete = (progress: Record<string, boolean>, week: number) =>
@@ -53,10 +57,18 @@ export function computeStickers(progress: Record<string, boolean>): StickerStatu
 }
 
 export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
-  const { hasResult, planProgress, courage, checkIns } = inputs;
-  const movementDone = Object.values(planProgress).filter(Boolean).length;
-  const courageDone = Object.values(courage).filter((c) => c?.missionDone).length;
-  const checkInCount = Object.keys(checkIns).length;
+  const {
+    hasResult,
+    planProgress,
+    courage,
+    checkIns,
+    historyQuests = 0,
+    historyCourage = 0,
+    historyCheckIns = 0,
+  } = inputs;
+  const movementDone = Object.values(planProgress).filter(Boolean).length + historyQuests;
+  const courageDone = Object.values(courage).filter((c) => c?.missionDone).length + historyCourage;
+  const checkInCount = Object.keys(checkIns).length + historyCheckIns;
 
   return [
     {
@@ -79,7 +91,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       id: "week-one",
       name: "Week One Wonder",
       emoji: "⭐",
-      earned: weekComplete(planProgress, 1),
+      earned: weekComplete(planProgress, 1) || historyQuests >= 36,
       description: "Finished all of Week 1 — The First Spark is lit!",
       hint: "Finish all three Week 1 quests.",
     },

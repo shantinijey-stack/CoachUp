@@ -13,6 +13,8 @@ interface GrowthReportProps {
   courage: AppState["courage"];
   questLevels: AppState["questLevels"];
   checkIns: AppState["checkIns"];
+  champion: boolean;
+  seasonHistory: AppState["seasonHistory"];
   onBack: () => void;
 }
 
@@ -24,11 +26,25 @@ export default function GrowthReport({
   courage,
   questLevels,
   checkIns,
+  champion,
+  seasonHistory,
   onBack,
 }: GrowthReportProps) {
   const guide = useGuide();
   const name = profile.name.trim() || "Your explorer";
-  const report = buildGrowthReport(result, planProgress, courage, questLevels, checkIns);
+  const history = seasonHistory.reduce(
+    (acc, s) => ({
+      quests: acc.quests + s.quests,
+      weeks: acc.weeks + s.weeks,
+      courage: acc.courage + s.courage,
+      checkIns: acc.checkIns + s.checkIns,
+    }),
+    { quests: 0, weeks: 0, courage: 0, checkIns: 0 },
+  );
+  const report = buildGrowthReport(result, planProgress, courage, questLevels, checkIns, {
+    champion,
+    history,
+  });
 
   return (
     <Screen onBack={onBack}>
@@ -134,6 +150,34 @@ export default function GrowthReport({
             ))}
           </div>
         </Card>
+
+        {/* Champion-only: real-world sport doors */}
+        {report.sportDoors && (
+          <Card delay={0.4} className="!border-2 !border-sunshine">
+            <h3 className="font-display font-bold text-deepsea mb-1">
+              🚪 Champion's doors: real-world sports to try
+            </h3>
+            <p className="text-xs text-deepsea/50 mb-3">
+              Three seasons of evidence say these doors are worth knocking on. They're
+              invitations, not predictions — try a few, keep whichever one {name} begs to go
+              back to.
+            </p>
+            <div className="space-y-2">
+              {report.sportDoors.map((d) => (
+                <div key={d.title} className="flex items-start gap-3 bg-sunshine/15 rounded-2xl p-3">
+                  <span className="text-2xl">{d.emoji}</span>
+                  <div>
+                    <p className="font-display font-bold text-sm text-deepsea">{d.title}</p>
+                    <p className="text-xs text-deepsea/60 leading-snug">{d.examples}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-deepsea/60 mt-3 text-center font-bold">
+              🎟️ A trial class is the perfect first knock.
+            </p>
+          </Card>
+        )}
 
         <p className="text-center text-xs text-deepsea/40 px-6">
           {guide.emoji} {guide.firstName} says: this report celebrates {name} exactly as they

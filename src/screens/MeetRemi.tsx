@@ -44,7 +44,7 @@ export default function MeetRemi({
         </div>
 
         {/* Guide picker */}
-        <div className="grid grid-cols-4 gap-2 w-full max-w-sm">
+        <div className="grid grid-cols-2 gap-2 w-full max-w-sm">
           {GUIDES.map((g, i) => (
             <motion.button
               key={g.id}
@@ -53,17 +53,20 @@ export default function MeetRemi({
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 * i }}
-              whileTap={{ scale: 0.92 }}
+              whileTap={{ scale: 0.95 }}
               aria-pressed={guideId === g.id}
-              className={`rounded-2xl p-2.5 border-2 transition-all ${
+              className={`flex items-center gap-2.5 rounded-2xl p-3 border-2 text-left transition-all ${
                 guideId === g.id
                   ? "bg-gradient-to-b from-sunshine/30 to-lagoon/20 border-lagoon shadow-soft"
                   : "bg-white border-transparent shadow-card hover:border-lagoon/30"
               }`}
             >
-              <span className="block text-3xl mb-1">{g.emoji}</span>
-              <span className="block font-display font-bold text-xs text-deepsea leading-tight">
-                {g.firstName}
+              <span className="text-3xl">{g.emoji}</span>
+              <span className="min-w-0">
+                <span className="block font-display font-bold text-sm text-deepsea leading-tight">
+                  {g.firstName}
+                </span>
+                <span className="block text-[10px] font-bold text-deepsea/45">{g.style}</span>
               </span>
             </motion.button>
           ))}
@@ -74,8 +77,8 @@ export default function MeetRemi({
         <div className="space-y-3 w-full max-w-sm text-left" key={guideId}>
           <SpeechBubble>
             Hi <strong>{name}</strong>! I'm <strong>{guide.firstName}</strong> —{" "}
-            {guide.vibe}! Today is <strong>Discovery Day</strong>, my favorite
-            day of the whole year! 🎈
+            {guide.vibe}! <em>"{guide.motto}"</em> Today is{" "}
+            <strong>Discovery Day</strong>, my favorite day of the whole year! 🎈
           </SpeechBubble>
           <motion.div
             initial={{ opacity: 0 }}

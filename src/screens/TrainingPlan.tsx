@@ -11,6 +11,7 @@ import { COURAGE_QUESTS, COURAGE_STAGES } from "../data/courage";
 import { QUESTS, type Quest } from "../data/quests";
 import type { GuideInfo } from "../data/guides";
 import { computeBadges } from "../lib/badges";
+import { seasonReadiness, SEASONS } from "../lib/graduation";
 import { LEVEL_INFO, trainerLevelFor } from "../lib/growth";
 import { generatePlan, type PlanWeek } from "../lib/plan";
 import type { ChildProfile, CourageAnswer, DnaResult, Level, QuestLevel } from "../types";
@@ -24,6 +25,10 @@ interface TrainingPlanProps {
   courage: Record<number, CourageAnswer>;
   seenBadges: string[];
   questLevels: Record<string, QuestLevel>;
+  season: number;
+  champion: boolean;
+  historyQuests: number;
+  onStartGraduation: () => void;
   onLevelUp: (questId: string) => void;
   onToggleQuest: (key: string) => void;
   onSwapQuest: (key: string, questId: string) => void;
@@ -44,12 +49,6 @@ const CHECK_IN_OPTIONS: { value: Level; emoji: string; label: string }[] = [
   { value: 2, emoji: "😊", label: "Good fun" },
   { value: 3, emoji: "🤩", label: "Loved it!" },
 ];
-
-const CHECK_IN_REPLIES: Record<Level, string> = {
-  1: "Thanks for telling me 💛 Next week will be gentler — shorter quests, extra celebrations.",
-  2: "Perfect — we'll keep this happy pace going! 😊",
-  3: "WOW! Next week we bring extra challenges, champion! 🚀",
-};
 
 const ADAPTIVE_TIPS: Record<Level, string> = {
   1: "Last week felt like a big climb, so this week let's shrink each quest to five fun minutes. Small steps, big wins!",
@@ -77,7 +76,7 @@ function nextSwapOption(current: Quest, weekQuestIds: string[]): Quest {
 
 function QuestRow({
   quest,
-  levelUp,
+  tierFloor,
   level,
   done,
   expanded,
@@ -87,7 +86,7 @@ function QuestRow({
   onLevelUp,
 }: {
   quest: Quest;
-  levelUp: boolean;
+  tierFloor: QuestLevel;
   level: QuestLevel;
   done: boolean;
   expanded: boolean;
@@ -97,8 +96,8 @@ function QuestRow({
   onLevelUp: () => void;
 }) {
   const domain = DOMAIN_INFO[quest.domain];
-  const showPro = level >= 2 || levelUp;
-  const showMaster = level === 3;
+  const showPro = level >= 2 || tierFloor >= 2;
+  const showMaster = level === 3 || tierFloor >= 3;
   const nextLevel = LEVEL_INFO[Math.min(3, level + 1) as QuestLevel];
 
   return (
@@ -119,7 +118,11 @@ function QuestRow({
           <span className="flex-1 min-w-0">
             <span className={`block font-display font-bold text-sm ${done ? "text-deepsea/40 line-through" : "text-deepsea"}`}>
               {quest.title}
-              {levelUp && <span className="ml-1.5 text-xs text-berry font-extrabold no-underline">LEVEL UP!</span>}
+              {tierFloor >= 2 && (
+                <span className="ml-1.5 text-xs text-berry font-extrabold no-underline">
+                  {tierFloor >= 3 ? "MASTER!" : "PRO!"}
+                </span>
+              )}
             </span>
             <span className="block text-[11px] font-bold text-deepsea/40">
               {domain.emoji} {domain.kidName} · {LEVEL_INFO[level].emoji} {LEVEL_INFO[level].name}
@@ -222,7 +225,7 @@ function CheckInBox({
       {answer ? (
         <p className="text-xs text-deepsea/80 leading-snug">
           <span className="font-bold">{guide.emoji} {guide.firstName}:</span>{" "}
-          {CHECK_IN_REPLIES[answer]}
+          {guide.reactions[answer]}
         </p>
       ) : (
         <>
@@ -276,7 +279,7 @@ function WeekCard({
   index,
 }: {
   week: PlanWeek;
-  quests: { key: string; quest: Quest; levelUp: boolean }[];
+  quests: { key: string; quest: Quest; tierFloor: QuestLevel }[];
   tip: string;
   tipAdapted: boolean;
   isCurrent: boolean;
@@ -346,7 +349,7 @@ function WeekCard({
           <QuestRow
             key={pq.key}
             quest={pq.quest}
-            levelUp={pq.levelUp}
+            tierFloor={pq.tierFloor}
             level={questLevels[pq.quest.id] ?? 1}
             done={!!progress[pq.key]}
             expanded={expandedKey === pq.key}
@@ -389,6 +392,10 @@ export default function TrainingPlan({
   courage,
   seenBadges,
   questLevels,
+  season,
+  champion,
+  historyQuests,
+  onStartGraduation,
   onLevelUp,
   onToggleQuest,
   onSwapQuest,
@@ -399,7 +406,9 @@ export default function TrainingPlan({
   onOpenBadges,
   onBack,
 }: TrainingPlanProps) {
-  const plan = useMemo(() => generatePlan(result), [result]);
+  const plan = useMemo(() => generatePlan(result, season), [result, season]);
+  const seasonInfo = SEASONS[Math.min(3, Math.max(1, season))];
+  const readiness = seasonReadiness(season, progress, questLevels);
   const guide = useGuide();
   const [expandedKey, setExpandedKey] = useState<string | null>(null);
   const [celebrating, setCelebrating] = useState(false);
@@ -417,7 +426,7 @@ export default function TrainingPlan({
           const swapped = swappedId
             ? QUESTS[slot.quest.domain].find((q) => q.id === swappedId)
             : undefined;
-          return { key: slot.key, quest: swapped ?? slot.quest, levelUp: slot.levelUp };
+          return { key: slot.key, quest: swapped ?? slot.quest, tierFloor: slot.tierFloor };
         }),
       })),
     [plan, swaps],
@@ -430,7 +439,13 @@ export default function TrainingPlan({
   const courageDone = COURAGE_QUESTS.filter((q) => courage[q.week]?.missionDone).length;
 
   // New-badge celebration: show the first earned-but-not-yet-celebrated badge.
-  const badges = computeBadges({ hasResult: true, planProgress: progress, courage, checkIns });
+  const badges = computeBadges({
+    hasResult: true,
+    planProgress: progress,
+    courage,
+    checkIns,
+    historyQuests,
+  });
   const newBadge = badges.find((b) => b.earned && !seenBadges.includes(b.id));
   useEffect(() => {
     if (!newBadge) return;
@@ -494,10 +509,11 @@ export default function TrainingPlan({
               {mod.emoji} {mod.name}
             </p>
             <h2 className="font-display font-extrabold text-2xl leading-tight">
-              {name}'s 12-Week Adventure
+              {name}'s {seasonInfo.name}
             </h2>
             <p className="text-xs font-bold mt-0.5 opacity-90">
-              {trainerLevelFor(questLevels).emoji} {trainerLevelFor(questLevels).name}
+              {seasonInfo.emoji} {seasonInfo.blurb} · {trainerLevelFor(questLevels).emoji}{" "}
+              {trainerLevelFor(questLevels).name}
             </p>
           </div>
         </div>
@@ -553,6 +569,63 @@ export default function TrainingPlan({
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Graduation gate */}
+      <div className="bg-white/90 rounded-3xl shadow-card p-4 mb-4">
+        {champion ? (
+          <div className="text-center">
+            <p className="text-3xl mb-1">👑🎇</p>
+            <p className="font-display font-extrabold text-deepsea">CoachUp Champion!</p>
+            <p className="text-xs text-deepsea/60">
+              Every season conquered — keep playing favorites, beating personal bests and
+              exploring real-world sports.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <p className="text-xs font-bold uppercase tracking-widest text-tangerine">
+                🎓 Graduation Adventure
+              </p>
+              <span className="text-[10px] font-extrabold bg-cream rounded-full px-2.5 py-1 text-deepsea/60 uppercase">
+                → {seasonInfo.next}
+              </span>
+            </div>
+            <div className="space-y-1.5 mb-3">
+              <div className="flex items-center gap-2 text-xs text-deepsea/70">
+                <span className={readiness.questsDone >= readiness.questsNeeded ? "" : "opacity-60"}>
+                  {readiness.questsDone >= readiness.questsNeeded ? "✅" : "⬜"}
+                </span>
+                Play {readiness.questsNeeded} quests this season ({readiness.questsDone}/{readiness.questsNeeded})
+              </div>
+              <div className="flex items-center gap-2 text-xs text-deepsea/70">
+                <span className={readiness.leveled >= readiness.leveledNeeded ? "" : "opacity-60"}>
+                  {readiness.leveled >= readiness.leveledNeeded ? "✅" : "⬜"}
+                </span>
+                Smash {readiness.leveledNeeded} quests to {readiness.levelName} ({readiness.leveled}/{readiness.leveledNeeded})
+              </div>
+              <div className="flex items-center gap-2 text-xs text-deepsea/70">
+                <span className="opacity-60">🎓</span>
+                Then replay the 3 Discovery games — compared only to {name}'s own past marks
+              </div>
+            </div>
+            {readiness.eligible ? (
+              <button
+                type="button"
+                onClick={onStartGraduation}
+                className="w-full bg-gradient-to-r from-tangerine to-coral text-white rounded-2xl py-2.5 font-display font-bold text-sm shadow-pop hover:brightness-105 transition-all"
+              >
+                Begin the Graduation Adventure! 🎓
+              </button>
+            ) : (
+              <p className="text-[11px] text-deepsea/45 text-center">
+                Keep questing — the Graduation Adventure unlocks when both boxes are ticked. No
+                rush, no pressure. 💛
+              </p>
+            )}
+          </>
+        )}
       </div>
 
       {/* Journey */}

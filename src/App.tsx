@@ -7,6 +7,7 @@ import { scoreDiscoveryDay } from "./lib/scoring";
 import { clearState, INITIAL_STATE, loadState, saveState } from "./lib/storage";
 import BadgeBook from "./screens/BadgeBook";
 import Celebration from "./screens/Celebration";
+import GraduationDay from "./screens/GraduationDay";
 import GrowthReport from "./screens/GrowthReport";
 import ComfortMap from "./screens/ComfortMap";
 import Dashboard from "./screens/Dashboard";
@@ -17,7 +18,7 @@ import MovementSnapshot from "./screens/MovementSnapshot";
 import QuickStart from "./screens/QuickStart";
 import SparkSnapshot from "./screens/SparkSnapshot";
 import TrainingPlan from "./screens/TrainingPlan";
-import type { AgeBand, AppState, Level, SocialStyle } from "./types";
+import type { AgeBand, AppState, Domain, Level, SocialStyle } from "./types";
 
 /**
  * Progress model: the adventure has 12 "beats" —
@@ -56,7 +57,7 @@ export default function App() {
 
   const result = useMemo(
     () =>
-      ["report", "dashboard", "plan", "badges", "growth"].includes(state.screen)
+      ["report", "dashboard", "plan", "badges", "growth", "graduation"].includes(state.screen)
         ? scoreDiscoveryDay(state.profile, state.answers)
         : null,
     [state.screen, state.profile, state.answers],
@@ -133,6 +134,46 @@ export default function App() {
     setBadgeReturnTo(from);
     go("badges");
   };
+
+  /**
+   * Passing a Graduation Adventure: archive this season's stats (so
+   * badges and lifetime totals never regress), advance the season with
+   * a fresh plan, and store the new movement marks as the next baseline.
+   * Quest levels, badges, guide and profile all carry over.
+   */
+  const completeGraduation = (movement: Record<Domain, Level>) =>
+    setState((s) => {
+      const record = {
+        season: s.season,
+        quests: Object.values(s.planProgress).filter(Boolean).length,
+        weeks: Array.from({ length: 12 }, (_, i) => i + 1).filter((w) =>
+          [0, 1, 2].every((q) => s.planProgress[`w${w}-q${q}`]),
+        ).length,
+        courage: Object.values(s.courage).filter((c) => c?.missionDone).length,
+        checkIns: Object.keys(s.checkIns).length,
+      };
+      if (s.season >= 3) {
+        return {
+          ...s,
+          champion: true,
+          lastGradMovement: movement,
+          seasonHistory: [...s.seasonHistory, record],
+          screen: "growth" as const,
+        };
+      }
+      return {
+        ...s,
+        season: s.season + 1,
+        seasonHistory: [...s.seasonHistory, record],
+        lastGradMovement: movement,
+        planProgress: {},
+        checkIns: {},
+        swaps: {},
+        courage: {},
+        screen: "plan" as const,
+        subIndex: 0,
+      };
+    });
 
   const levelUpQuest = (questId: string) =>
     setState((s) => ({
@@ -283,6 +324,10 @@ export default function App() {
             courage={state.courage}
             seenBadges={state.seenBadges}
             questLevels={state.questLevels}
+            season={state.season}
+            champion={state.champion}
+            historyQuests={state.seasonHistory.reduce((n, r) => n + r.quests, 0)}
+            onStartGraduation={() => go("graduation")}
             onLevelUp={levelUpQuest}
             onToggleQuest={toggleQuest}
             onSwapQuest={swapQuest}
@@ -304,6 +349,9 @@ export default function App() {
               planProgress: state.planProgress,
               courage: state.courage,
               checkIns: state.checkIns,
+              historyQuests: state.seasonHistory.reduce((n, r) => n + r.quests, 0),
+              historyCourage: state.seasonHistory.reduce((n, r) => n + r.courage, 0),
+              historyCheckIns: state.seasonHistory.reduce((n, r) => n + r.checkIns, 0),
             }}
             onSeen={badgesSeen}
             onBack={() => go(badgeReturnTo)}
@@ -319,7 +367,20 @@ export default function App() {
             courage={state.courage}
             questLevels={state.questLevels}
             checkIns={state.checkIns}
+            champion={state.champion}
+            seasonHistory={state.seasonHistory}
             onBack={() => go("dashboard")}
+          />
+        )}
+
+        {state.screen === "graduation" && result && (
+          <GraduationDay
+            key="graduation"
+            profile={state.profile}
+            season={state.season}
+            baseline={state.lastGradMovement ?? result.domainScores}
+            onGraduate={completeGraduation}
+            onBack={() => go("plan")}
           />
         )}
       </AnimatePresence>
