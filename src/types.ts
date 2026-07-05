@@ -26,6 +26,8 @@ export interface ChildProfile {
   activitiesTried: string[];
   parentGoal: string;
   healthNote: string;
+  /** The child's chosen adventure guide (see data/guides.ts). */
+  guideId: string;
 }
 
 export interface Answers {
@@ -74,4 +76,8 @@ export interface AppState {
   answers: Answers;
   /** Completed training-plan quests, keyed like "w3-q1". */
   planProgress: Record<string, boolean>;
+  /** Weekly check-in answers: week number → how it felt (1 gentle / 2 good / 3 fire). */
+  checkIns: Record<number, Level>;
+  /** Quest swaps chosen by parents: plan slot key → replacement quest id. */
+  swaps: Record<string, string>;
 }

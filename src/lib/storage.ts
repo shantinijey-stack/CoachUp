@@ -12,12 +12,15 @@ export const INITIAL_STATE: AppState = {
     activitiesTried: [],
     parentGoal: "",
     healthNote: "",
+    guideId: "remi",
   },
   answers: {
     movement: {},
     comfort: {},
   },
   planProgress: {},
+  checkIns: {},
+  swaps: {},
 };
 
 export function loadState(): AppState {
@@ -38,6 +41,8 @@ export function loadState(): AppState {
         social: parsed.answers?.social,
       },
       planProgress: { ...parsed.planProgress },
+      checkIns: { ...parsed.checkIns },
+      swaps: { ...parsed.swaps },
     };
   } catch {
     return INITIAL_STATE;

@@ -47,7 +47,10 @@ npm run preview   # serve the production build
 7. **Celebration** — confetti! 🎉
 8. **CoachUp DNA™ Report** — strength, growth quest, comfort style, spark, recommended module, parent explanation, coach notes
 9. **Parent Dashboard** — profile card, 12-week journey preview, growth quest, comfort notes, coach notes, book-a-trial CTA
-10. **12-Week Adventure Plan** — personalized home training plan: 3 quests/week from a 12-game library, generated deterministically from the DNA result (strength-led early weeks, growth quest woven in, level-up twists in weeks 9–12, Remi tips shaped by comfort/drive/social style), with tap-to-complete progress and week celebrations
+10. **12-Week Adventure Plan** — personalized home training plan: 3 quests/week from a 12-game library, generated deterministically from the DNA result (strength-led early weeks, growth quest woven in, level-up twists in weeks 9–12, guide tips shaped by comfort/drive/social style), with tap-to-complete progress and week celebrations
+11. **Choosable guide** — kids pick their adventure guide (Remi the Otter 🦦, Luna the Owl 🦉, Dash the Dolphin 🐬, Koko the Koala 🐨); all story copy personalizes to the chosen character
+12. **Weekly check-in & adaptive encouragement** — after finishing a week, the guide asks how it felt; the answer reshapes next week's tip (gentler / same pace / extra challenge)
+13. **Quest swap** — no equipment? Tap 🔄 on any quest to swap it for another game in the same movement domain
 
 ## Scoring engine (`src/lib/scoring.ts`)
 

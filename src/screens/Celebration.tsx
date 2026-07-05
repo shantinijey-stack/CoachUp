@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Button from "../components/Button";
 import Confetti from "../components/Confetti";
+import { useGuide } from "../components/GuideContext";
 import Remi from "../components/Remi";
 import Screen from "../components/Screen";
 
@@ -11,6 +12,7 @@ interface CelebrationProps {
 
 export default function Celebration({ childName, onNext }: CelebrationProps) {
   const name = childName.trim() || "Explorer";
+  const guide = useGuide();
   return (
     <Screen>
       <Confetti />
@@ -27,8 +29,8 @@ export default function Celebration({ childName, onNext }: CelebrationProps) {
             You did it, {name}! 🏅
           </h2>
           <p className="text-lg text-deepsea/70 max-w-xs mx-auto">
-            Discovery Day complete! Remi is putting the final sparkles on your
-            very own <strong>CoachUp DNA™</strong> report…
+            Discovery Day complete! {guide.firstName} is putting the final
+            sparkles on your very own <strong>CoachUp DNA™</strong> report…
           </p>
         </motion.div>
 

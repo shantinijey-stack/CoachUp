@@ -1,6 +1,8 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
+import { GuideContext } from "./components/GuideContext";
 import { MOVEMENT_ACTIVITIES } from "./data/content";
+import { getGuide } from "./data/guides";
 import { scoreDiscoveryDay } from "./lib/scoring";
 import { clearState, INITIAL_STATE, loadState, saveState } from "./lib/storage";
 import Celebration from "./screens/Celebration";
@@ -91,6 +93,17 @@ export default function App() {
       planProgress: { ...s.planProgress, [key]: !s.planProgress[key] },
     }));
 
+  // Swapping a quest also clears its done mark — the new quest hasn't been played yet.
+  const swapQuest = (key: string, questId: string) =>
+    setState((s) => ({
+      ...s,
+      swaps: { ...s.swaps, [key]: questId },
+      planProgress: { ...s.planProgress, [key]: false },
+    }));
+
+  const checkIn = (week: number, feeling: Level) =>
+    setState((s) => ({ ...s, checkIns: { ...s.checkIns, [week]: feeling } }));
+
   /* ----------------------------- navigation ---------------------------- */
 
   const nextFromMovement = () =>
@@ -111,6 +124,7 @@ export default function App() {
   /* ------------------------------- render ------------------------------ */
 
   return (
+    <GuideContext.Provider value={getGuide(state.profile.guideId)}>
     <div className="min-h-dvh">
       <AnimatePresence mode="wait">
         {state.screen === "landing" && (
@@ -140,6 +154,10 @@ export default function App() {
           <MeetRemi
             key="meetRemi"
             childName={state.profile.name}
+            guideId={state.profile.guideId}
+            onSelectGuide={(guideId) =>
+              setState((s) => ({ ...s, profile: { ...s.profile, guideId } }))
+            }
             onNext={() => go("movement", 0)}
             onBack={() => go("quickstart")}
             progress={progress}
@@ -219,11 +237,16 @@ export default function App() {
             profile={state.profile}
             result={result}
             progress={state.planProgress}
+            checkIns={state.checkIns}
+            swaps={state.swaps}
             onToggleQuest={toggleQuest}
+            onSwapQuest={swapQuest}
+            onCheckIn={checkIn}
             onBack={() => go("dashboard")}
           />
         )}
       </AnimatePresence>
     </div>
+    </GuideContext.Provider>
   );
 }

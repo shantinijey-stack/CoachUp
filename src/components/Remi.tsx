@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useGuide } from "./GuideContext";
 
 interface RemiProps {
   size?: "sm" | "md" | "lg" | "xl";
@@ -14,10 +15,13 @@ const SIZES = {
 };
 
 /**
- * Remi the Otter — the child's guide. Rendered as an emoji inside a soft
- * gradient badge (placeholder for real illustration in Phase 2).
+ * The child's adventure guide avatar (Remi the Otter by default —
+ * the component keeps the mascot's name, but renders whichever guide
+ * the child chose). Emoji inside a soft gradient badge, placeholder
+ * for real illustration in a later phase.
  */
 export default function Remi({ size = "md", mood = "happy", bounce = true }: RemiProps) {
+  const guide = useGuide();
   const sparkle = mood === "excited" ? "✨" : mood === "proud" ? "🎉" : null;
   return (
     <motion.div
@@ -28,7 +32,7 @@ export default function Remi({ size = "md", mood = "happy", bounce = true }: Rem
       <div
         className={`${SIZES[size]} rounded-full bg-gradient-to-br from-sunshine/60 to-lagoon/40 flex items-center justify-center shadow-soft`}
       >
-        <span role="img" aria-label="Remi the Otter">🦦</span>
+        <span role="img" aria-label={guide.name}>{guide.emoji}</span>
       </div>
       {sparkle && (
         <motion.span

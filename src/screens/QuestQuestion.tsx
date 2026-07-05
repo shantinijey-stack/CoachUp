@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import Button from "../components/Button";
+import { personalizeText, useGuide } from "../components/GuideContext";
 import OptionCard from "../components/OptionCard";
 import Remi from "../components/Remi";
 import Screen from "../components/Screen";
@@ -46,6 +47,7 @@ export default function QuestQuestion({
   progress,
   extra,
 }: QuestQuestionProps) {
+  const guide = useGuide();
   return (
     <Screen
       progress={progress}
@@ -76,7 +78,7 @@ export default function QuestQuestion({
         <div className="shrink-0 mt-1">
           <Remi size="sm" bounce={false} />
         </div>
-        <SpeechBubble>{scene}</SpeechBubble>
+        <SpeechBubble>{personalizeText(scene, guide)}</SpeechBubble>
       </div>
 
       {extra}

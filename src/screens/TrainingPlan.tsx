@@ -1,19 +1,62 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import Confetti from "../components/Confetti";
+import { useGuide } from "../components/GuideContext";
 import Remi from "../components/Remi";
 import Screen from "../components/Screen";
 import TimerBox from "../components/TimerBox";
 import { DOMAIN_INFO, MODULES } from "../data/content";
-import { generatePlan, type PlanQuest, type PlanWeek } from "../lib/plan";
-import type { ChildProfile, DnaResult } from "../types";
+import { QUESTS, type Quest } from "../data/quests";
+import type { GuideInfo } from "../data/guides";
+import { generatePlan, type PlanWeek } from "../lib/plan";
+import type { ChildProfile, DnaResult, Level } from "../types";
 
 interface TrainingPlanProps {
   profile: ChildProfile;
   result: DnaResult;
   progress: Record<string, boolean>;
+  checkIns: Record<number, Level>;
+  swaps: Record<string, string>;
   onToggleQuest: (key: string) => void;
+  onSwapQuest: (key: string, questId: string) => void;
+  onCheckIn: (week: number, feeling: Level) => void;
   onBack: () => void;
+}
+
+/* ------------------------------------------------------------------ */
+/* Check-in copy: how last week felt shapes this week's encouragement  */
+/* ------------------------------------------------------------------ */
+
+const CHECK_IN_OPTIONS: { value: Level; emoji: string; label: string }[] = [
+  { value: 1, emoji: "😮‍💨", label: "It felt big" },
+  { value: 2, emoji: "😊", label: "Good fun" },
+  { value: 3, emoji: "🤩", label: "Loved it!" },
+];
+
+const CHECK_IN_REPLIES: Record<Level, string> = {
+  1: "Thanks for telling me 💛 Next week will be gentler — shorter quests, extra celebrations.",
+  2: "Perfect — we'll keep this happy pace going! 😊",
+  3: "WOW! Next week we bring extra challenges, champion! 🚀",
+};
+
+const ADAPTIVE_TIPS: Record<Level, string> = {
+  1: "Last week felt like a big climb, so this week let's shrink each quest to five fun minutes. Small steps, big wins!",
+  2: "Last week was good fun — this cozy pace is exactly right, so let's keep it rolling!",
+  3: "Last week was a smash hit — try the level-up twists early this week, superstar!",
+};
+
+/* ------------------------------------------------------------------ */
+/* Quest swapping: next quest in the same domain not used this week    */
+/* ------------------------------------------------------------------ */
+
+function nextSwapOption(current: Quest, weekQuestIds: string[]): Quest {
+  const list = QUESTS[current.domain];
+  const start = list.findIndex((q) => q.id === current.id);
+  for (let step = 1; step <= list.length; step++) {
+    const candidate = list[(start + step) % list.length];
+    if (!weekQuestIds.includes(candidate.id)) return candidate;
+  }
+  return current; // only one option in domain — nothing to swap to
 }
 
 /* ------------------------------------------------------------------ */
@@ -21,24 +64,27 @@ interface TrainingPlanProps {
 /* ------------------------------------------------------------------ */
 
 function QuestRow({
-  planQuest,
+  quest,
+  levelUp,
   done,
   expanded,
   onToggle,
   onExpand,
+  onSwap,
 }: {
-  planQuest: PlanQuest;
+  quest: Quest;
+  levelUp: boolean;
   done: boolean;
   expanded: boolean;
   onToggle: () => void;
   onExpand: () => void;
+  onSwap: () => void;
 }) {
-  const { quest, levelUp } = planQuest;
   const domain = DOMAIN_INFO[quest.domain];
 
   return (
     <div className={`rounded-2xl border-2 transition-colors ${expanded ? "border-lagoon/40 bg-cream" : "border-transparent bg-cream/60"}`}>
-      <div className="flex items-center gap-3 p-3">
+      <div className="flex items-center gap-2.5 p-3">
         <button
           type="button"
           onClick={onToggle}
@@ -49,7 +95,7 @@ function QuestRow({
         >
           ✓
         </button>
-        <button type="button" onClick={onExpand} className="flex-1 min-w-0 flex items-center gap-3 text-left">
+        <button type="button" onClick={onExpand} className="flex-1 min-w-0 flex items-center gap-2.5 text-left">
           <span className="text-2xl">{quest.emoji}</span>
           <span className="flex-1 min-w-0">
             <span className={`block font-display font-bold text-sm ${done ? "text-deepsea/40 line-through" : "text-deepsea"}`}>
@@ -61,6 +107,15 @@ function QuestRow({
             </span>
           </span>
           <span className={`text-deepsea/40 text-sm transition-transform ${expanded ? "rotate-180" : ""}`}>▾</span>
+        </button>
+        <button
+          type="button"
+          onClick={onSwap}
+          aria-label={`Swap ${quest.title} for a different quest`}
+          title="No equipment? Swap this quest"
+          className="shrink-0 w-8 h-8 rounded-full bg-white shadow-card flex items-center justify-center text-sm text-deepsea/60 hover:text-deepsea transition-colors"
+        >
+          🔄
         </button>
       </div>
 
@@ -76,6 +131,7 @@ function QuestRow({
             <div className="px-3 pb-3 space-y-3">
               <p className="text-xs text-deepsea/60">
                 <span className="font-bold text-deepsea/80">You'll need:</span> {quest.youllNeed}
+                <span className="text-deepsea/40"> · Missing something? Tap 🔄 to swap this quest.</span>
               </p>
               <ol className="space-y-2">
                 {quest.steps.map((step, i) => (
@@ -105,29 +161,95 @@ function QuestRow({
 }
 
 /* ------------------------------------------------------------------ */
+/* Weekly check-in box                                                 */
+/* ------------------------------------------------------------------ */
+
+function CheckInBox({
+  week,
+  guide,
+  answer,
+  onCheckIn,
+}: {
+  week: number;
+  guide: GuideInfo;
+  answer?: Level;
+  onCheckIn: (week: number, feeling: Level) => void;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="mt-3 bg-lagoon/10 border-2 border-lagoon/20 rounded-2xl p-3"
+    >
+      {answer ? (
+        <p className="text-xs text-deepsea/80 leading-snug">
+          <span className="font-bold">{guide.emoji} {guide.firstName}:</span>{" "}
+          {CHECK_IN_REPLIES[answer]}
+        </p>
+      ) : (
+        <>
+          <p className="text-xs font-bold text-deepsea mb-2">
+            {guide.emoji} {guide.firstName} asks: how did this week feel?
+          </p>
+          <div className="flex gap-2">
+            {CHECK_IN_OPTIONS.map((opt) => (
+              <motion.button
+                key={opt.value}
+                type="button"
+                whileTap={{ scale: 0.94 }}
+                onClick={() => onCheckIn(week, opt.value)}
+                className="flex-1 bg-white rounded-xl py-2 px-1 shadow-card text-center hover:ring-2 hover:ring-lagoon/40 transition-all"
+              >
+                <span className="block text-xl">{opt.emoji}</span>
+                <span className="block text-[10px] font-bold text-deepsea/70">{opt.label}</span>
+              </motion.button>
+            ))}
+          </div>
+        </>
+      )}
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Week card                                                           */
 /* ------------------------------------------------------------------ */
 
 function WeekCard({
   week,
+  quests,
+  tip,
+  tipAdapted,
   isCurrent,
   doneCount,
   progress,
+  checkIn,
   expandedKey,
+  guide,
   onToggleQuest,
+  onSwapQuest,
+  onCheckIn,
   onExpand,
   index,
 }: {
   week: PlanWeek;
+  quests: { key: string; quest: Quest; levelUp: boolean }[];
+  tip: string;
+  tipAdapted: boolean;
   isCurrent: boolean;
   doneCount: number;
   progress: Record<string, boolean>;
+  checkIn?: Level;
   expandedKey: string | null;
+  guide: GuideInfo;
   onToggleQuest: (key: string) => void;
+  onSwapQuest: (key: string, questId: string) => void;
+  onCheckIn: (week: number, feeling: Level) => void;
   onExpand: (key: string | null) => void;
   index: number;
 }) {
-  const complete = doneCount === week.quests.length;
+  const complete = doneCount === quests.length;
+  const weekQuestIds = quests.map((q) => q.quest.id);
 
   return (
     <motion.div
@@ -147,13 +269,11 @@ function WeekCard({
           {complete ? "★" : week.week}
         </span>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <h3 className="font-display font-extrabold text-deepsea leading-tight">
-              {week.title} {week.titleEmoji}
-            </h3>
-          </div>
+          <h3 className="font-display font-extrabold text-deepsea leading-tight">
+            {week.title} {week.titleEmoji}
+          </h3>
           <p className="text-[11px] font-bold text-deepsea/40 uppercase tracking-wide">
-            Week {week.week} · {week.phaseEmoji} {week.phase} · {doneCount}/{week.quests.length} quests
+            Week {week.week} · {week.phaseEmoji} {week.phase} · {doneCount}/{quests.length} quests
           </p>
         </div>
         {isCurrent && (
@@ -164,22 +284,34 @@ function WeekCard({
       </div>
 
       <p className="flex items-start gap-2 text-xs text-deepsea/60 mb-3 pl-1">
-        <span className="text-base leading-none pt-0.5">🦦</span>
-        <span className="italic">{week.remiTip}</span>
+        <span className="text-base leading-none pt-0.5">{guide.emoji}</span>
+        <span className="italic">
+          {tipAdapted && <span className="not-italic font-bold text-lagoon">Adjusted for you: </span>}
+          {tip}
+        </span>
       </p>
 
       <div className="space-y-2">
-        {week.quests.map((pq) => (
+        {quests.map((pq) => (
           <QuestRow
             key={pq.key}
-            planQuest={pq}
+            quest={pq.quest}
+            levelUp={pq.levelUp}
             done={!!progress[pq.key]}
             expanded={expandedKey === pq.key}
             onToggle={() => onToggleQuest(pq.key)}
             onExpand={() => onExpand(expandedKey === pq.key ? null : pq.key)}
+            onSwap={() => {
+              const next = nextSwapOption(pq.quest, weekQuestIds);
+              if (next.id !== pq.quest.id) onSwapQuest(pq.key, next.id);
+            }}
           />
         ))}
       </div>
+
+      {complete && (
+        <CheckInBox week={week.week} guide={guide} answer={checkIn} onCheckIn={onCheckIn} />
+      )}
     </motion.div>
   );
 }
@@ -192,29 +324,50 @@ export default function TrainingPlan({
   profile,
   result,
   progress,
+  checkIns,
+  swaps,
   onToggleQuest,
+  onSwapQuest,
+  onCheckIn,
   onBack,
 }: TrainingPlanProps) {
   const plan = useMemo(() => generatePlan(result), [result]);
+  const guide = useGuide();
   const [expandedKey, setExpandedKey] = useState<string | null>(null);
   const [celebrating, setCelebrating] = useState(false);
 
   const name = profile.name.trim() || "Your explorer";
   const mod = MODULES[result.module];
-  const doneTotal = plan.weeks.reduce(
+
+  // Apply parent swaps on top of the generated plan.
+  const resolvedWeeks = useMemo(
+    () =>
+      plan.weeks.map((week) => ({
+        week,
+        quests: week.quests.map((slot) => {
+          const swappedId = swaps[slot.key];
+          const swapped = swappedId
+            ? QUESTS[slot.quest.domain].find((q) => q.id === swappedId)
+            : undefined;
+          return { key: slot.key, quest: swapped ?? slot.quest, levelUp: slot.levelUp };
+        }),
+      })),
+    [plan, swaps],
+  );
+
+  const doneTotal = resolvedWeeks.reduce(
     (sum, w) => sum + w.quests.filter((q) => progress[q.key]).length,
     0,
   );
   const currentWeek =
-    plan.weeks.find((w) => w.quests.some((q) => !progress[q.key]))?.week ?? 12;
+    resolvedWeeks.find((w) => w.quests.some((q) => !progress[q.key]))?.week.week ?? 12;
 
-  const handleToggle = (key: string, week: PlanWeek) => {
+  const handleToggle = (key: string, quests: { key: string }[]) => {
     const wasDone = !!progress[key];
     onToggleQuest(key);
-    // Completing the last open quest of a week earns a confetti moment.
     if (!wasDone) {
-      const nowDone = week.quests.filter((q) => progress[q.key] || q.key === key).length;
-      if (nowDone === week.quests.length) {
+      const nowDone = quests.filter((q) => progress[q.key] || q.key === key).length;
+      if (nowDone === quests.length) {
         setCelebrating(true);
         setTimeout(() => setCelebrating(false), 3500);
       }
@@ -261,19 +414,29 @@ export default function TrainingPlan({
 
       {/* Journey */}
       <div className="space-y-4 pb-8">
-        {plan.weeks.map((week, i) => (
-          <WeekCard
-            key={week.week}
-            week={week}
-            index={i}
-            isCurrent={week.week === currentWeek}
-            doneCount={week.quests.filter((q) => progress[q.key]).length}
-            progress={progress}
-            expandedKey={expandedKey}
-            onToggleQuest={(key) => handleToggle(key, week)}
-            onExpand={setExpandedKey}
-          />
-        ))}
+        {resolvedWeeks.map(({ week, quests }, i) => {
+          const prevFeeling = checkIns[week.week - 1];
+          return (
+            <WeekCard
+              key={week.week}
+              week={week}
+              quests={quests}
+              tip={prevFeeling ? ADAPTIVE_TIPS[prevFeeling] : week.remiTip}
+              tipAdapted={!!prevFeeling}
+              index={i}
+              isCurrent={week.week === currentWeek}
+              doneCount={quests.filter((q) => progress[q.key]).length}
+              progress={progress}
+              checkIn={checkIns[week.week]}
+              expandedKey={expandedKey}
+              guide={guide}
+              onToggleQuest={(key) => handleToggle(key, quests)}
+              onSwapQuest={onSwapQuest}
+              onCheckIn={onCheckIn}
+              onExpand={setExpandedKey}
+            />
+          );
+        })}
 
         <div className="text-center py-4">
           {doneTotal === plan.totalQuests ? (
@@ -282,7 +445,7 @@ export default function TrainingPlan({
             </p>
           ) : (
             <p className="text-sm text-deepsea/50">
-              🦦 Remi says: any quest, any order — every adventure counts!
+              {guide.emoji} {guide.firstName} says: any quest, any order — every adventure counts!
             </p>
           )}
         </div>
