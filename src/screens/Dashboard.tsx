@@ -15,6 +15,7 @@ interface DashboardProps {
   onViewReport: () => void;
   onOpenPlan: () => void;
   onOpenBadges: () => void;
+  onOpenGrowth: () => void;
   onRestart: () => void;
 }
 
@@ -25,6 +26,7 @@ export default function Dashboard({
   onViewReport,
   onOpenPlan,
   onOpenBadges,
+  onOpenGrowth,
   onRestart,
 }: DashboardProps) {
   const [booked, setBooked] = useState(false);
@@ -145,13 +147,22 @@ export default function Dashboard({
             </span>
             <span className="text-2xl">→</span>
           </button>
-          <button
-            type="button"
-            onClick={onOpenBadges}
-            className="mt-2 w-full bg-white rounded-2xl shadow-card p-3 flex items-center justify-center gap-2 text-sm font-bold text-berry hover:bg-berry/5 transition-colors"
-          >
-            🏅 Open the Sticker Book
-          </button>
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={onOpenBadges}
+              className="bg-white rounded-2xl shadow-card p-3 text-sm font-bold text-berry hover:bg-berry/5 transition-colors"
+            >
+              🏅 Sticker Book
+            </button>
+            <button
+              type="button"
+              onClick={onOpenGrowth}
+              className="bg-white rounded-2xl shadow-card p-3 text-sm font-bold text-lagoon hover:bg-lagoon/5 transition-colors"
+            >
+              📈 Growth Report
+            </button>
+          </div>
         </motion.div>
 
         {/* Growth quest */}

@@ -11,8 +11,9 @@ import { COURAGE_QUESTS, COURAGE_STAGES } from "../data/courage";
 import { QUESTS, type Quest } from "../data/quests";
 import type { GuideInfo } from "../data/guides";
 import { computeBadges } from "../lib/badges";
+import { LEVEL_INFO, trainerLevelFor } from "../lib/growth";
 import { generatePlan, type PlanWeek } from "../lib/plan";
-import type { ChildProfile, CourageAnswer, DnaResult, Level } from "../types";
+import type { ChildProfile, CourageAnswer, DnaResult, Level, QuestLevel } from "../types";
 
 interface TrainingPlanProps {
   profile: ChildProfile;
@@ -22,6 +23,8 @@ interface TrainingPlanProps {
   swaps: Record<string, string>;
   courage: Record<number, CourageAnswer>;
   seenBadges: string[];
+  questLevels: Record<string, QuestLevel>;
+  onLevelUp: (questId: string) => void;
   onToggleQuest: (key: string) => void;
   onSwapQuest: (key: string, questId: string) => void;
   onCheckIn: (week: number, feeling: Level) => void;
@@ -75,21 +78,28 @@ function nextSwapOption(current: Quest, weekQuestIds: string[]): Quest {
 function QuestRow({
   quest,
   levelUp,
+  level,
   done,
   expanded,
   onToggle,
   onExpand,
   onSwap,
+  onLevelUp,
 }: {
   quest: Quest;
   levelUp: boolean;
+  level: QuestLevel;
   done: boolean;
   expanded: boolean;
   onToggle: () => void;
   onExpand: () => void;
   onSwap: () => void;
+  onLevelUp: () => void;
 }) {
   const domain = DOMAIN_INFO[quest.domain];
+  const showPro = level >= 2 || levelUp;
+  const showMaster = level === 3;
+  const nextLevel = LEVEL_INFO[Math.min(3, level + 1) as QuestLevel];
 
   return (
     <div className={`rounded-2xl border-2 transition-colors ${expanded ? "border-lagoon/40 bg-cream" : "border-transparent bg-cream/60"}`}>
@@ -112,7 +122,7 @@ function QuestRow({
               {levelUp && <span className="ml-1.5 text-xs text-berry font-extrabold no-underline">LEVEL UP!</span>}
             </span>
             <span className="block text-[11px] font-bold text-deepsea/40">
-              {domain.emoji} {domain.kidName}
+              {domain.emoji} {domain.kidName} · {LEVEL_INFO[level].emoji} {LEVEL_INFO[level].name}
             </span>
           </span>
           <span className={`text-deepsea/40 text-sm transition-transform ${expanded ? "rotate-180" : ""}`}>▾</span>
@@ -155,12 +165,31 @@ function QuestRow({
                   </li>
                 ))}
               </ol>
-              {levelUp && (
+              {showPro && (
                 <p className="text-xs bg-berry/10 text-deepsea/80 rounded-xl px-3 py-2">
-                  <span className="font-extrabold text-berry">⬆️ Level up:</span> {quest.levelUp}
+                  <span className="font-extrabold text-berry">🔥 Pro twist:</span> {quest.levelUp}
+                </p>
+              )}
+              {showMaster && (
+                <p className="text-xs bg-sunshine/25 text-deepsea/80 rounded-xl px-3 py-2">
+                  <span className="font-extrabold text-tangerine">👑 Master twist:</span> {quest.master}
                 </p>
               )}
               {quest.timer && <TimerBox timer={quest.timer} />}
+              {done && level < 3 && (
+                <div className="bg-cream rounded-xl px-3 py-2.5">
+                  <button
+                    type="button"
+                    onClick={onLevelUp}
+                    className="w-full bg-gradient-to-r from-berry to-sky text-white rounded-xl py-2 font-display font-bold text-xs shadow-pop hover:brightness-105 transition-all"
+                  >
+                    Smashed it! Unlock {nextLevel.emoji} {nextLevel.name} ⬆️
+                  </button>
+                  <p className="text-[10px] text-deepsea/45 text-center mt-1.5">
+                    Still practicing? That's perfect too — level up whenever it feels easy.
+                  </p>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
@@ -236,6 +265,8 @@ function WeekCard({
   courageAnswer,
   expandedKey,
   guide,
+  questLevels,
+  onLevelUp,
   onToggleQuest,
   onSwapQuest,
   onCheckIn,
@@ -255,6 +286,8 @@ function WeekCard({
   courageAnswer: CourageAnswer;
   expandedKey: string | null;
   guide: GuideInfo;
+  questLevels: Record<string, QuestLevel>;
+  onLevelUp: (questId: string) => void;
   onToggleQuest: (key: string) => void;
   onSwapQuest: (key: string, questId: string) => void;
   onCheckIn: (week: number, feeling: Level) => void;
@@ -314,6 +347,7 @@ function WeekCard({
             key={pq.key}
             quest={pq.quest}
             levelUp={pq.levelUp}
+            level={questLevels[pq.quest.id] ?? 1}
             done={!!progress[pq.key]}
             expanded={expandedKey === pq.key}
             onToggle={() => onToggleQuest(pq.key)}
@@ -322,6 +356,7 @@ function WeekCard({
               const next = nextSwapOption(pq.quest, weekQuestIds);
               if (next.id !== pq.quest.id) onSwapQuest(pq.key, next.id);
             }}
+            onLevelUp={() => onLevelUp(pq.quest.id)}
           />
         ))}
         <CourageQuestCard
@@ -353,6 +388,8 @@ export default function TrainingPlan({
   swaps,
   courage,
   seenBadges,
+  questLevels,
+  onLevelUp,
   onToggleQuest,
   onSwapQuest,
   onCheckIn,
@@ -459,6 +496,9 @@ export default function TrainingPlan({
             <h2 className="font-display font-extrabold text-2xl leading-tight">
               {name}'s 12-Week Adventure
             </h2>
+            <p className="text-xs font-bold mt-0.5 opacity-90">
+              {trainerLevelFor(questLevels).emoji} {trainerLevelFor(questLevels).name}
+            </p>
           </div>
         </div>
         <div className="mt-4">
@@ -534,6 +574,8 @@ export default function TrainingPlan({
               courageAnswer={courage[week.week] ?? {}}
               expandedKey={expandedKey}
               guide={guide}
+              questLevels={questLevels}
+              onLevelUp={onLevelUp}
               onToggleQuest={(key) => handleToggle(key, quests)}
               onSwapQuest={onSwapQuest}
               onCheckIn={onCheckIn}

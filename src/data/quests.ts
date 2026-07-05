@@ -14,8 +14,10 @@ export interface Quest {
   youllNeed: string;
   steps: { emoji: string; text: string }[];
   timer?: ActivityTimer;
-  /** Harder twist unlocked in the final phase of the plan. */
+  /** Pro twist — unlocked at Pro level or in the plan's final phase. */
   levelUp: string;
+  /** Master twist — unlocked at Master level. */
+  master: string;
 }
 
 export const QUESTS: Record<Domain, Quest[]> = {
@@ -33,6 +35,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "countdown", seconds: 60, label: "One-minute parade!" },
       levelUp: "Parade backwards, or invent a brand-new animal nobody has ever seen!",
+      master: "Three animals in a row with no pauses between — and narrate the adventure story as you go!",
     },
     {
       id: "floor-is-lava",
@@ -47,6 +50,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "countdown", seconds: 45, label: "Escape the lava!" },
       levelUp: "Two-feet jumps only — and carry a teddy passenger to safety!",
+      master: "Lava rising! Rocks a big jump apart, teddy passenger aboard — two full crossings without a splash.",
     },
     {
       id: "shadow-chase",
@@ -61,6 +65,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "countdown", seconds: 60, label: "Chase for one minute!" },
       levelUp: "Leader adds jumps and direction switches with no warning — sharp shadows only!",
+      master: "Mirror mode: the shadow copies with OPPOSITE hands and feet, and the leader adds three surprise freezes.",
     },
     {
       id: "rocket-races",
@@ -75,6 +80,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "stopwatch", label: "Time the rocket flight!" },
       levelUp: "Fly two laps, or launch sideways-shuffling like a space crab!",
+      master: "Three laps with a touchdown tap at every marker — steady astronaut breathing the whole flight.",
     },
   ],
   objectControl: [
@@ -91,6 +97,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "counter", target: 10, label: "Count the baskets!" },
       levelUp: "Throw with your other hand, or spin once before each toss!",
+      master: "Five steps back, other hand only — land five baskets in a row.",
     },
     {
       id: "balloon-keepy-up",
@@ -105,6 +112,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "counter", target: 10, label: "Count the taps!" },
       levelUp: "Keep two balloons up at once, or taps with feet only!",
+      master: "Twenty taps alternating hands and feet — no double-taps allowed!",
     },
     {
       id: "target-kick",
@@ -119,6 +127,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "counter", target: 5, label: "Count the goals!" },
       levelUp: "Shrink the goal to one cushion-width, or score from a rolling ball!",
+      master: "One-cushion goal, rolling ball — score three in a row.",
     },
     {
       id: "cup-catch",
@@ -133,6 +142,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "counter", target: 10, label: "Count the catches!" },
       levelUp: "Catch after a bounce, after a clap — or after a full spin!",
+      master: "Toss, full spin, one bounce, catch — three in a row without a drop.",
     },
   ],
   stability: [
@@ -149,6 +159,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "countdown", seconds: 60, label: "Statue party — one minute!" },
       levelUp: "Freeze with eyes closed, or hold each statue for a slow count of ten!",
+      master: "Freeze on tiptoes with eyes closed for a slow count of ten.",
     },
     {
       id: "tightrope-walker",
@@ -163,6 +174,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "stopwatch", label: "Time the tightrope crossing!" },
       levelUp: "Carry a spoon with a sock ball on it — the circus's hardest act!",
+      master: "Walk it backwards heel-to-toe carrying the spoon-and-sock-ball — the circus finale!",
     },
     {
       id: "animal-yoga",
@@ -177,6 +189,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "stopwatch", label: "Time the longest hold!" },
       levelUp: "Flow bear → flamingo → puppy without a wobble between poses!",
+      master: "Flow bear → flamingo → puppy twice through with slow breaths — steady as a mountain.",
     },
     {
       id: "pillow-mountain",
@@ -191,6 +204,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "countdown", seconds: 60, label: "Summit in one minute!" },
       levelUp: "Cross carrying a cup of (pretend) mountain tea without spilling!",
+      master: "Cross with the (pretend) mountain tea, then return backwards — not a drop spilled.",
     },
   ],
 };

@@ -67,7 +67,8 @@ export type Screen =
   | "report"
   | "dashboard"
   | "plan"
-  | "badges";
+  | "badges"
+  | "growth";
 
 export interface AppState {
   screen: Screen;
@@ -85,7 +86,11 @@ export interface AppState {
   courage: Record<number, CourageAnswer>;
   /** Badge ids whose earn-celebration has been shown. */
   seenBadges: string[];
+  /** Per-quest training level: quest id → 1 Rookie / 2 Pro / 3 Master. */
+  questLevels: Record<string, QuestLevel>;
 }
+
+export type QuestLevel = 1 | 2 | 3;
 
 export interface CourageAnswer {
   /** Index of the chosen scenario answer. */

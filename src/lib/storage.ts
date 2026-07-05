@@ -23,6 +23,7 @@ export const INITIAL_STATE: AppState = {
   swaps: {},
   courage: {},
   seenBadges: [],
+  questLevels: {},
 };
 
 export function loadState(): AppState {
@@ -47,6 +48,7 @@ export function loadState(): AppState {
       swaps: { ...parsed.swaps },
       courage: { ...parsed.courage },
       seenBadges: Array.isArray(parsed.seenBadges) ? parsed.seenBadges : [],
+      questLevels: { ...parsed.questLevels },
     };
   } catch {
     return INITIAL_STATE;

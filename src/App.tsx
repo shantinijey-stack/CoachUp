@@ -7,6 +7,7 @@ import { scoreDiscoveryDay } from "./lib/scoring";
 import { clearState, INITIAL_STATE, loadState, saveState } from "./lib/storage";
 import BadgeBook from "./screens/BadgeBook";
 import Celebration from "./screens/Celebration";
+import GrowthReport from "./screens/GrowthReport";
 import ComfortMap from "./screens/ComfortMap";
 import Dashboard from "./screens/Dashboard";
 import DnaReport from "./screens/DnaReport";
@@ -55,7 +56,7 @@ export default function App() {
 
   const result = useMemo(
     () =>
-      ["report", "dashboard", "plan", "badges"].includes(state.screen)
+      ["report", "dashboard", "plan", "badges", "growth"].includes(state.screen)
         ? scoreDiscoveryDay(state.profile, state.answers)
         : null,
     [state.screen, state.profile, state.answers],
@@ -132,6 +133,15 @@ export default function App() {
     setBadgeReturnTo(from);
     go("badges");
   };
+
+  const levelUpQuest = (questId: string) =>
+    setState((s) => ({
+      ...s,
+      questLevels: {
+        ...s.questLevels,
+        [questId]: Math.min(3, (s.questLevels[questId] ?? 1) + 1) as 1 | 2 | 3,
+      },
+    }));
 
   /* ----------------------------- navigation ---------------------------- */
 
@@ -257,6 +267,7 @@ export default function App() {
             onViewReport={() => go("report")}
             onOpenPlan={() => go("plan")}
             onOpenBadges={() => openBadges("dashboard")}
+            onOpenGrowth={() => go("growth")}
             onRestart={restart}
           />
         )}
@@ -271,6 +282,8 @@ export default function App() {
             swaps={state.swaps}
             courage={state.courage}
             seenBadges={state.seenBadges}
+            questLevels={state.questLevels}
+            onLevelUp={levelUpQuest}
             onToggleQuest={toggleQuest}
             onSwapQuest={swapQuest}
             onCheckIn={checkIn}
@@ -294,6 +307,19 @@ export default function App() {
             }}
             onSeen={badgesSeen}
             onBack={() => go(badgeReturnTo)}
+          />
+        )}
+
+        {state.screen === "growth" && result && (
+          <GrowthReport
+            key="growth"
+            profile={state.profile}
+            result={result}
+            planProgress={state.planProgress}
+            courage={state.courage}
+            questLevels={state.questLevels}
+            checkIns={state.checkIns}
+            onBack={() => go("dashboard")}
           />
         )}
       </AnimatePresence>
