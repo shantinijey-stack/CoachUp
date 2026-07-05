@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Button from "../components/Button";
-import { BrandMark } from "../components/BrandLogo";
+import { AnimatedBrandMark } from "../components/BrandLogo";
 import Screen from "../components/Screen";
 
 interface LandingProps {
@@ -68,7 +68,7 @@ export default function Landing({ onStart, hasSavedRun, onResume }: LandingProps
           transition={{ duration: 0.5 }}
           className="flex flex-col items-center gap-3"
         >
-          <BrandMark size={72} />
+          <AnimatedBrandMark size={84} />
           <span className="font-display font-extrabold text-2xl text-deepsea leading-none">
             CoachUp <span className="text-tangerine">Kids</span>
           </span>
@@ -92,8 +92,8 @@ export default function Landing({ onStart, hasSavedRun, onResume }: LandingProps
             transition={{ delay: 0.3 }}
             className="text-deepsea/70 text-lg leading-relaxed"
           >
-            A playful discovery experience that helps parents understand how their
-            child moves, builds confidence, and gets emotionally ready for sport.
+            Through fun games and activities, discover your child's physical,
+            emotional and social strengths before choosing a sport.
           </motion.p>
         </div>
 
