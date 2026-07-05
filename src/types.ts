@@ -63,7 +63,8 @@ export type Screen =
   | "spark"
   | "celebration"
   | "report"
-  | "dashboard";
+  | "dashboard"
+  | "plan";
 
 export interface AppState {
   screen: Screen;
@@ -71,4 +72,6 @@ export interface AppState {
   subIndex: number;
   profile: ChildProfile;
   answers: Answers;
+  /** Completed training-plan quests, keyed like "w3-q1". */
+  planProgress: Record<string, boolean>;
 }

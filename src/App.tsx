@@ -12,6 +12,7 @@ import MeetRemi from "./screens/MeetRemi";
 import MovementSnapshot from "./screens/MovementSnapshot";
 import QuickStart from "./screens/QuickStart";
 import SparkSnapshot from "./screens/SparkSnapshot";
+import TrainingPlan from "./screens/TrainingPlan";
 import type { AgeBand, AppState, Level, SocialStyle } from "./types";
 
 /**
@@ -49,7 +50,7 @@ export default function App() {
 
   const result = useMemo(
     () =>
-      state.screen === "report" || state.screen === "dashboard"
+      state.screen === "report" || state.screen === "dashboard" || state.screen === "plan"
         ? scoreDiscoveryDay(state.profile, state.answers)
         : null,
     [state.screen, state.profile, state.answers],
@@ -83,6 +84,12 @@ export default function App() {
 
   const answerSpark = (key: "drive" | "confidence" | "social", value: Level | SocialStyle) =>
     setState((s) => ({ ...s, answers: { ...s.answers, [key]: value } }));
+
+  const toggleQuest = (key: string) =>
+    setState((s) => ({
+      ...s,
+      planProgress: { ...s.planProgress, [key]: !s.planProgress[key] },
+    }));
 
   /* ----------------------------- navigation ---------------------------- */
 
@@ -199,8 +206,21 @@ export default function App() {
             key="dashboard"
             profile={state.profile}
             result={result}
+            planDoneCount={Object.values(state.planProgress).filter(Boolean).length}
             onViewReport={() => go("report")}
+            onOpenPlan={() => go("plan")}
             onRestart={restart}
+          />
+        )}
+
+        {state.screen === "plan" && result && (
+          <TrainingPlan
+            key="plan"
+            profile={state.profile}
+            result={result}
+            progress={state.planProgress}
+            onToggleQuest={toggleQuest}
+            onBack={() => go("dashboard")}
           />
         )}
       </AnimatePresence>

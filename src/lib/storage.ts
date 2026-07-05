@@ -17,6 +17,7 @@ export const INITIAL_STATE: AppState = {
     movement: {},
     comfort: {},
   },
+  planProgress: {},
 };
 
 export function loadState(): AppState {
@@ -36,6 +37,7 @@ export function loadState(): AppState {
         confidence: parsed.answers?.confidence,
         social: parsed.answers?.social,
       },
+      planProgress: { ...parsed.planProgress },
     };
   } catch {
     return INITIAL_STATE;

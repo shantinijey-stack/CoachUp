@@ -11,11 +11,20 @@ import type { ChildProfile, DnaResult } from "../types";
 interface DashboardProps {
   profile: ChildProfile;
   result: DnaResult;
+  planDoneCount: number;
   onViewReport: () => void;
+  onOpenPlan: () => void;
   onRestart: () => void;
 }
 
-export default function Dashboard({ profile, result, onViewReport, onRestart }: DashboardProps) {
+export default function Dashboard({
+  profile,
+  result,
+  planDoneCount,
+  onViewReport,
+  onOpenPlan,
+  onRestart,
+}: DashboardProps) {
   const [booked, setBooked] = useState(false);
   const name = profile.name.trim() || "Your explorer";
   const mod = MODULES[result.module];
@@ -109,6 +118,32 @@ export default function Dashboard({ profile, result, onViewReport, onRestart }: 
             ))}
           </div>
         </Card>
+
+        {/* Training plan entry */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+        >
+          <button
+            type="button"
+            onClick={onOpenPlan}
+            className="w-full bg-gradient-to-r from-tangerine to-coral text-white rounded-3xl shadow-card p-5 text-left flex items-center gap-4 hover:brightness-105 transition-all active:scale-[0.98]"
+          >
+            <span className="text-4xl">🗺️</span>
+            <span className="flex-1 min-w-0">
+              <span className="block font-display font-extrabold text-lg leading-tight">
+                {planDoneCount > 0 ? "Continue the adventure plan" : "Start the 12-week adventure plan"}
+              </span>
+              <span className="block text-sm opacity-90">
+                {planDoneCount > 0
+                  ? `${planDoneCount} of 36 quests complete — keep going!`
+                  : "3 home quests a week, made just for " + (name === "Your explorer" ? "your explorer" : name)}
+              </span>
+            </span>
+            <span className="text-2xl">→</span>
+          </button>
+        </motion.div>
 
         {/* Growth quest */}
         <Card delay={0.2}>

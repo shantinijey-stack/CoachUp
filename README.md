@@ -47,6 +47,7 @@ npm run preview   # serve the production build
 7. **Celebration** — confetti! 🎉
 8. **CoachUp DNA™ Report** — strength, growth quest, comfort style, spark, recommended module, parent explanation, coach notes
 9. **Parent Dashboard** — profile card, 12-week journey preview, growth quest, comfort notes, coach notes, book-a-trial CTA
+10. **12-Week Adventure Plan** — personalized home training plan: 3 quests/week from a 12-game library, generated deterministically from the DNA result (strength-led early weeks, growth quest woven in, level-up twists in weeks 9–12, Remi tips shaped by comfort/drive/social style), with tap-to-complete progress and week celebrations
 
 ## Scoring engine (`src/lib/scoring.ts`)
 
@@ -72,9 +73,11 @@ src/
 ├── index.css                # Tailwind + global background
 ├── types.ts                 # All shared TypeScript types
 ├── data/
-│   └── content.ts           # All mock content: activities, questions, modules
+│   ├── content.ts           # All mock content: activities, questions, modules
+│   └── quests.ts            # Home mini-game library for the training plan
 ├── lib/
 │   ├── scoring.ts           # Scoring engine + report copy generation
+│   ├── plan.ts              # 12-week personalized plan generator
 │   └── storage.ts           # localStorage persistence
 ├── components/              # Reusable UI (Button, Card, ProgressBar, Remi,
 │   ...                      #   SpeechBubble, OptionCard, Screen, Confetti)
