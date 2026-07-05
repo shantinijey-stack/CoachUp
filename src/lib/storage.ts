@@ -22,6 +22,7 @@ export const INITIAL_STATE: AppState = {
   checkIns: {},
   swaps: {},
   courage: {},
+  seenBadges: [],
 };
 
 export function loadState(): AppState {
@@ -45,6 +46,7 @@ export function loadState(): AppState {
       checkIns: { ...parsed.checkIns },
       swaps: { ...parsed.swaps },
       courage: { ...parsed.courage },
+      seenBadges: Array.isArray(parsed.seenBadges) ? parsed.seenBadges : [],
     };
   } catch {
     return INITIAL_STATE;

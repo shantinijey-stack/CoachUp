@@ -66,7 +66,8 @@ export type Screen =
   | "celebration"
   | "report"
   | "dashboard"
-  | "plan";
+  | "plan"
+  | "badges";
 
 export interface AppState {
   screen: Screen;
@@ -82,6 +83,8 @@ export interface AppState {
   swaps: Record<string, string>;
   /** Courage Quest progress: week number → chosen answer + mission state. */
   courage: Record<number, CourageAnswer>;
+  /** Badge ids whose earn-celebration has been shown. */
+  seenBadges: string[];
 }
 
 export interface CourageAnswer {

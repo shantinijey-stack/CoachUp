@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Confetti from "../components/Confetti";
 import CourageQuestCard from "../components/CourageQuestCard";
 import { useGuide } from "../components/GuideContext";
@@ -10,6 +10,7 @@ import { DOMAIN_INFO, MODULES } from "../data/content";
 import { COURAGE_QUESTS, COURAGE_STAGES } from "../data/courage";
 import { QUESTS, type Quest } from "../data/quests";
 import type { GuideInfo } from "../data/guides";
+import { computeBadges } from "../lib/badges";
 import { generatePlan, type PlanWeek } from "../lib/plan";
 import type { ChildProfile, CourageAnswer, DnaResult, Level } from "../types";
 
@@ -20,11 +21,14 @@ interface TrainingPlanProps {
   checkIns: Record<number, Level>;
   swaps: Record<string, string>;
   courage: Record<number, CourageAnswer>;
+  seenBadges: string[];
   onToggleQuest: (key: string) => void;
   onSwapQuest: (key: string, questId: string) => void;
   onCheckIn: (week: number, feeling: Level) => void;
   onCourageChoice: (week: number, choice: number) => void;
   onCourageMission: (week: number) => void;
+  onBadgesSeen: (ids: string[]) => void;
+  onOpenBadges: () => void;
   onBack: () => void;
 }
 
@@ -348,11 +352,14 @@ export default function TrainingPlan({
   checkIns,
   swaps,
   courage,
+  seenBadges,
   onToggleQuest,
   onSwapQuest,
   onCheckIn,
   onCourageChoice,
   onCourageMission,
+  onBadgesSeen,
+  onOpenBadges,
   onBack,
 }: TrainingPlanProps) {
   const plan = useMemo(() => generatePlan(result), [result]);
@@ -384,6 +391,15 @@ export default function TrainingPlan({
     0,
   );
   const courageDone = COURAGE_QUESTS.filter((q) => courage[q.week]?.missionDone).length;
+
+  // New-badge celebration: show the first earned-but-not-yet-celebrated badge.
+  const badges = computeBadges({ hasResult: true, planProgress: progress, courage, checkIns });
+  const newBadge = badges.find((b) => b.earned && !seenBadges.includes(b.id));
+  useEffect(() => {
+    if (!newBadge) return;
+    const t = setTimeout(() => onBadgesSeen([newBadge.id]), 3800);
+    return () => clearTimeout(t);
+  }, [newBadge, onBadgesSeen]);
   const currentWeek =
     resolvedWeeks.find((w) => w.quests.some((q) => !progress[q.key]))?.week.week ?? 12;
 
@@ -402,6 +418,35 @@ export default function TrainingPlan({
   return (
     <Screen onBack={onBack}>
       {celebrating && <Confetti count={20} />}
+
+      {/* New-badge toast */}
+      <AnimatePresence>
+        {newBadge && (
+          <motion.button
+            type="button"
+            onClick={onOpenBadges}
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 60 }}
+            transition={{ type: "spring", stiffness: 260, damping: 22 }}
+            className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-deepsea text-white rounded-2xl shadow-soft pl-3 pr-4 py-2.5 max-w-[90vw]"
+          >
+            <motion.span
+              className="text-2xl"
+              animate={{ rotate: [0, -12, 12, 0], scale: [1, 1.2, 1] }}
+              transition={{ duration: 0.8 }}
+            >
+              {newBadge.emoji}
+            </motion.span>
+            <span className="text-left">
+              <span className="block text-[10px] font-extrabold uppercase tracking-widest text-sunshine">
+                New badge earned!
+              </span>
+              <span className="block font-display font-bold text-sm">{newBadge.name}</span>
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Header */}
       <div className={`bg-gradient-to-br ${mod.gradient} rounded-3xl shadow-card p-5 text-white mb-4`}>
@@ -435,8 +480,17 @@ export default function TrainingPlan({
           games to shine in, {DOMAIN_INFO[result.growthDomain].kidName} games to grow with — and
           level-up twists waiting in weeks 9–12!
         </p>
-        <div className="mt-2 text-xs font-bold">
-          💜 Courage Curve: {courageDone} of 12 courage quests
+        <div className="mt-2 flex items-center justify-between gap-2">
+          <span className="text-xs font-bold">
+            💜 Courage Curve: {courageDone} of 12 courage quests
+          </span>
+          <button
+            type="button"
+            onClick={onOpenBadges}
+            className="shrink-0 bg-white/20 hover:bg-white/30 rounded-full px-3 py-1.5 text-xs font-bold transition-colors"
+          >
+            🏅 Sticker Book ({badges.filter((b) => b.earned).length})
+          </button>
         </div>
       </div>
 

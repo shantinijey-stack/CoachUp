@@ -5,6 +5,7 @@ import { MOVEMENT_ACTIVITIES } from "./data/content";
 import { getGuide } from "./data/guides";
 import { scoreDiscoveryDay } from "./lib/scoring";
 import { clearState, INITIAL_STATE, loadState, saveState } from "./lib/storage";
+import BadgeBook from "./screens/BadgeBook";
 import Celebration from "./screens/Celebration";
 import ComfortMap from "./screens/ComfortMap";
 import Dashboard from "./screens/Dashboard";
@@ -42,6 +43,8 @@ function beatFor(state: AppState): number {
 
 export default function App() {
   const [state, setState] = useState<AppState>(loadState);
+  // Where the Sticker Book returns to (not worth persisting).
+  const [badgeReturnTo, setBadgeReturnTo] = useState<"plan" | "dashboard">("plan");
 
   useEffect(() => {
     saveState(state);
@@ -52,7 +55,7 @@ export default function App() {
 
   const result = useMemo(
     () =>
-      state.screen === "report" || state.screen === "dashboard" || state.screen === "plan"
+      ["report", "dashboard", "plan", "badges"].includes(state.screen)
         ? scoreDiscoveryDay(state.profile, state.answers)
         : null,
     [state.screen, state.profile, state.answers],
@@ -118,6 +121,17 @@ export default function App() {
         [week]: { ...s.courage[week], missionDone: !s.courage[week]?.missionDone },
       },
     }));
+
+  const badgesSeen = (ids: string[]) =>
+    setState((s) => {
+      const unseen = ids.filter((id) => !s.seenBadges.includes(id));
+      return unseen.length ? { ...s, seenBadges: [...s.seenBadges, ...unseen] } : s;
+    });
+
+  const openBadges = (from: "plan" | "dashboard") => {
+    setBadgeReturnTo(from);
+    go("badges");
+  };
 
   /* ----------------------------- navigation ---------------------------- */
 
@@ -242,6 +256,7 @@ export default function App() {
             planDoneCount={Object.values(state.planProgress).filter(Boolean).length}
             onViewReport={() => go("report")}
             onOpenPlan={() => go("plan")}
+            onOpenBadges={() => openBadges("dashboard")}
             onRestart={restart}
           />
         )}
@@ -255,12 +270,30 @@ export default function App() {
             checkIns={state.checkIns}
             swaps={state.swaps}
             courage={state.courage}
+            seenBadges={state.seenBadges}
             onToggleQuest={toggleQuest}
             onSwapQuest={swapQuest}
             onCheckIn={checkIn}
             onCourageChoice={courageChoice}
             onCourageMission={courageMission}
+            onBadgesSeen={badgesSeen}
+            onOpenBadges={() => openBadges("plan")}
             onBack={() => go("dashboard")}
+          />
+        )}
+
+        {state.screen === "badges" && result && (
+          <BadgeBook
+            key="badges"
+            profile={state.profile}
+            inputs={{
+              hasResult: true,
+              planProgress: state.planProgress,
+              courage: state.courage,
+              checkIns: state.checkIns,
+            }}
+            onSeen={badgesSeen}
+            onBack={() => go(badgeReturnTo)}
           />
         )}
       </AnimatePresence>

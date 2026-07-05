@@ -14,6 +14,7 @@ interface DashboardProps {
   planDoneCount: number;
   onViewReport: () => void;
   onOpenPlan: () => void;
+  onOpenBadges: () => void;
   onRestart: () => void;
 }
 
@@ -23,6 +24,7 @@ export default function Dashboard({
   planDoneCount,
   onViewReport,
   onOpenPlan,
+  onOpenBadges,
   onRestart,
 }: DashboardProps) {
   const [booked, setBooked] = useState(false);
@@ -142,6 +144,13 @@ export default function Dashboard({
               </span>
             </span>
             <span className="text-2xl">→</span>
+          </button>
+          <button
+            type="button"
+            onClick={onOpenBadges}
+            className="mt-2 w-full bg-white rounded-2xl shadow-card p-3 flex items-center justify-center gap-2 text-sm font-bold text-berry hover:bg-berry/5 transition-colors"
+          >
+            🏅 Open the Sticker Book
           </button>
         </motion.div>
 
