@@ -1,10 +1,10 @@
 /**
- * The Courage Curve — one Courage Quest per week of the 12-week plan.
+ * The Courage Curve. One Courage Quest per week of the 12-week plan.
  * A leadership learning curve in three stages:
- *   Weeks 1–4  · Knowing Me       — feelings, strengths, brave body, growth mindset
- *   Weeks 5–8  · Standing Strong  — boundaries and the full "what to do about
+ *   Weeks 1–4  · Knowing Me. Feelings, strengths, brave body, growth mindset
+ *   Weeks 5–8  · Standing Strong. Boundaries and the full "what to do about
  *                                    unkindness/bullying" toolkit
- *   Weeks 9–12 · Lifting Others   — upstander moves, including others, leading
+ *   Weeks 9–12 · Lifting Others. Upstander moves, including others, leading
  *
  * Design rules:
  *  - Scenario stories star the guide ("Remi…", personalized at render time)
@@ -12,7 +12,7 @@
  *  - Every choice gets a warm response; the strongest choice gets celebrated,
  *    the others get gentle coaching. No answer is ever wrong or shamed.
  *  - Every path routes back to trusted adults. The app is a practice space
- *    and conversation starter — never the child's only confidant.
+ *    and conversation starter. Never the child's only confidant.
  */
 
 export interface CourageChoice {
@@ -46,30 +46,30 @@ export const COURAGE_QUESTS: CourageQuest[] = [
     title: "The Feelings Weather Report",
     emoji: "🌦️",
     story:
-      "Before the big swim, Remi's tummy felt fizzy — like storm clouds rumbling inside! Coach said something clever: “Feelings are like weather. They visit… and then they pass.”",
+      "Before the big swim, Remi's tummy felt fizzy. Like storm clouds rumbling inside! Coach said something clever: “Feelings are like weather. They visit… and then they pass.”",
     question: "When a big feeling visits, what's a super first move?",
     choices: [
       {
         emoji: "🙈",
         label: "Hide the feeling away",
         response:
-          "Hidden feelings grow bigger in the dark! Naming them out loud — “I feel nervous” — makes them shrink. Try it!",
+          "Hidden feelings grow bigger in the dark! Naming them out loud. “I feel nervous”. Makes them shrink. Try it!",
       },
       {
         emoji: "🌦️",
         label: "Name the weather: “I feel nervous”",
         best: true,
         response:
-          "YES! Naming a feeling is like opening an umbrella — the weather is still there, but now YOU'RE in charge!",
+          "YES! Naming a feeling is like opening an umbrella. The weather is still there, but now YOU'RE in charge!",
       },
       {
         emoji: "🏃",
         label: "Run away from it",
         response:
-          "A little break can help! And naming the feeling first — “I'm frustrated” — makes the break work twice as well.",
+          "A little break can help! And naming the feeling first. “I'm frustrated”. Makes the break work twice as well.",
       },
     ],
-    mission: "Hold a Feelings Weather Report at dinner: everyone shares their weather — sunny, stormy, foggy, rainbow…",
+    mission: "Hold a Feelings Weather Report at dinner: everyone shares their weather. Sunny, stormy, foggy, rainbow…",
     parentPrompt: "Share your own weather first. Kids open up when grown-ups go first.",
   },
   {
@@ -79,18 +79,18 @@ export const COURAGE_QUESTS: CourageQuest[] = [
     title: "My Strengths Treasure",
     emoji: "💎",
     story:
-      "Pip the Duckling missed the ball and quacked, “I'll never be good at ANYTHING!” Remi opened an imaginary treasure chest: “Pip — fastest swimmer in the pond, kindest friend on the team, and the best tryer I know. That's treasure!”",
+      "Pip the Duckling missed the ball and quacked, “I'll never be good at ANYTHING!” Remi opened an imaginary treasure chest: “Pip. Fastest swimmer in the pond, kindest friend on the team, and the best tryer I know. That's treasure!”",
     question: "What's the treasure-chest truth?",
     choices: [
       {
         emoji: "💭",
         label: "One miss means you're not good at it",
         response:
-          "One miss is just one wave 🌊 — every champion has missed a thousand times. The treasure truth is “I'm still learning!”",
+          "One miss is just one wave 🌊. Every champion has missed a thousand times. The treasure truth is “I'm still learning!”",
       },
       {
         emoji: "💎",
-        label: "Everyone has strengths — name three!",
+        label: "Everyone has strengths. Name three!",
         best: true,
         response:
           "YES! A sporty one, a kind one, a just-you one. That treasure belongs to you forever, and nobody can take it.",
@@ -99,7 +99,7 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         emoji: "🤐",
         label: "Better not to think about it",
         response:
-          "Thinking about strengths is like polishing treasure — it makes them shine brighter. Name one right now, out loud!",
+          "Thinking about strengths is like polishing treasure. It makes them shine brighter. Name one right now, out loud!",
       },
     ],
     mission: "Make a Strengths Treasure list of three things: one sporty, one kind, one that's just-you.",
@@ -119,24 +119,24 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         emoji: "🧍",
         label: "Head down, tiny voice",
         response:
-          "Even lions feel small sometimes! Try the Lion Stance — tall back, chin up — and feel how your body teaches your heart.",
+          "Even lions feel small sometimes! Try the Lion Stance. Tall back, chin up. And feel how your body teaches your heart.",
       },
       {
         emoji: "🦁",
         label: "Stand tall, chin up, steady voice",
         best: true,
         response:
-          "That's the Lion Stance! Your body can teach your heart to feel brave — it works even when your tummy has butterflies.",
+          "That's the Lion Stance! Your body can teach your heart to feel brave. It works even when your tummy has butterflies.",
       },
       {
         emoji: "😤",
         label: "Puff up and act tough",
         response:
-          "Brave isn't loud or tough — it's tall, calm and steady. Quiet lions are still lions!",
+          "Brave isn't loud or tough. It's tall, calm and steady. Quiet lions are still lions!",
       },
     ],
     mission: "Practice the Lion Stance in the mirror: tall body, deep breath, then say “I've got this!” three times.",
-    parentPrompt: "Do it together — silly versions and serious versions both count.",
+    parentPrompt: "Do it together. Silly versions and serious versions both count.",
   },
   {
     week: 4,
@@ -157,15 +157,15 @@ export const COURAGE_QUESTS: CourageQuest[] = [
       },
       {
         emoji: "🚪",
-        label: "Give up — skipping isn't for Pip",
+        label: "Give up. Skipping isn't for Pip",
         response:
-          "Every skill ever learned started with “can't.” YET keeps the door open — and doors are for walking through!",
+          "Every skill ever learned started with “can't.” YET keeps the door open. And doors are for walking through!",
       },
       {
         emoji: "😠",
         label: "Try harder and get mad",
         response:
-          "Big effort is brilliant — but big frustration makes wobbly hands. Breathe, say YET, try again slowly.",
+          "Big effort is brilliant. But big frustration makes wobbly hands. Breathe, say YET, try again slowly.",
       },
     ],
     mission: "Catch one “can't” this week and add YET out loud. Grown-ups' cants count too!",
@@ -180,19 +180,19 @@ export const COURAGE_QUESTS: CourageQuest[] = [
     title: "My Safety Team",
     emoji: "🛡️",
     story:
-      "Every hero has a team! Remi's Safety Team is Mama Otter, Coach, and Grandpa River. When anything feels wrong, scary or unkind — the team ALWAYS wants to know. That's what teams are for.",
+      "Every hero has a team! Remi's Safety Team is Mama Otter, Coach, and Grandpa River. When anything feels wrong, scary or unkind. The team ALWAYS wants to know. That's what teams are for.",
     question: "Who belongs on a Safety Team?",
     choices: [
       {
         emoji: "🛡️",
-        label: "Trusted grown-ups who listen — name three!",
+        label: "Trusted grown-ups who listen. Name three!",
         best: true,
         response:
-          "YES! Say their names out loud so they're ready in your pocket. Telling your team is a hero move — every single time.",
+          "YES! Say their names out loud so they're ready in your pocket. Telling your team is a hero move. Every single time.",
       },
       {
         emoji: "🤖",
-        label: "Nobody — heroes handle everything alone",
+        label: "Nobody. Heroes handle everything alone",
         response:
           "Even the mightiest heroes call for backup! Telling your team makes you stronger, never smaller.",
       },
@@ -200,13 +200,13 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         emoji: "🎲",
         label: "Anyone at all",
         response:
-          "Your team is special: grown-ups who listen AND help. Let's pick the exact three — one at home, one at school, one more.",
+          "Your team is special: grown-ups who listen AND help. Let's pick the exact three. One at home, one at school, one more.",
       },
     ],
-    mission: "Build your Safety Team: name (or draw!) three trusted grown-ups — home, school, and one more.",
-    parentPrompt: "Make the list real together: “Yes — you can always, always tell Ms. Lee.”",
+    mission: "Build your Safety Team: name (or draw!) three trusted grown-ups. Home, school, and one more.",
+    parentPrompt: "Make the list real together: “Yes. You can always, always tell Ms. Lee.”",
     safetyNote:
-      "Grown-ups: if unkindness or bullying is happening right now, please loop in school and your trusted adults directly. These quests support those conversations — they never replace them.",
+      "Grown-ups: if unkindness or bullying is happening right now, please loop in school and your trusted adults directly. These quests support those conversations. They never replace them.",
   },
   {
     week: 6,
@@ -215,30 +215,30 @@ export const COURAGE_QUESTS: CourageQuest[] = [
     title: "The Strong Stop",
     emoji: "✋",
     story:
-      "At practice, a kid kept grabbing Remi's ball and calling him “slowpoke.” Remi's cheeks went hot. Coach taught him the Strong Stop: stand tall, hand up, calm voice — “Stop. I don't like that.”",
+      "At practice, a kid kept grabbing Remi's ball and calling him “slowpoke.” Remi's cheeks went hot. Coach taught him the Strong Stop: stand tall, hand up, calm voice. “Stop. I don't like that.”",
     question: "What could Remi do?",
     choices: [
       {
         emoji: "😤",
         label: "Grab it back and shout",
         response:
-          "Feeling angry is completely okay! But grabbing back can tangle things worse. The Strong Stop — tall, calm, clear — is the real power move.",
+          "Feeling angry is completely okay! But grabbing back can tangle things worse. The Strong Stop. Tall, calm, clear. Is the real power move.",
       },
       {
         emoji: "✋",
         label: "Stand tall: “Stop. I don't like that.”",
         best: true,
         response:
-          "YES! Tall body, calm voice, clear words. That's courage you can practice — and it surprises unkindness every time.",
+          "YES! Tall body, calm voice, clear words. That's courage you can practice. And it surprises unkindness every time.",
       },
       {
         emoji: "🤫",
         label: "Stay quiet and hope it stops",
         response:
-          "Wanting peace is kind — and you deserve help too. A Strong Stop plus telling your Safety Team works even better.",
+          "Wanting peace is kind. And you deserve help too. A Strong Stop plus telling your Safety Team works even better.",
       },
     ],
-    mission: "Practice the Strong Stop at home: tall stance, hand up, calm voice — “Stop. I don't like that.”",
+    mission: "Practice the Strong Stop at home: tall stance, hand up, calm voice. “Stop. I don't like that.”",
     parentPrompt: "Play the silly villain so they can practice on you. Laugh together, then run it once seriously.",
   },
   {
@@ -248,32 +248,32 @@ export const COURAGE_QUESTS: CourageQuest[] = [
     title: "Walk Tall, Tell Tall",
     emoji: "🚶",
     story:
-      "The Strong Stop didn't work — the unkind words kept coming. So Remi used move two: he walked tall (no running, no crying needed, though crying is always allowed) straight to Coach, and told.",
+      "The Strong Stop didn't work. The unkind words kept coming. So Remi used move two: he walked tall (no running, no crying needed, though crying is always allowed) straight to Coach, and told.",
     question: "Is telling a grown-up “tattling”?",
     choices: [
       {
         emoji: "🚶",
-        label: "No — telling keeps someone safe. That's brave.",
+        label: "No. Telling keeps someone safe. That's brave.",
         best: true,
         response:
           "Exactly! Tattling is trying to get someone INTO trouble. Telling is getting someone OUT of trouble. Heroes tell.",
       },
       {
         emoji: "🤐",
-        label: "Yes — better to stay quiet",
+        label: "Yes. Better to stay quiet",
         response:
-          "Quiet lets unkindness grow in the dark. Telling your Safety Team turns the lights on — it's a hero move, every time.",
+          "Quiet lets unkindness grow in the dark. Telling your Safety Team turns the lights on. It's a hero move, every time.",
       },
       {
         emoji: "😡",
-        label: "No — but yelling back works better",
+        label: "No. But yelling back works better",
         response:
-          "Your voice matters! And your Safety Team has grown-up powers you don't have yet. Walk tall, tell tall — let the team do the heavy lifting.",
+          "Your voice matters! And your Safety Team has grown-up powers you don't have yet. Walk tall, tell tall. Let the team do the heavy lifting.",
       },
     ],
     mission: "Practice the two-step with a grown-up: Strong Stop → Walk tall & tell. Make it a game!",
     parentPrompt:
-      "Say this promise out loud: “If you tell me, I will listen and help — and you will never be in trouble for telling.”",
+      "Say this promise out loud: “If you tell me, I will listen and help. And you will never be in trouble for telling.”",
   },
   {
     week: 8,
@@ -282,8 +282,8 @@ export const COURAGE_QUESTS: CourageQuest[] = [
     title: "The Buddy Shield",
     emoji: "🤝",
     story:
-      "Remi noticed something magic: unkindness goes quiet around buddies. At the new class, he found one friendly face, said “hi, I'm Remi!” — and suddenly the room felt twice as safe.",
-    question: "First day somewhere new and feeling wobbly — what's the move?",
+      "Remi noticed something magic: unkindness goes quiet around buddies. At the new class, he found one friendly face, said “hi, I'm Remi!”. And suddenly the room felt twice as safe.",
+    question: "First day somewhere new and feeling wobbly. What's the move?",
     choices: [
       {
         emoji: "🤝",
@@ -296,7 +296,7 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         emoji: "🧍",
         label: "Stay alone in the corner",
         response:
-          "Corners feel safe but lonely. One small “hi” to one kind face changes the whole room — and you only need one.",
+          "Corners feel safe but lonely. One small “hi” to one kind face changes the whole room. And you only need one.",
       },
       {
         emoji: "🎭",
@@ -305,7 +305,7 @@ export const COURAGE_QUESTS: CourageQuest[] = [
           "You being YOU is the best teammate anyone could get. One real buddy beats ten pretend ones.",
       },
     ],
-    mission: "Say hi first to one kid at school or practice this week. Just one “hi” — that's the whole mission.",
+    mission: "Say hi first to one kid at school or practice this week. Just one “hi”. That's the whole mission.",
     parentPrompt: "Afterwards ask: “Who did you play with today?” Celebrate the trying, whatever happened.",
   },
 
@@ -317,7 +317,7 @@ export const COURAGE_QUESTS: CourageQuest[] = [
     title: "The Upstander Move",
     emoji: "🦸",
     story:
-      "At the park, Remi saw a kid being called names. His tummy went tight — it wasn't even happening to HIM, but it hurt to watch. Then he remembered: heroes don't watch. Heroes get backup.",
+      "At the park, Remi saw a kid being called names. His tummy went tight. It wasn't even happening to HIM, but it hurt to watch. Then he remembered: heroes don't watch. Heroes get backup.",
     question: "You SEE someone being treated unkindly. What's the Upstander Move?",
     choices: [
       {
@@ -331,7 +331,7 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         emoji: "👀",
         label: "Watch and do nothing",
         response:
-          "Watching feels safer — but the kid feels all alone. Even the smallest move, like fetching help or a kind word after, changes everything.",
+          "Watching feels safer. But the kid feels all alone. Even the smallest move, like fetching help or a kind word after, changes everything.",
       },
       {
         emoji: "🥊",
@@ -341,7 +341,7 @@ export const COURAGE_QUESTS: CourageQuest[] = [
       },
     ],
     mission: "Make a family Upstander Plan: talk through exactly what you'd do if you SAW unkindness happen.",
-    parentPrompt: "Tell them about a time you stood up for someone — or a time you wish you had. Real stories stick.",
+    parentPrompt: "Tell them about a time you stood up for someone. Or a time you wish you had. Real stories stick.",
   },
   {
     week: 10,
@@ -364,13 +364,13 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         emoji: "🙈",
         label: "Someone else will invite them",
         response:
-          "Everyone thinks that — so often nobody does! Leaders go first. And going first gets easier every time.",
+          "Everyone thinks that. So often nobody does! Leaders go first. And going first gets easier every time.",
       },
       {
         emoji: "👑",
         label: "Only invite the best players",
         response:
-          "The best teams aren't the best players — they're the ones where everyone gets to play. That's what makes people follow a leader.",
+          "The best teams aren't the best players. They're the ones where everyone gets to play. That's what makes people follow a leader.",
       },
     ],
     mission: "Use the five magic words once this week: “Want to play with us?”",
@@ -391,7 +391,7 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         label: "Fair turns, big cheers, everyone plays",
         best: true,
         response:
-          "YES! Captains aren't the loudest or the fastest — they're the ones who make everyone else feel ten feet tall.",
+          "YES! Captains aren't the loudest or the fastest. They're the ones who make everyone else feel ten feet tall.",
       },
       {
         emoji: "📢",
@@ -403,11 +403,11 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         emoji: "🥇",
         label: "Winning at any cost",
         response:
-          "Winning feels great — but a captain who cheers the last-place kid wins something bigger: the whole team's heart.",
+          "Winning feels great. But a captain who cheers the last-place kid wins something bigger: the whole team's heart.",
       },
     ],
     mission: "Lead one family game start to finish: explain the rules, give fair turns, cheer everyone.",
-    parentPrompt: "Be a player, not the boss — let them run the whole thing, wobbles and all.",
+    parentPrompt: "Be a player, not the boss. Let them run the whole thing, wobbles and all.",
   },
   {
     week: 12,
@@ -424,7 +424,7 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         label: "Courage grows every time you use it",
         best: true,
         response:
-          "That's the one! Courage is a muscle — twelve weeks of tiny brave moves made yours stronger. And it keeps growing forever.",
+          "That's the one! Courage is a muscle. Twelve weeks of tiny brave moves made yours stronger. And it keeps growing forever.",
       },
       {
         emoji: "🦸",
@@ -436,7 +436,7 @@ export const COURAGE_QUESTS: CourageQuest[] = [
         emoji: "🏆",
         label: "Courage is only for big moments",
         response:
-          "Courage lives in tiny moments — a hello, a stop, a “want to play?” You've been doing it for twelve whole weeks!",
+          "Courage lives in tiny moments. A hello, a stop, a “want to play?” You've been doing it for twelve whole weeks!",
       },
     ],
     mission: "Tell your Courage Story: teach a grown-up your three favorite moves from the last 12 weeks.",

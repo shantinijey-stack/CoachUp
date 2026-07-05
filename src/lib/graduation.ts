@@ -6,8 +6,7 @@ import type { Domain, Level, QuestLevel } from "../types";
  * A child journeys Rookie Season → Pro Season → Master Season; each is a
  * fresh 12-week plan at a higher base difficulty. Promotion happens at a
  * "Graduation Adventure": the child replays the three Discovery Day
- * activities and the result is compared to their OWN previous marks —
- * never to other children. Not being ready is never a fail: it becomes a
+ * activities and the result is compared to their OWN previous marks. * never to other children. Not being ready is never a fail: it becomes a
  * "Victory Lap" (keep playing favorites and try again anytime).
  */
 
@@ -25,13 +24,13 @@ export const SEASONS: Record<
     name: "Pro Season",
     emoji: "🔥",
     next: "Master Season",
-    blurb: "Every quest at Pro twist — skills getting sharp",
+    blurb: "Every quest at Pro twist. Skills getting sharp",
   },
   3: {
     name: "Master Season",
     emoji: "👑",
     next: "CoachUp Champion",
-    blurb: "Master twists everywhere — the legend chapter",
+    blurb: "Master twists everywhere. The legend chapter",
   },
 };
 
@@ -79,7 +78,7 @@ export type GradComparison = {
 /**
  * Compare graduation answers with the child's own baseline (their last
  * graduation, or Discovery Day the first time). Pass = overall held or
- * grew. A dip is "still warming up today" — retry anytime, no fail.
+ * grew. A dip is "still warming up today". Retry anytime, no fail.
  */
 export function compareGraduation(
   baseline: Record<Domain, Level>,

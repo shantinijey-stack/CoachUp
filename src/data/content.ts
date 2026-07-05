@@ -76,11 +76,11 @@ export const MOVEMENT_ACTIVITIES: Record<AgeBand, MovementActivity[]> = {
       steps: [
         { emoji: "🛝", text: "Lay the lily pads in a line, a small jump apart" },
         { emoji: "🐰", text: "Show a bunny hop: two feet together, bouncy knees" },
-        { emoji: "🎵", text: "Start the timer — hop pad to pad, turn round and come back!" },
+        { emoji: "🎵", text: "Start the timer. Hop pad to pad, turn round and come back!" },
       ],
       timer: { mode: "countdown", seconds: 30, label: "Hop for 30 seconds!" },
       options: [
-        { level: 1, label: "Emerging", emoji: "🌱", description: "Hops are just starting — one foot leads or they pause between hops" },
+        { level: 1, label: "Emerging", emoji: "🌱", description: "Hops are just starting. One foot leads or they pause between hops" },
         { level: 2, label: "Growing", emoji: "🌿", description: "Hops along with both feet, sometimes wobbly but keeps going" },
         { level: 3, label: "Thriving", emoji: "🌳", description: "Springy two-foot hops in a row, could hop all day!" },
       ],
@@ -90,18 +90,18 @@ export const MOVEMENT_ACTIVITIES: Record<AgeBand, MovementActivity[]> = {
       title: "Rolling Ball Rescue",
       emoji: "⚽",
       scene:
-        "Oh no — Remi's favorite ball is rolling away! Roll a ball back and forth together and see how the rescue mission goes.",
+        "Oh no. Remi's favorite ball is rolling away! Roll a ball back and forth together and see how the rescue mission goes.",
       question: "When rolling and stopping a ball with you, what do you see?",
       demo: "roll",
       youllNeed: "Any soft ball and a partner, sitting 2–3 big steps apart",
       steps: [
         { emoji: "🧘", text: "Sit facing each other with legs wide like a goal" },
-        { emoji: "⚽", text: "Roll the ball over — they trap it, then roll it back" },
+        { emoji: "⚽", text: "Roll the ball over. They trap it, then roll it back" },
         { emoji: "↔️", text: "Rescue going well? Scoot one step further apart each round!" },
       ],
       timer: { mode: "countdown", seconds: 60, label: "One-minute rescue mission!" },
       options: [
-        { level: 1, label: "Emerging", emoji: "🌱", description: "Learning to line up hands with the ball — catches are surprises!" },
+        { level: 1, label: "Emerging", emoji: "🌱", description: "Learning to line up hands with the ball. Catches are surprises!" },
         { level: 2, label: "Growing", emoji: "🌿", description: "Stops and rolls the ball back most of the time" },
         { level: 3, label: "Thriving", emoji: "🌳", description: "Traps, rolls and aims the ball with confidence" },
       ],
@@ -114,17 +114,17 @@ export const MOVEMENT_ACTIVITIES: Record<AgeBand, MovementActivity[]> = {
         "Remi met a fancy flamingo who stands on one leg! Can your explorer strike the flamingo pose too?",
       question: "When they balance on one foot, what do you see?",
       demo: "flamingo",
-      youllNeed: "A flat, safe spot — barefoot works best",
+      youllNeed: "A flat, safe spot. Barefoot works best",
       steps: [
         { emoji: "🧍", text: "Stand tall and proud like a fancy flamingo" },
         { emoji: "🦩", text: "Lift one foot up, arms out wide like wings" },
-        { emoji: "⏱️", text: "Start the timer — stop it when the foot touches down. Swap legs and try again!" },
+        { emoji: "⏱️", text: "Start the timer. Stop it when the foot touches down. Swap legs and try again!" },
       ],
       timer: { mode: "stopwatch", label: "Time the flamingo pose!" },
       options: [
-        { level: 1, label: "Emerging", emoji: "🌱", description: "A quick flamingo flash — a second or two with a helping hand" },
+        { level: 1, label: "Emerging", emoji: "🌱", description: "A quick flamingo flash. A second or two with a helping hand" },
         { level: 2, label: "Growing", emoji: "🌿", description: "Holds the pose for a few seconds with wiggly arms" },
-        { level: 3, label: "Thriving", emoji: "🌳", description: "Steady statue flamingo — 8+ seconds, maybe even eyes closed!" },
+        { level: 3, label: "Thriving", emoji: "🌳", description: "Steady statue flamingo. 8+ seconds, maybe even eyes closed!" },
       ],
     },
   ],
@@ -140,14 +140,14 @@ export const MOVEMENT_ACTIVITIES: Record<AgeBand, MovementActivity[]> = {
       youllNeed: "4 markers (bottles, shoes or cones) in a line, one big step apart",
       steps: [
         { emoji: "🔸", text: "Set the 4 markers in a straight line" },
-        { emoji: "🏃", text: "Weave in and out to the last marker — then zig-zag back" },
-        { emoji: "⚡", text: "Time the run. Two tries — the fastest lightning bolt counts!" },
+        { emoji: "🏃", text: "Weave in and out to the last marker. Then zig-zag back" },
+        { emoji: "⚡", text: "Time the run. Two tries. The fastest lightning bolt counts!" },
       ],
       timer: { mode: "stopwatch", label: "Time the lightning run!" },
       options: [
-        { level: 1, label: "Emerging", emoji: "🌱", description: "Takes it step by step — turns are careful and slow down the run" },
+        { level: 1, label: "Emerging", emoji: "🌱", description: "Takes it step by step. Turns are careful and slow down the run" },
         { level: 2, label: "Growing", emoji: "🌿", description: "Good speed with a few wide turns or bumped cones" },
-        { level: 3, label: "Thriving", emoji: "🌳", description: "Sharp cuts at speed — a lightning bolt through the course!" },
+        { level: 3, label: "Thriving", emoji: "🌳", description: "Sharp cuts at speed. A lightning bolt through the course!" },
       ],
     },
     {
@@ -162,13 +162,13 @@ export const MOVEMENT_ACTIVITIES: Record<AgeBand, MovementActivity[]> = {
       steps: [
         { emoji: "🧱", text: "Stand 2–3 steps from the wall, ball in hand" },
         { emoji: "🎾", text: "Throw underarm at the wall, catch it after one bounce (no bounce = super mode!)" },
-        { emoji: "🔢", text: "Tap +1 for every clean catch — can they reach 10 in a row?" },
+        { emoji: "🔢", text: "Tap +1 for every clean catch. Can they reach 10 in a row?" },
       ],
       timer: { mode: "counter", target: 10, label: "Count the catches!" },
       options: [
-        { level: 1, label: "Emerging", emoji: "🌱", description: "Catches a few — timing the bounce is the exciting part to learn" },
+        { level: 1, label: "Emerging", emoji: "🌱", description: "Catches a few. Timing the bounce is the exciting part to learn" },
         { level: 2, label: "Growing", emoji: "🌿", description: "Gets 5–8 catches with focus and resets" },
-        { level: 3, label: "Thriving", emoji: "🌳", description: "10 clean catches — maybe even one-handed for style!" },
+        { level: 3, label: "Thriving", emoji: "🌳", description: "10 clean catches. Maybe even one-handed for style!" },
       ],
     },
     {
@@ -182,12 +182,12 @@ export const MOVEMENT_ACTIVITIES: Record<AgeBand, MovementActivity[]> = {
       youllNeed: "A mat, carpet or big towel",
       steps: [
         { emoji: "🛡️", text: "Choose a power pose: forearm plank, or tummy-down “flying” with arms out" },
-        { emoji: "💪", text: "Body strong and straight — keep breathing, superheroes breathe!" },
-        { emoji: "⏱️", text: "Start the timer — stop when the pose melts. One rest, then one more try!" },
+        { emoji: "💪", text: "Body strong and straight. Keep breathing, superheroes breathe!" },
+        { emoji: "⏱️", text: "Start the timer. Stop when the pose melts. One rest, then one more try!" },
       ],
       timer: { mode: "stopwatch", label: "Time the superhero power!" },
       options: [
-        { level: 1, label: "Emerging", emoji: "🌱", description: "Powers up for 5–10 seconds — the core cape is still charging" },
+        { level: 1, label: "Emerging", emoji: "🌱", description: "Powers up for 5–10 seconds. The core cape is still charging" },
         { level: 2, label: "Growing", emoji: "🌿", description: "Solid 15–25 second hold with some shakes" },
         { level: 3, label: "Thriving", emoji: "🌳", description: "30+ seconds of rock-steady superhero power" },
       ],
@@ -214,7 +214,7 @@ export const COMFORT_QUESTIONS: ComfortQuestion[] = [
     emoji: "🔊",
     scene: "Remi's world has quiet forests and buzzing stadiums. Where does your child feel happiest?",
     options: [
-      { level: 1, label: "Calm cove", emoji: "🌙", description: "Loves quieter spaces — big noise takes energy" },
+      { level: 1, label: "Calm cove", emoji: "🌙", description: "Loves quieter spaces. Big noise takes energy" },
       { level: 2, label: "Goes with the flow", emoji: "🌊", description: "Fine with noise once they settle in" },
       { level: 3, label: "Loves the roar", emoji: "📣", description: "The louder and livelier, the better!" },
     ],
@@ -278,7 +278,7 @@ export const SPARK_QUESTIONS: SparkQuestion[] = [
     emoji: "🔥",
     scene: "When today's adventures ended, how did your child feel?",
     options: [
-      { value: 1, label: "Phew, all done!", emoji: "😮‍💨", description: "Relieved it's over — recharging time" },
+      { value: 1, label: "Phew, all done!", emoji: "😮‍💨", description: "Relieved it's over. Recharging time" },
       { value: 2, label: "Happy and done", emoji: "😊", description: "Enjoyed it and felt finished" },
       { value: 3, label: "Again! Again!", emoji: "🤩", description: "Asked to keep going or do it again" },
     ],
@@ -302,7 +302,7 @@ export const SPARK_QUESTIONS: SparkQuestion[] = [
     options: [
       { value: "individual", label: "One-on-one", emoji: "🤝", description: "Solo play or with one trusted person" },
       { value: "smallSquad", label: "Small squad", emoji: "👯", description: "One or two good friends" },
-      { value: "group", label: "The big crew", emoji: "🎪", description: "A big lively group — the more the merrier" },
+      { value: "group", label: "The big crew", emoji: "🎪", description: "A big lively group. The more the merrier" },
     ],
   },
 ];
@@ -329,7 +329,7 @@ export const MODULES: Record<ModuleId, ModuleInfo> = {
     tagline: "Every superpower starts with a great foundation",
     gradient: "from-meadow to-lagoon",
     description:
-      "A joyful all-round adventure that grows running, throwing, balancing and confidence together — perfect for building a love of movement from the ground up.",
+      "A joyful all-round adventure that grows running, throwing, balancing and confidence together. Perfect for building a love of movement from the ground up.",
     weeks: [
       { phase: "Explore", weeks: "Weeks 1–4", focus: "Playful games across all movement worlds", emoji: "🗺️" },
       { phase: "Grow", weeks: "Weeks 5–8", focus: "Favorite skills get their own spotlight", emoji: "🌿" },
@@ -343,7 +343,7 @@ export const MODULES: Record<ModuleId, ModuleInfo> = {
     tagline: "For kids whose feet were born to fly",
     gradient: "from-sunshine to-tangerine",
     description:
-      "A speed-and-agility adventure built around running, dodging, jumping and racing games — turning natural zoom into skillful, confident movement.",
+      "A speed-and-agility adventure built around running, dodging, jumping and racing games. Turning natural zoom into skillful, confident movement.",
     weeks: [
       { phase: "Ignite", weeks: "Weeks 1–4", focus: "Fun speed games and animal races", emoji: "🐆" },
       { phase: "Charge", weeks: "Weeks 5–8", focus: "Agility courses and chase challenges", emoji: "🌀" },
@@ -357,9 +357,9 @@ export const MODULES: Record<ModuleId, ModuleInfo> = {
     tagline: "Hands and feet with ball magic",
     gradient: "from-sky to-berry",
     description:
-      "A hands-on adventure with throwing, catching, kicking and aiming games — growing sharp eyes and clever hands across every kind of ball play.",
+      "A hands-on adventure with throwing, catching, kicking and aiming games. Growing sharp eyes and clever hands across every kind of ball play.",
     weeks: [
-      { phase: "Discover", weeks: "Weeks 1–4", focus: "Every ball, every game — find the favorites", emoji: "🎯" },
+      { phase: "Discover", weeks: "Weeks 1–4", focus: "Every ball, every game. Find the favorites", emoji: "🎯" },
       { phase: "Craft", weeks: "Weeks 5–8", focus: "Target quests and catch-combo challenges", emoji: "🧤" },
       { phase: "Master", weeks: "Weeks 9–12", focus: "Mini-matches and the Ball Masters Festival", emoji: "🎪" },
     ],
@@ -371,7 +371,7 @@ export const MODULES: Record<ModuleId, ModuleInfo> = {
     tagline: "Stillness is a superpower",
     gradient: "from-lagoon to-deepsea",
     description:
-      "A body-control adventure with balancing quests, climbing challenges and ninja poses — building the calm, strong core that powers every sport.",
+      "A body-control adventure with balancing quests, climbing challenges and ninja poses. Building the calm, strong core that powers every sport.",
     weeks: [
       { phase: "Train", weeks: "Weeks 1–4", focus: "Ninja poses, beams and freeze games", emoji: "🧘" },
       { phase: "Flow", weeks: "Weeks 5–8", focus: "Obstacle paths and slow-motion challenges", emoji: "🌊" },
@@ -385,7 +385,7 @@ export const MODULES: Record<ModuleId, ModuleInfo> = {
     tagline: "Ready for every arena",
     gradient: "from-coral to-berry",
     description:
-      "A multi-sport adventure for kids thriving across movement worlds — sampling many sports, learning game smarts and leading with heart.",
+      "A multi-sport adventure for kids thriving across movement worlds. Sampling many sports, learning game smarts and leading with heart.",
     weeks: [
       { phase: "Sample", weeks: "Weeks 1–4", focus: "A new sport world every week", emoji: "🌍" },
       { phase: "Sharpen", weeks: "Weeks 5–8", focus: "Game tactics, teamwork and leadership", emoji: "🧠" },

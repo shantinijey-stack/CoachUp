@@ -34,21 +34,21 @@ export interface TrainingPlan {
 /* ------------------------------------------------------------------ */
 
 const COMFORT_TIPS: Record<ComfortStyle, string> = {
-  calm: "Keep quests in a familiar, calm spot — same place, same little warm-up. Predictable feels powerful.",
-  flex: "Mix up where you play — living room, garden, park. Fresh places keep quests exciting.",
-  adventure: "Take quests outside, add music, make it loud and silly — big energy is the fuel!",
+  calm: "Keep quests in a familiar, calm spot. Same place, same little warm-up. Predictable feels powerful.",
+  flex: "Mix up where you play. Living room, garden, park. Fresh places keep quests exciting.",
+  adventure: "Take quests outside, add music, make it loud and silly. Big energy is the fuel!",
 };
 
 const DRIVE_TIPS: Record<Level, string> = {
-  1: "Short and sweet wins the week — stop each quest while it's still fun, and the spark grows.",
-  2: "One quest a day is the perfect pace — steady adventurers go far.",
-  3: "Feed the fire — let them replay a quest or invent an even harder version!",
+  1: "Short and sweet wins the week. Stop each quest while it's still fun, and the spark grows.",
+  2: "One quest a day is the perfect pace. Steady adventurers go far.",
+  3: "Feed the fire. Let them replay a quest or invent an even harder version!",
 };
 
 const SOCIAL_TIPS: Record<SocialStyle, string> = {
-  individual: "These quests shine one-on-one — your full attention is the real magic.",
-  smallSquad: "Invite one buddy or sibling along this week — quests are twice the fun in a small squad.",
-  group: "Turn a quest into a family tournament — everyone plays, everyone cheers!",
+  individual: "These quests shine one-on-one. Your full attention is the real magic.",
+  smallSquad: "Invite one buddy or sibling along this week. Quests are twice the fun in a small squad.",
+  group: "Turn a quest into a family tournament. Everyone plays, everyone cheers!",
 };
 
 /* ------------------------------------------------------------------ */

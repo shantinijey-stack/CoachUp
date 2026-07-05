@@ -52,8 +52,8 @@ const CHECK_IN_OPTIONS: { value: Level; emoji: string; label: string }[] = [
 
 const ADAPTIVE_TIPS: Record<Level, string> = {
   1: "Last week felt like a big climb, so this week let's shrink each quest to five fun minutes. Small steps, big wins!",
-  2: "Last week was good fun — this cozy pace is exactly right, so let's keep it rolling!",
-  3: "Last week was a smash hit — try the level-up twists early this week, superstar!",
+  2: "Last week was good fun. This cozy pace is exactly right, so let's keep it rolling!",
+  3: "Last week was a smash hit. Try the level-up twists early this week, superstar!",
 };
 
 /* ------------------------------------------------------------------ */
@@ -67,7 +67,7 @@ function nextSwapOption(current: Quest, weekQuestIds: string[]): Quest {
     const candidate = list[(start + step) % list.length];
     if (!weekQuestIds.includes(candidate.id)) return candidate;
   }
-  return current; // only one option in domain — nothing to swap to
+  return current; // only one option in domain. Nothing to swap to
 }
 
 /* ------------------------------------------------------------------ */
@@ -189,7 +189,7 @@ function QuestRow({
                     Smashed it! Unlock {nextLevel.emoji} {nextLevel.name} ⬆️
                   </button>
                   <p className="text-[10px] text-deepsea/45 text-center mt-1.5">
-                    Still practicing? That's perfect too — level up whenever it feels easy.
+                    Still practicing? That's perfect too. Level up whenever it feels easy.
                   </p>
                 </div>
               )}
@@ -468,7 +468,7 @@ export default function TrainingPlan({
   };
 
   return (
-    <Screen onBack={onBack}>
+    <Screen brand onBack={onBack}>
       {celebrating && <Confetti count={20} />}
 
       {/* New-badge toast */}
@@ -533,7 +533,7 @@ export default function TrainingPlan({
         </div>
         <p className="mt-3 text-xs opacity-90 leading-relaxed">
           Three home quests a week, made for {name}: {DOMAIN_INFO[result.strengthDomain].kidName}{" "}
-          games to shine in, {DOMAIN_INFO[result.growthDomain].kidName} games to grow with — and
+          games to shine in, {DOMAIN_INFO[result.growthDomain].kidName} games to grow with. And
           level-up twists waiting in weeks 9–12!
         </p>
         <div className="mt-2 flex items-center justify-between gap-2">
@@ -550,14 +550,14 @@ export default function TrainingPlan({
         </div>
       </div>
 
-      {/* The Courage Curve — the leadership learning path */}
+      {/* The Courage Curve. The leadership learning path */}
       <div className="bg-white/90 rounded-3xl shadow-card p-4 mb-4">
         <p className="text-xs font-bold uppercase tracking-widest text-berry mb-2">
           💜 The Courage Curve
         </p>
         <p className="text-xs text-deepsea/60 mb-3 leading-snug">
           Alongside the movement quests, one Courage Quest a week grows {name}'s
-          confidence step by step — from knowing themselves, to standing strong
+          confidence step by step. From knowing themselves, to standing strong
           around unkindness, to lifting others as a leader.
         </p>
         <div className="grid grid-cols-3 gap-2">
@@ -578,7 +578,7 @@ export default function TrainingPlan({
             <p className="text-3xl mb-1">👑🎇</p>
             <p className="font-display font-extrabold text-deepsea">CoachUp Champion!</p>
             <p className="text-xs text-deepsea/60">
-              Every season conquered — keep playing favorites, beating personal bests and
+              Every season conquered. Keep playing favorites, beating personal bests and
               exploring real-world sports.
             </p>
           </div>
@@ -607,7 +607,7 @@ export default function TrainingPlan({
               </div>
               <div className="flex items-center gap-2 text-xs text-deepsea/70">
                 <span className="opacity-60">🎓</span>
-                Then replay the 3 Discovery games — compared only to {name}'s own past marks
+                Then replay the 3 Discovery games. Compared only to {name}'s own past marks
               </div>
             </div>
             {readiness.eligible ? (
@@ -620,7 +620,7 @@ export default function TrainingPlan({
               </button>
             ) : (
               <p className="text-[11px] text-deepsea/45 text-center">
-                Keep questing — the Graduation Adventure unlocks when both boxes are ticked. No
+                Keep questing. The Graduation Adventure unlocks when both boxes are ticked. No
                 rush, no pressure. 💛
               </p>
             )}
@@ -662,11 +662,11 @@ export default function TrainingPlan({
         <div className="text-center py-4">
           {doneTotal === plan.totalQuests ? (
             <p className="font-display font-extrabold text-xl text-deepsea">
-              🎪 The Grand Festival is complete — what an adventure, {name}! 🏆
+              🎪 The Grand Festival is complete. What an adventure, {name}! 🏆
             </p>
           ) : (
             <p className="text-sm text-deepsea/50">
-              {guide.emoji} {guide.firstName} says: any quest, any order — every adventure counts!
+              {guide.emoji} {guide.firstName} says: any quest, any order. Every adventure counts!
             </p>
           )}
         </div>

@@ -70,7 +70,7 @@ const FAMILY: Record<Domain, ExploreOption> = {
 /**
  * Champion-only sport doors. Named sports appear ONLY after the full
  * three-season journey, as invitations grounded in demonstrated
- * strengths — plural options, never a single prediction.
+ * strengths. Plural options, never a single prediction.
  */
 const SPORT_DOORS: Record<Domain, ExploreOption> = {
   locomotor: {
@@ -92,7 +92,7 @@ const SPORT_DOORS: Record<Domain, ExploreOption> = {
 
 const STRENGTH_DETAIL: Record<Domain, string> = {
   locomotor: "Fast feet, quick direction changes and big running energy",
-  objectControl: "Sharp eyes and clever hands — throwing, catching, kicking and aiming",
+  objectControl: "Sharp eyes and clever hands: throwing, catching, kicking and aiming",
   stability: "Steady balance, strong core and calm body control",
 };
 
@@ -107,10 +107,10 @@ export function trainerLevelFor(questLevels: Record<string, QuestLevel>): Traine
   const masters = values.filter((l) => l === 3).length;
   const proPlus = values.filter((l) => l >= 2).length;
   if (masters >= 6)
-    return { name: "Master Trainer", emoji: "👑", blurb: "Top-level twists conquered — mastery in motion!" };
+    return { name: "Master Trainer", emoji: "👑", blurb: "Top-level twists conquered. Mastery in motion!" };
   if (proPlus >= 4)
-    return { name: "Pro Trainer", emoji: "🔥", blurb: "Quests are leveling up — skills turning into superpowers!" };
-  return { name: "Rookie Trainer", emoji: "🌱", blurb: "Every master started here — the adventure is underway!" };
+    return { name: "Pro Trainer", emoji: "🔥", blurb: "Quests are leveling up. Skills turning into superpowers!" };
+  return { name: "Rookie Trainer", emoji: "🌱", blurb: "Every master started here. The adventure is underway!" };
 }
 
 export function buildGrowthReport(
@@ -136,12 +136,12 @@ export function buildGrowthReport(
     const trained = domainLevel(domain, questLevels);
     return {
       emoji: info.emoji,
-      title: `${info.kidName} (${STRENGTH_DETAIL[domain].split(" — ")[0].split(",")[0].toLowerCase()})`,
+      title: `${info.kidName} (${STRENGTH_DETAIL[domain].split(": ")[0].split(",")[0].toLowerCase()})`,
       detail:
         STRENGTH_DETAIL[domain] +
         (trained >= 2
-          ? " — and weeks of practice have turned this spark into real skill."
-          : " — a natural spark that practice keeps growing."),
+          ? ". And weeks of practice have turned this spark into real skill."
+          : ". A natural spark that practice keeps growing."),
       levelLabel:
         trained >= 2.5 ? "👑 Master level" : trained >= 1.5 ? "🔥 Pro level" : "🌱 Growing",
     };
@@ -159,7 +159,7 @@ export function buildGrowthReport(
   const exploreOptions: ExploreOption[] = [FAMILY[top1.domain], FAMILY[top2.domain]];
   exploreOptions.push(
     result.social === "group"
-      ? { emoji: "🎪", title: "Big-crew versions", examples: "team formats of the families above — group energy is this explorer's fuel" }
+      ? { emoji: "🎪", title: "Big-crew versions", examples: "team formats of the families above. Group energy is this explorer's fuel" }
       : result.social === "smallSquad"
         ? { emoji: "👯", title: "Buddy versions", examples: "small-pod formats of the families above, with one or two good friends" }
         : { emoji: "🤝", title: "One-to-one versions", examples: "focused coach-and-me formats of the families above" },
@@ -173,15 +173,15 @@ export function buildGrowthReport(
 
   return {
     trainerLevel: opts.champion
-      ? { name: "CoachUp Champion", emoji: "🏆", blurb: "Every season conquered — a true movement adventurer!" }
+      ? { name: "CoachUp Champion", emoji: "🏆", blurb: "Every season conquered. A true movement adventurer!" }
       : trainerLevelFor(questLevels),
     strengths: [strengthFor(top1.domain), strengthFor(top2.domain)],
     courageStrengths,
     sportDoors: opts.champion ? [SPORT_DOORS[top1.domain], SPORT_DOORS[top2.domain]] : undefined,
     growth: {
       emoji: DOMAIN_INFO[lowest].emoji,
-      title: `${DOMAIN_INFO[lowest].kidName} — the next quest`,
-      detail: `${DOMAIN_INFO[lowest].name} games are the freshest frontier. More playful practice here unlocks brand-new powers — that's the exciting part!`,
+      title: `${DOMAIN_INFO[lowest].kidName}: the next quest`,
+      detail: `${DOMAIN_INFO[lowest].name} games are the freshest frontier. More playful practice here unlocks brand-new powers. That's the exciting part!`,
     },
     exploreOptions,
     effort: {

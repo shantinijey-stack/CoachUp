@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import BrandLogo from "../components/BrandLogo";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import Confetti from "../components/Confetti";
@@ -41,12 +42,7 @@ export default function Dashboard({
     <Screen>
       {booked && <Confetti count={18} />}
       <header className="flex items-center justify-between pt-5 pb-4">
-        <div className="flex items-center gap-2 font-display font-extrabold text-lg text-deepsea">
-          <span className="w-8 h-8 rounded-xl bg-gradient-to-br from-tangerine to-coral flex items-center justify-center text-white shadow-pop">
-            C
-          </span>
-          CoachUp <span className="text-tangerine">Kids</span>
-        </div>
+        <BrandLogo markSize={30} />
         <button
           type="button"
           onClick={onRestart}
@@ -141,7 +137,7 @@ export default function Dashboard({
               </span>
               <span className="block text-sm opacity-90">
                 {planDoneCount > 0
-                  ? `${planDoneCount} of 36 quests complete — keep going!`
+                  ? `${planDoneCount} of 36 quests complete. Keep going!`
                   : "3 home quests a week, made just for " + (name === "Your explorer" ? "your explorer" : name)}
               </span>
             </span>
@@ -176,7 +172,7 @@ export default function Dashboard({
               <p className="text-sm text-deepsea/70 leading-relaxed">
                 {growth.name} skills are {name}'s next exciting frontier. Coaches
                 will tuck playful {growth.name.toLowerCase()} practice into
-                favorite games — small wins, big celebrations.
+                favorite games. Small wins, big celebrations.
               </p>
             </div>
           </div>

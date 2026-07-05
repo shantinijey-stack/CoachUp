@@ -34,11 +34,11 @@ export const GUIDES: GuideInfo[] = [
     style: "Playful & silly",
     motto: "Let's turn EVERYTHING into a game!",
     reactions: {
-      1: "Thanks for telling me 💛 Next week we'll make the games smaller and even sillier — tiny quests, giant giggles!",
-      2: "Yippee! That's the perfect splash — same fun-sized pace coming up! 😊",
-      3: "WOOHOO! 🎉 Extra-bouncy challenges coming right up — let's gooo!",
+      1: "Thanks for telling me 💛 Next week we'll make the games smaller and even sillier. Tiny quests, giant giggles!",
+      2: "Yippee! That's the perfect splash. Same fun-sized pace coming up! 😊",
+      3: "WOOHOO! 🎉 Extra-bouncy challenges coming right up. Let's gooo!",
     },
-    cheer: "OTTERLY AMAZING! You've grown SO much — river-dance party time! 🎉",
+    cheer: "OTTERLY AMAZING! You've grown SO much. River-dance party time! 🎉",
   },
   {
     id: "luna",
@@ -47,13 +47,13 @@ export const GUIDES: GuideInfo[] = [
     emoji: "🦉",
     vibe: "wise and twinkly",
     style: "Chill & wise",
-    motto: "Slow breaths, clever moves — we've got this.",
+    motto: "Slow breaths, clever moves. We've got this.",
     reactions: {
-      1: "Wise of you to notice 🌙 Next week will be softer and slower — small wings still fly far.",
+      1: "Wise of you to notice 🌙 Next week will be softer and slower. Small wings still fly far.",
       2: "Lovely. We'll glide on at this gentle, happy pace. ✨",
       3: "My, my! Those wings are ready for cleverer, twistier challenges next week! 🌟",
     },
-    cheer: "Wise wings, brilliant flight — look how far you've soared! ✨",
+    cheer: "Wise wings, brilliant flight. Look how far you've soared! ✨",
   },
   {
     id: "dash",
@@ -64,9 +64,9 @@ export const GUIDES: GuideInfo[] = [
     style: "Fast & sporty",
     motto: "Ready, set, GO GO GO!",
     reactions: {
-      1: "Smart call, champ 💙 We'll shorten the sprints next week — rest is where speed is made!",
-      2: "Nice pace, teammate! Keep cruising — waves ahead! 🌊",
-      3: "BOOM! 💥 TURBO MODE unlocked for next week — hold onto your fins!",
+      1: "Smart call, champ 💙 We'll shorten the sprints next week. Rest is where speed is made!",
+      2: "Nice pace, teammate! Keep cruising. Waves ahead! 🌊",
+      3: "BOOM! 💥 TURBO MODE unlocked for next week. Hold onto your fins!",
     },
     cheer: "LIGHTNING SPEED, CHAMPION! That was a personal-best kind of day! ⚡",
   },
@@ -80,10 +80,10 @@ export const GUIDES: GuideInfo[] = [
     motto: "One cozy step at a time.",
     reactions: {
       1: "Thank you for sharing 🤎 Next week: smaller, cozier quests with extra snack breaks built in.",
-      2: "Steady and lovely — we'll amble on at this comfy pace. ☕",
-      3: "Goodness me! Bigger adventures coming next week — cozily, of course! 🌟",
+      2: "Steady and lovely. We'll amble on at this comfy pace. ☕",
+      3: "Goodness me! Bigger adventures coming next week. Cozily, of course! 🌟",
     },
-    cheer: "Warm hugs and enormous pride — you steady, splendid star! 🤎",
+    cheer: "Warm hugs and enormous pride. You steady, splendid star! 🤎",
   },
 ];
 

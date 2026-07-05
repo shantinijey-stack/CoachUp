@@ -14,9 +14,9 @@ export interface Quest {
   youllNeed: string;
   steps: { emoji: string; text: string }[];
   timer?: ActivityTimer;
-  /** Pro twist — unlocked at Pro level or in the plan's final phase. */
+  /** Pro twist. Unlocked at Pro level or in the plan's final phase. */
   levelUp: string;
-  /** Master twist — unlocked at Master level. */
+  /** Master twist. Unlocked at Master level. */
   master: string;
 }
 
@@ -29,13 +29,13 @@ export const QUESTS: Record<Domain, Quest[]> = {
       domain: "locomotor",
       youllNeed: "A clear path across a room or garden",
       steps: [
-        { emoji: "🦁", text: "Call out an animal — hop like a kangaroo, stomp like a bear, tiptoe like a fox" },
+        { emoji: "🦁", text: "Call out an animal. Hop like a kangaroo, stomp like a bear, tiptoe like a fox" },
         { emoji: "🔁", text: "Cross the room as that animal, then pick a new one" },
         { emoji: "🎶", text: "Keep the parade going until the timer sings!" },
       ],
       timer: { mode: "countdown", seconds: 60, label: "One-minute parade!" },
       levelUp: "Parade backwards, or invent a brand-new animal nobody has ever seen!",
-      master: "Three animals in a row with no pauses between — and narrate the adventure story as you go!",
+      master: "Three animals in a row with no pauses between. And narrate the adventure story as you go!",
     },
     {
       id: "floor-is-lava",
@@ -49,8 +49,8 @@ export const QUESTS: Record<Domain, Quest[]> = {
         { emoji: "🔥", text: "Made it across? Move the rocks a little further apart" },
       ],
       timer: { mode: "countdown", seconds: 45, label: "Escape the lava!" },
-      levelUp: "Two-feet jumps only — and carry a teddy passenger to safety!",
-      master: "Lava rising! Rocks a big jump apart, teddy passenger aboard — two full crossings without a splash.",
+      levelUp: "Two-feet jumps only. And carry a teddy passenger to safety!",
+      master: "Lava rising! Rocks a big jump apart, teddy passenger aboard. Two full crossings without a splash.",
     },
     {
       id: "shadow-chase",
@@ -59,12 +59,12 @@ export const QUESTS: Record<Domain, Quest[]> = {
       domain: "locomotor",
       youllNeed: "Just the two of you and space to move",
       steps: [
-        { emoji: "🐾", text: "One of you is the leader — run, skip, dodge and spin" },
+        { emoji: "🐾", text: "One of you is the leader. Run, skip, dodge and spin" },
         { emoji: "👥", text: "The shadow copies every move, right behind" },
-        { emoji: "🔄", text: "Swap roles when the timer ends — shadows become leaders!" },
+        { emoji: "🔄", text: "Swap roles when the timer ends. Shadows become leaders!" },
       ],
       timer: { mode: "countdown", seconds: 60, label: "Chase for one minute!" },
-      levelUp: "Leader adds jumps and direction switches with no warning — sharp shadows only!",
+      levelUp: "Leader adds jumps and direction switches with no warning. Sharp shadows only!",
       master: "Mirror mode: the shadow copies with OPPOSITE hands and feet, and the leader adds three surprise freezes.",
     },
     {
@@ -74,13 +74,13 @@ export const QUESTS: Record<Domain, Quest[]> = {
       domain: "locomotor",
       youllNeed: "Two markers about 10 big steps apart",
       steps: [
-        { emoji: "🧑‍🚀", text: "Stand at the launch pad — count down 3, 2, 1…" },
+        { emoji: "🧑‍🚀", text: "Stand at the launch pad. Count down 3, 2, 1…" },
         { emoji: "💨", text: "Blast off! Run to the far marker and back" },
-        { emoji: "⏱️", text: "Time the flight — then try to beat it by one second" },
+        { emoji: "⏱️", text: "Time the flight. Then try to beat it by one second" },
       ],
       timer: { mode: "stopwatch", label: "Time the rocket flight!" },
       levelUp: "Fly two laps, or launch sideways-shuffling like a space crab!",
-      master: "Three laps with a touchdown tap at every marker — steady astronaut breathing the whole flight.",
+      master: "Three laps with a touchdown tap at every marker. Steady astronaut breathing the whole flight.",
     },
   ],
   objectControl: [
@@ -97,7 +97,7 @@ export const QUESTS: Record<Domain, Quest[]> = {
       ],
       timer: { mode: "counter", target: 10, label: "Count the baskets!" },
       levelUp: "Throw with your other hand, or spin once before each toss!",
-      master: "Five steps back, other hand only — land five baskets in a row.",
+      master: "Five steps back, other hand only. Land five baskets in a row.",
     },
     {
       id: "balloon-keepy-up",
@@ -106,13 +106,13 @@ export const QUESTS: Record<Domain, Quest[]> = {
       domain: "objectControl",
       youllNeed: "One balloon and a little space",
       steps: [
-        { emoji: "🎈", text: "Tap the balloon up in the air — don't let it land!" },
+        { emoji: "🎈", text: "Tap the balloon up in the air. Don't let it land!" },
         { emoji: "✋", text: "Use hands, then try elbows, head and knees" },
-        { emoji: "🔢", text: "Count every tap — what's the record today?" },
+        { emoji: "🔢", text: "Count every tap. What's the record today?" },
       ],
       timer: { mode: "counter", target: 10, label: "Count the taps!" },
       levelUp: "Keep two balloons up at once, or taps with feet only!",
-      master: "Twenty taps alternating hands and feet — no double-taps allowed!",
+      master: "Twenty taps alternating hands and feet. No double-taps allowed!",
     },
     {
       id: "target-kick",
@@ -122,12 +122,12 @@ export const QUESTS: Record<Domain, Quest[]> = {
       youllNeed: "A soft ball and two cushions as goalposts",
       steps: [
         { emoji: "🥅", text: "Set the cushion goal 3–4 steps away" },
-        { emoji: "⚽", text: "Kick the ball through the goal — soft and aimed beats hard and wild" },
+        { emoji: "⚽", text: "Kick the ball through the goal. Soft and aimed beats hard and wild" },
         { emoji: "🦶", text: "Try the other foot every second kick" },
       ],
       timer: { mode: "counter", target: 5, label: "Count the goals!" },
       levelUp: "Shrink the goal to one cushion-width, or score from a rolling ball!",
-      master: "One-cushion goal, rolling ball — score three in a row.",
+      master: "One-cushion goal, rolling ball. Score three in a row.",
     },
     {
       id: "cup-catch",
@@ -141,8 +141,8 @@ export const QUESTS: Record<Domain, Quest[]> = {
         { emoji: "📏", text: "Getting easy? Toss a little higher each time" },
       ],
       timer: { mode: "counter", target: 10, label: "Count the catches!" },
-      levelUp: "Catch after a bounce, after a clap — or after a full spin!",
-      master: "Toss, full spin, one bounce, catch — three in a row without a drop.",
+      levelUp: "Catch after a bounce, after a clap. Or after a full spin!",
+      master: "Toss, full spin, one bounce, catch. Three in a row without a drop.",
     },
   ],
   stability: [
@@ -154,10 +154,10 @@ export const QUESTS: Record<Domain, Quest[]> = {
       youllNeed: "Music you can pause (or a grown-up shouting “freeze!”)",
       steps: [
         { emoji: "💃", text: "Dance big and silly while the music plays" },
-        { emoji: "🧊", text: "Music stops — freeze in a statue pose, stone-still!" },
+        { emoji: "🧊", text: "Music stops. Freeze in a statue pose, stone-still!" },
         { emoji: "🦵", text: "Each freeze gets trickier: one leg, tiptoes, arms up high" },
       ],
-      timer: { mode: "countdown", seconds: 60, label: "Statue party — one minute!" },
+      timer: { mode: "countdown", seconds: 60, label: "Statue party. One minute!" },
       levelUp: "Freeze with eyes closed, or hold each statue for a slow count of ten!",
       master: "Freeze on tiptoes with eyes closed for a slow count of ten.",
     },
@@ -170,11 +170,11 @@ export const QUESTS: Record<Domain, Quest[]> = {
       steps: [
         { emoji: "🪢", text: "Lay the tightrope in a long line (curves welcome!)" },
         { emoji: "🤸", text: "Walk it heel-to-toe, arms out like a circus star" },
-        { emoji: "🔙", text: "Reach the end? Walk back — backwards!" },
+        { emoji: "🔙", text: "Reach the end? Walk back. Backwards!" },
       ],
       timer: { mode: "stopwatch", label: "Time the tightrope crossing!" },
-      levelUp: "Carry a spoon with a sock ball on it — the circus's hardest act!",
-      master: "Walk it backwards heel-to-toe carrying the spoon-and-sock-ball — the circus finale!",
+      levelUp: "Carry a spoon with a sock ball on it. The circus's hardest act!",
+      master: "Walk it backwards heel-to-toe carrying the spoon-and-sock-ball. The circus finale!",
     },
     {
       id: "animal-yoga",
@@ -185,11 +185,11 @@ export const QUESTS: Record<Domain, Quest[]> = {
       steps: [
         { emoji: "🐻", text: "Bear pose: hands and feet down, hips high, hold strong" },
         { emoji: "🦩", text: "Flamingo: one leg up, wings wide, steady breathing" },
-        { emoji: "🐕", text: "Puppy stretch to finish — which pose felt strongest?" },
+        { emoji: "🐕", text: "Puppy stretch to finish. Which pose felt strongest?" },
       ],
       timer: { mode: "stopwatch", label: "Time the longest hold!" },
       levelUp: "Flow bear → flamingo → puppy without a wobble between poses!",
-      master: "Flow bear → flamingo → puppy twice through with slow breaths — steady as a mountain.",
+      master: "Flow bear → flamingo → puppy twice through with slow breaths. Steady as a mountain.",
     },
     {
       id: "pillow-mountain",
@@ -199,17 +199,17 @@ export const QUESTS: Record<Domain, Quest[]> = {
       youllNeed: "A path of pillows, cushions and folded blankets",
       steps: [
         { emoji: "⛰️", text: "Build a wobbly mountain path across the floor" },
-        { emoji: "🥾", text: "Cross it slowly — squishy ground tests super-balance" },
+        { emoji: "🥾", text: "Cross it slowly. Squishy ground tests super-balance" },
         { emoji: "🏁", text: "Plant an imaginary flag at the summit!" },
       ],
       timer: { mode: "countdown", seconds: 60, label: "Summit in one minute!" },
       levelUp: "Cross carrying a cup of (pretend) mountain tea without spilling!",
-      master: "Cross with the (pretend) mountain tea, then return backwards — not a drop spilled.",
+      master: "Cross with the (pretend) mountain tea, then return backwards. Not a drop spilled.",
     },
   ],
 };
 
-/** Fun names for the 12 weeks of each season — shared across modules. */
+/** Fun names for the 12 weeks of each season. Shared across modules. */
 export const WEEK_THEMES: { title: string; emoji: string }[] = [
   { title: "The First Spark", emoji: "✨" },
   { title: "The Bouncy Trail", emoji: "🦘" },

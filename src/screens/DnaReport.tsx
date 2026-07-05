@@ -73,6 +73,7 @@ export default function DnaReport({ profile, result, onNext, onBack }: DnaReport
 
   return (
     <Screen
+      brand
       onBack={onBack}
       footer={
         <Button full onClick={onNext}>

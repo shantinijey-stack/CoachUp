@@ -188,7 +188,7 @@ export default function QuickStart({
             Anything helpful for coaches to know? 📝
           </label>
           <p className="text-xs text-deepsea/50 mb-2">
-            Optional — health, movement or anything else
+            Optional. Health, movement or anything else
           </p>
           <textarea
             id="health-note"

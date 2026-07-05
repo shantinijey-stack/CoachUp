@@ -63,12 +63,12 @@ export default function GraduationDay({
           <div className="space-y-3 w-full max-w-sm text-left">
             <SpeechBubble>
               <strong>{name}</strong>, you've trained hard all through{" "}
-              <strong>{seasonInfo.name}</strong> {seasonInfo.emoji} — today we play the three
+              <strong>{seasonInfo.name}</strong> {seasonInfo.emoji}. Today we play the three
               Discovery games one more time!
             </SpeechBubble>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
               <SpeechBubble>
-                This is <strong>not a test</strong> — it's a mirror. We're only comparing you
+                This is <strong>not a test</strong>. It's a mirror. We're only comparing you
                 to <strong>you</strong>, to see how much you've grown. 💛
               </SpeechBubble>
             </motion.div>
@@ -141,7 +141,7 @@ export default function GraduationDay({
           {passed ? guide.cheer : "What a brave adventure!"}
         </h2>
 
-        {/* Growth comparison — always vs their own past self */}
+        {/* Growth comparison. Always vs their own past self */}
         <div className="w-full max-w-sm bg-white/90 rounded-3xl shadow-card p-4 space-y-3">
           <p className="text-xs font-bold uppercase tracking-widest text-tangerine">
             Then → Now
@@ -175,9 +175,9 @@ export default function GraduationDay({
         <p className="text-sm text-deepsea/60 max-w-xs">
           {passed
             ? season >= 3
-              ? `${name} has completed every season — the whole mountain, top to bottom. The Champion's Growth Report awaits!`
+              ? `${name} has completed every season. The whole mountain, top to bottom. The Champion's Growth Report awaits!`
               : `${seasonInfo.next} is unlocked: same adventures, ${season === 1 ? "Pro" : "Master"} twists, new week quests. Let's grow!`
-            : `Today was a warming-up day — and that's part of every athlete's story. Take a Victory Lap: replay favorite quests, and come back to graduate whenever you're ready. The door never closes. 💛`}
+            : `Today was a warming-up day. And that's part of every athlete's story. Take a Victory Lap: replay favorite quests, and come back to graduate whenever you're ready. The door never closes. 💛`}
         </p>
       </div>
     </Screen>

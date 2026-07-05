@@ -14,7 +14,7 @@ interface CourageQuestCardProps {
 
 /**
  * The weekly Courage Quest: a scenario story, a "what would you do?"
- * choice (every answer gets a warm response — the strongest one gets
+ * choice (every answer gets a warm response. The strongest one gets
  * celebrated), a tiny real-world mission and a parent prompt.
  */
 export default function CourageQuestCard({
@@ -134,7 +134,7 @@ export default function CourageQuestCard({
                       : "bg-white text-berry shadow-card hover:ring-2 hover:ring-berry/30"
                   }`}
                 >
-                  {done ? "💜 Mission complete — courage grew today!" : "Mark mission complete"}
+                  {done ? "💜 Mission complete. Courage grew today!" : "Mark mission complete"}
                 </button>
               </div>
 

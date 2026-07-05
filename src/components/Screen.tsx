@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { BrandMark } from "./BrandLogo";
 import ProgressBar from "./ProgressBar";
 
 interface ScreenProps {
@@ -8,13 +9,15 @@ interface ScreenProps {
   progress?: number;
   onBack?: () => void;
   footer?: ReactNode;
+  /** Show the small brand mark at the right of the header row. */
+  brand?: boolean;
 }
 
 /**
  * Shared mobile-first screen shell: centered column, optional progress
  * bar + back button header, sticky footer for Next CTAs.
  */
-export default function Screen({ children, progress, onBack, footer }: ScreenProps) {
+export default function Screen({ children, progress, onBack, footer, brand }: ScreenProps) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 40 }}
@@ -23,7 +26,7 @@ export default function Screen({ children, progress, onBack, footer }: ScreenPro
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="min-h-dvh flex flex-col max-w-md mx-auto w-full px-5"
     >
-      {(progress !== undefined || onBack) && (
+      {(progress !== undefined || onBack || brand) && (
         <header className="flex items-center gap-3 pt-5 pb-2">
           {onBack && (
             <button
@@ -35,7 +38,8 @@ export default function Screen({ children, progress, onBack, footer }: ScreenPro
               ←
             </button>
           )}
-          {progress !== undefined && <ProgressBar progress={progress} />}
+          {progress !== undefined ? <ProgressBar progress={progress} /> : <div className="flex-1" />}
+          {brand && <BrandMark size={30} />}
         </header>
       )}
       <main className="flex-1 flex flex-col py-4">{children}</main>

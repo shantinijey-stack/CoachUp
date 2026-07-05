@@ -2,11 +2,11 @@ import { WEEK_THEMES } from "../data/quests";
 import type { CourageAnswer, Level } from "../types";
 
 /**
- * Stickers & badges — the reward system.
+ * Stickers & badges. The reward system.
  *
  * Design rule: every reward celebrates effort and showing up (quests
  * played, courage practiced, honest check-ins). Nothing here rewards
- * performance, speed or scores — CoachUp never ranks children.
+ * performance, speed or scores. CoachUp never ranks children.
  * No streaks, no guilt mechanics: progress never expires.
  */
 
@@ -17,7 +17,7 @@ export interface BadgeStatus {
   earned: boolean;
   /** Shown when earned. */
   description: string;
-  /** Shown while still to come — phrased as an invitation, never a lack. */
+  /** Shown while still to come. Phrased as an invitation, never a lack. */
   hint: string;
 }
 
@@ -33,7 +33,7 @@ export interface BadgeInputs {
   planProgress: Record<string, boolean>;
   courage: Record<number, CourageAnswer>;
   checkIns: Record<number, Level>;
-  /** Totals from previous (graduated) seasons — badges never regress. */
+  /** Totals from previous (graduated) seasons. Badges never regress. */
   historyQuests?: number;
   historyCourage?: number;
   historyCheckIns?: number;
@@ -84,7 +84,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "First Steps",
       emoji: "🥇",
       earned: movementDone >= 1,
-      description: "Played your very first home quest — every adventure starts with one step!",
+      description: "Played your very first home quest. Every adventure starts with one step!",
       hint: "Play any home quest to take your first step.",
     },
     {
@@ -92,7 +92,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "Week One Wonder",
       emoji: "⭐",
       earned: weekComplete(planProgress, 1) || historyQuests >= 36,
-      description: "Finished all of Week 1 — The First Spark is lit!",
+      description: "Finished all of Week 1. The First Spark is lit!",
       hint: "Finish all three Week 1 quests.",
     },
     {
@@ -100,7 +100,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "Check-In Star",
       emoji: "🗣️",
       earned: checkInCount >= 1,
-      description: "Told your guide how the week felt — honest explorers grow fastest!",
+      description: "Told your guide how the week felt. Honest explorers grow fastest!",
       hint: "After a week's quests, tell your guide how it felt.",
     },
     {
@@ -116,7 +116,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "Halfway Hero",
       emoji: "🏔️",
       earned: movementDone >= 18,
-      description: "Halfway up the mountain — 18 quests played!",
+      description: "Halfway up the mountain. 18 quests played!",
       hint: "Reach 18 quests to plant the halfway flag.",
     },
     {
@@ -124,7 +124,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "Grand Festival",
       emoji: "🎪",
       earned: movementDone >= 36,
-      description: "All 36 quests complete — the whole 12-week adventure!",
+      description: "All 36 quests complete. The whole 12-week adventure!",
       hint: "Complete every quest in the 12-week adventure.",
     },
     {
@@ -132,7 +132,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "Courage Cub",
       emoji: "💜",
       earned: courageDone >= 1,
-      description: "Completed your first courage mission — courage grows every time you use it!",
+      description: "Completed your first courage mission. Courage grows every time you use it!",
       hint: "Complete any Courage Quest mission.",
     },
     {
@@ -140,7 +140,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "Heart Explorer",
       emoji: "💛",
       earned: courageStageDone(courage, 1, 4),
-      description: "Finished the Knowing Me stage — feelings named, strengths found!",
+      description: "Finished the Knowing Me stage. Feelings named, strengths found!",
       hint: "Complete the Week 1–4 courage missions.",
     },
     {
@@ -148,7 +148,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "Standing Strong",
       emoji: "🛡️",
       earned: courageStageDone(courage, 5, 8),
-      description: "Safety Team built, Strong Stop practiced — standing tall!",
+      description: "Safety Team built, Strong Stop practiced. Standing tall!",
       hint: "Complete the Week 5–8 courage missions.",
     },
     {
@@ -156,7 +156,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "Heart Lifter",
       emoji: "🌟",
       earned: courageStageDone(courage, 9, 12),
-      description: "Upstander moves and magic words — a leader who lifts others!",
+      description: "Upstander moves and magic words. A leader who lifts others!",
       hint: "Complete the Week 9–12 courage missions.",
     },
     {
@@ -164,7 +164,7 @@ export function computeBadges(inputs: BadgeInputs): BadgeStatus[] {
       name: "Courage Champion",
       emoji: "👑",
       earned: courageDone >= 12,
-      description: "Every courage mission complete — your Courage Story is legendary!",
+      description: "Every courage mission complete. Your Courage Story is legendary!",
       hint: "Complete all 12 courage missions.",
     },
   ];

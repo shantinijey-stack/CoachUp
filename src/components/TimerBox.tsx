@@ -98,7 +98,7 @@ export default function TimerBox({ timer }: { timer: ActivityTimer }) {
               animate={{ scale: 1 }}
               className="flex-1 font-display font-bold text-sunshine self-center"
             >
-              🎉 {target} in a row — champion catch!
+              🎉 {target} in a row. Champion catch!
             </motion.p>
           ) : (
             <motion.button
@@ -148,12 +148,12 @@ export default function TimerBox({ timer }: { timer: ActivityTimer }) {
               animate={{ opacity: 1, y: 0 }}
               className="font-display font-bold text-sunshine mt-1"
             >
-              ⭐ Time's up — amazing effort!
+              ⭐ Time's up. Amazing effort!
             </motion.p>
           )}
           {!isCountdown && !running && elapsed > 0 && (
             <p className="font-display font-bold text-sunshine">
-              ⭐ {elapsed} second{elapsed === 1 ? "" : "s"} — great try!
+              ⭐ {elapsed} second{elapsed === 1 ? "" : "s"}. Great try!
             </p>
           )}
         </div>

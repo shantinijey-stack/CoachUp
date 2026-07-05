@@ -29,7 +29,7 @@ export default function BadgeBook({ profile, inputs, onSeen, onBack }: BadgeBook
   }, [earnedBadges.length]);
 
   return (
-    <Screen onBack={onBack}>
+    <Screen brand onBack={onBack}>
       <div className="bg-gradient-to-br from-berry to-sky rounded-3xl shadow-card p-5 text-white mb-4">
         <div className="flex items-center gap-3">
           <Remi size="sm" bounce={false} />
@@ -46,7 +46,7 @@ export default function BadgeBook({ profile, inputs, onSeen, onBack }: BadgeBook
         </div>
         <p className="mt-3 text-xs opacity-90 leading-relaxed">
           {guide.emoji} {guide.firstName} says: every treasure here was earned by{" "}
-          <strong>trying</strong> — that's the only way to earn them, and nobody can ever take
+          <strong>trying</strong>. That's the only way to earn them, and nobody can ever take
           them away!
         </p>
       </div>
@@ -118,7 +118,7 @@ export default function BadgeBook({ profile, inputs, onSeen, onBack }: BadgeBook
         </div>
 
         <p className="text-center text-xs text-deepsea/40 px-6">
-          Rewards here celebrate effort, never scores — because showing up and trying
+          Rewards here celebrate effort, never scores. Because showing up and trying
           IS the achievement. 💛
         </p>
       </div>

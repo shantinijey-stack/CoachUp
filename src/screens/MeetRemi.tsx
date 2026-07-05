@@ -76,7 +76,7 @@ export default function MeetRemi({
 
         <div className="space-y-3 w-full max-w-sm text-left" key={guideId}>
           <SpeechBubble>
-            Hi <strong>{name}</strong>! I'm <strong>{guide.firstName}</strong> —{" "}
+            Hi <strong>{name}</strong>! I'm <strong>{guide.firstName}</strong>,{" "}
             {guide.vibe}! <em>"{guide.motto}"</em> Today is{" "}
             <strong>Discovery Day</strong>, my favorite day of the whole year! 🎈
           </SpeechBubble>
@@ -97,7 +97,7 @@ export default function MeetRemi({
           >
             <SpeechBubble>
               We're going on an adventure to discover your{" "}
-              <strong>movement spark</strong> ✨ — the special way{" "}
+              <strong>movement spark</strong> ✨. The special way{" "}
               <em>you</em> love to move, play and shine!
             </SpeechBubble>
           </motion.div>

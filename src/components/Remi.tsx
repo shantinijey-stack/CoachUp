@@ -15,8 +15,7 @@ const SIZES = {
 };
 
 /**
- * The child's adventure guide avatar (Remi the Otter by default —
- * the component keeps the mascot's name, but renders whichever guide
+ * The child's adventure guide avatar (Remi the Otter by default. * the component keeps the mascot's name, but renders whichever guide
  * the child chose). Emoji inside a soft gradient badge, placeholder
  * for real illustration in a later phase.
  */

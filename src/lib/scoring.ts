@@ -17,21 +17,21 @@ const DOMAINS: Domain[] = ["locomotor", "objectControl", "stability"];
 /* ------------------------------------------------------------------ */
 
 const INTENSITY_RAMP: Record<Level, string> = {
-  1: "Gentle build — short bursts of fun with plenty of recharge breaks, gradually growing session energy",
-  2: "Steady climb — a balanced mix of active games and rest, building stamina week by week",
-  3: "Turbo track — high-energy sessions with bonus challenges to feed that 'again, again!' spark",
+  1: "Gentle build: short bursts of fun with plenty of recharge breaks, gradually growing session energy",
+  2: "Steady climb: a balanced mix of active games and rest, building stamina week by week",
+  3: "Turbo track: high-energy sessions with bonus challenges to feed that 'again, again!' spark",
 };
 
 const WELCOME_STYLE: Record<Level, string> = {
-  1: "Warm welcome — a coach buddy greets them at the door and starts with a favorite game to spark momentum",
-  2: "Watch-then-wow — a front-row viewing spot first, then a personal invitation to jump in when ready",
-  3: "Straight into action — first in line for the opening game, with fresh challenges to keep the fire lit",
+  1: "Warm welcome. A coach buddy greets them at the door and starts with a favorite game to spark momentum",
+  2: "Watch-then-wow. A front-row viewing spot first, then a personal invitation to jump in when ready",
+  3: "Straight into action. First in line for the opening game, with fresh challenges to keep the fire lit",
 };
 
 const GROUP_FORMAT: Record<SocialStyle, string> = {
-  individual: "One-to-one or duo coaching — deep focus time with a trusted coach",
-  smallSquad: "Small squad pods — 2–3 buddies per activity for close-knit teamwork",
-  group: "Full crew energy — big-group games with lots of buzz and celebration",
+  individual: "One-to-one or duo coaching. Deep focus time with a trusted coach",
+  smallSquad: "Small squad pods. 2–3 buddies per activity for close-knit teamwork",
+  group: "Full crew energy. Big-group games with lots of buzz and celebration",
 };
 
 const COMFORT_COPY: Record<ComfortStyle, { label: string; emoji: string; note: string }> = {
@@ -135,7 +135,7 @@ function buildParentExplanation(
   }[comfortStyle];
 
   return (
-    `${name}'s movement spark shines brightest in ${s.name} (${s.kidName} ${s.emoji}) — that's the superpower we'll celebrate and build on. ` +
+    `${name}'s movement spark shines brightest in ${s.name} (${s.kidName} ${s.emoji}). That's the superpower we'll celebrate and build on. ` +
     `The next exciting quest is ${g.name} (${g.kidName} ${g.emoji}), where playful practice will unlock brand-new skills. ` +
     `${comfortPhrase}. ` +
     `That's why we recommend ${mod.name} ${mod.emoji}: ${mod.tagline.toLowerCase()}.`
@@ -151,10 +151,10 @@ function buildCoachNotes(
   const s = DOMAIN_INFO[result.strengthDomain];
   const g = DOMAIN_INFO[result.growthDomain];
 
-  notes.push(`Lead with ${s.name.toLowerCase()} games early in the session — it's ${name}'s confidence zone.`);
+  notes.push(`Lead with ${s.name.toLowerCase()} games early in the session. It's ${name}'s confidence zone.`);
   notes.push(`Weave ${g.name.toLowerCase()} practice into favorite games in small, winnable doses. Celebrate every attempt.`);
   notes.push(COMFORT_COPY[result.comfortStyle].note);
-  const ramp = INTENSITY_RAMP[result.drive].split(" — ")[1] ?? INTENSITY_RAMP[result.drive];
+  const ramp = INTENSITY_RAMP[result.drive].split(": ")[1] ?? INTENSITY_RAMP[result.drive];
   notes.push(ramp.charAt(0).toUpperCase() + ramp.slice(1));
   notes.push(WELCOME_STYLE[result.confidence]);
   notes.push(GROUP_FORMAT[result.social]);

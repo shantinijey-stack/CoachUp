@@ -21,8 +21,7 @@ import TrainingPlan from "./screens/TrainingPlan";
 import type { AgeBand, AppState, Domain, Level, SocialStyle } from "./types";
 
 /**
- * Progress model: the adventure has 12 "beats" —
- * quickstart (1) + meetRemi (1) + movement (3) + comfort (4) + spark (3).
+ * Progress model: the adventure has 12 "beats". * quickstart (1) + meetRemi (1) + movement (3) + comfort (4) + spark (3).
  */
 const TOTAL_BEATS = 12;
 
@@ -98,7 +97,7 @@ export default function App() {
       planProgress: { ...s.planProgress, [key]: !s.planProgress[key] },
     }));
 
-  // Swapping a quest also clears its done mark — the new quest hasn't been played yet.
+  // Swapping a quest also clears its done mark. The new quest hasn't been played yet.
   const swapQuest = (key: string, questId: string) =>
     setState((s) => ({
       ...s,

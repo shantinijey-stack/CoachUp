@@ -66,7 +66,7 @@ export function saveState(state: AppState) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
-    // Storage full / private mode — the prototype keeps working from memory.
+    // Storage full / private mode. The prototype keeps working from memory.
   }
 }
 

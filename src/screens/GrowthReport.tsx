@@ -47,7 +47,7 @@ export default function GrowthReport({
   });
 
   return (
-    <Screen onBack={onBack}>
+    <Screen brand onBack={onBack}>
       {/* Hero */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
@@ -71,7 +71,7 @@ export default function GrowthReport({
       </motion.div>
 
       <div className="space-y-4 pb-8">
-        {/* Effort first — that's the real achievement */}
+        {/* Effort first. That's the real achievement */}
         <Card>
           <h3 className="font-display font-bold text-deepsea mb-2">The work behind it 💪</h3>
           <div className="grid grid-cols-4 gap-2 text-center">
@@ -135,7 +135,7 @@ export default function GrowthReport({
         <Card delay={0.3}>
           <h3 className="font-display font-bold text-deepsea mb-1">Ways to explore these strengths 🗺️</h3>
           <p className="text-xs text-deepsea/50 mb-3">
-            Not a prescription — just movement families where {name}'s sparks tend to shine.
+            Not a prescription. Just movement families where {name}'s sparks tend to shine.
             The best activity is always the one they love.
           </p>
           <div className="space-y-2">
@@ -159,7 +159,7 @@ export default function GrowthReport({
             </h3>
             <p className="text-xs text-deepsea/50 mb-3">
               Three seasons of evidence say these doors are worth knocking on. They're
-              invitations, not predictions — try a few, keep whichever one {name} begs to go
+              invitations, not predictions. Try a few, keep whichever one {name} begs to go
               back to.
             </p>
             <div className="space-y-2">
@@ -181,7 +181,7 @@ export default function GrowthReport({
 
         <p className="text-center text-xs text-deepsea/40 px-6">
           {guide.emoji} {guide.firstName} says: this report celebrates {name} exactly as they
-          are today — and tomorrow's practice writes the next page. 💛
+          are today. And tomorrow's practice writes the next page. 💛
         </p>
       </div>
     </Screen>

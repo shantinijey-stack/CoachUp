@@ -38,7 +38,7 @@ export interface Answers {
   social?: SocialStyle;
 }
 
-/** The output of the scoring engine — everything the DNA report needs. */
+/** The output of the scoring engine. Everything the DNA report needs. */
 export interface DnaResult {
   strengthDomain: Domain;
   growthDomain: Domain;
@@ -93,7 +93,7 @@ export interface AppState {
   season: number;
   /** Archived stats from graduated seasons (keeps badges permanent). */
   seasonHistory: SeasonRecord[];
-  /** Movement marks from the last passed graduation — the next baseline. */
+  /** Movement marks from the last passed graduation. The next baseline. */
   lastGradMovement?: Record<Domain, Level>;
   /** Completed the Master Season graduation. */
   champion: boolean;
