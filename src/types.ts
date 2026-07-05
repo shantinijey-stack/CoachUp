@@ -80,4 +80,12 @@ export interface AppState {
   checkIns: Record<number, Level>;
   /** Quest swaps chosen by parents: plan slot key → replacement quest id. */
   swaps: Record<string, string>;
+  /** Courage Quest progress: week number → chosen answer + mission state. */
+  courage: Record<number, CourageAnswer>;
+}
+
+export interface CourageAnswer {
+  /** Index of the chosen scenario answer. */
+  choice?: number;
+  missionDone?: boolean;
 }

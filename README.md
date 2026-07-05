@@ -51,6 +51,7 @@ npm run preview   # serve the production build
 11. **Choosable guide** — kids pick their adventure guide (Remi the Otter 🦦, Luna the Owl 🦉, Dash the Dolphin 🐬, Koko the Koala 🐨); all story copy personalizes to the chosen character
 12. **Weekly check-in & adaptive encouragement** — after finishing a week, the guide asks how it felt; the answer reshapes next week's tip (gentler / same pace / extra challenge)
 13. **Quest swap** — no equipment? Tap 🔄 on any quest to swap it for another game in the same movement domain
+14. **The Courage Curve 💜** — one Courage Quest per week inside the plan, forming a leadership learning curve: Weeks 1–4 *Knowing Me* (feelings, strengths, brave body language, growth mindset) → Weeks 5–8 *Standing Strong* (Safety Team, the Strong Stop, telling vs. tattling, buddy shield — the what-to-do-about-bullying toolkit) → Weeks 9–12 *Lifting Others* (upstander moves, including everyone, leading with kindness). Each quest: scenario story + "what would you do?" choices (every answer coached warmly, never shamed) + real-world mission + parent conversation prompt. All paths route back to trusted adults; week 5 carries an explicit grown-up safety note.
 
 ## Scoring engine (`src/lib/scoring.ts`)
 

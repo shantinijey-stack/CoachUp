@@ -104,6 +104,21 @@ export default function App() {
   const checkIn = (week: number, feeling: Level) =>
     setState((s) => ({ ...s, checkIns: { ...s.checkIns, [week]: feeling } }));
 
+  const courageChoice = (week: number, choice: number) =>
+    setState((s) => ({
+      ...s,
+      courage: { ...s.courage, [week]: { ...s.courage[week], choice } },
+    }));
+
+  const courageMission = (week: number) =>
+    setState((s) => ({
+      ...s,
+      courage: {
+        ...s.courage,
+        [week]: { ...s.courage[week], missionDone: !s.courage[week]?.missionDone },
+      },
+    }));
+
   /* ----------------------------- navigation ---------------------------- */
 
   const nextFromMovement = () =>
@@ -239,9 +254,12 @@ export default function App() {
             progress={state.planProgress}
             checkIns={state.checkIns}
             swaps={state.swaps}
+            courage={state.courage}
             onToggleQuest={toggleQuest}
             onSwapQuest={swapQuest}
             onCheckIn={checkIn}
+            onCourageChoice={courageChoice}
+            onCourageMission={courageMission}
             onBack={() => go("dashboard")}
           />
         )}

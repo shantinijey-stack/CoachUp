@@ -1,15 +1,17 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import Confetti from "../components/Confetti";
+import CourageQuestCard from "../components/CourageQuestCard";
 import { useGuide } from "../components/GuideContext";
 import Remi from "../components/Remi";
 import Screen from "../components/Screen";
 import TimerBox from "../components/TimerBox";
 import { DOMAIN_INFO, MODULES } from "../data/content";
+import { COURAGE_QUESTS, COURAGE_STAGES } from "../data/courage";
 import { QUESTS, type Quest } from "../data/quests";
 import type { GuideInfo } from "../data/guides";
 import { generatePlan, type PlanWeek } from "../lib/plan";
-import type { ChildProfile, DnaResult, Level } from "../types";
+import type { ChildProfile, CourageAnswer, DnaResult, Level } from "../types";
 
 interface TrainingPlanProps {
   profile: ChildProfile;
@@ -17,9 +19,12 @@ interface TrainingPlanProps {
   progress: Record<string, boolean>;
   checkIns: Record<number, Level>;
   swaps: Record<string, string>;
+  courage: Record<number, CourageAnswer>;
   onToggleQuest: (key: string) => void;
   onSwapQuest: (key: string, questId: string) => void;
   onCheckIn: (week: number, feeling: Level) => void;
+  onCourageChoice: (week: number, choice: number) => void;
+  onCourageMission: (week: number) => void;
   onBack: () => void;
 }
 
@@ -224,11 +229,14 @@ function WeekCard({
   doneCount,
   progress,
   checkIn,
+  courageAnswer,
   expandedKey,
   guide,
   onToggleQuest,
   onSwapQuest,
   onCheckIn,
+  onCourageChoice,
+  onCourageMission,
   onExpand,
   index,
 }: {
@@ -240,14 +248,19 @@ function WeekCard({
   doneCount: number;
   progress: Record<string, boolean>;
   checkIn?: Level;
+  courageAnswer: CourageAnswer;
   expandedKey: string | null;
   guide: GuideInfo;
   onToggleQuest: (key: string) => void;
   onSwapQuest: (key: string, questId: string) => void;
   onCheckIn: (week: number, feeling: Level) => void;
+  onCourageChoice: (week: number, choice: number) => void;
+  onCourageMission: (week: number) => void;
   onExpand: (key: string | null) => void;
   index: number;
 }) {
+  const courageQuest = COURAGE_QUESTS[week.week - 1];
+  const courageKey = `courage-w${week.week}`;
   const complete = doneCount === quests.length;
   const weekQuestIds = quests.map((q) => q.quest.id);
 
@@ -307,6 +320,14 @@ function WeekCard({
             }}
           />
         ))}
+        <CourageQuestCard
+          quest={courageQuest}
+          answer={courageAnswer}
+          expanded={expandedKey === courageKey}
+          onExpand={() => onExpand(expandedKey === courageKey ? null : courageKey)}
+          onChoose={(choice) => onCourageChoice(week.week, choice)}
+          onToggleMission={() => onCourageMission(week.week)}
+        />
       </div>
 
       {complete && (
@@ -326,9 +347,12 @@ export default function TrainingPlan({
   progress,
   checkIns,
   swaps,
+  courage,
   onToggleQuest,
   onSwapQuest,
   onCheckIn,
+  onCourageChoice,
+  onCourageMission,
   onBack,
 }: TrainingPlanProps) {
   const plan = useMemo(() => generatePlan(result), [result]);
@@ -359,6 +383,7 @@ export default function TrainingPlan({
     (sum, w) => sum + w.quests.filter((q) => progress[q.key]).length,
     0,
   );
+  const courageDone = COURAGE_QUESTS.filter((q) => courage[q.week]?.missionDone).length;
   const currentWeek =
     resolvedWeeks.find((w) => w.quests.some((q) => !progress[q.key]))?.week.week ?? 12;
 
@@ -410,6 +435,30 @@ export default function TrainingPlan({
           games to shine in, {DOMAIN_INFO[result.growthDomain].kidName} games to grow with — and
           level-up twists waiting in weeks 9–12!
         </p>
+        <div className="mt-2 text-xs font-bold">
+          💜 Courage Curve: {courageDone} of 12 courage quests
+        </div>
+      </div>
+
+      {/* The Courage Curve — the leadership learning path */}
+      <div className="bg-white/90 rounded-3xl shadow-card p-4 mb-4">
+        <p className="text-xs font-bold uppercase tracking-widest text-berry mb-2">
+          💜 The Courage Curve
+        </p>
+        <p className="text-xs text-deepsea/60 mb-3 leading-snug">
+          Alongside the movement quests, one Courage Quest a week grows {name}'s
+          confidence step by step — from knowing themselves, to standing strong
+          around unkindness, to lifting others as a leader.
+        </p>
+        <div className="grid grid-cols-3 gap-2">
+          {COURAGE_STAGES.map((stage) => (
+            <div key={stage.name} className="bg-cream rounded-2xl p-2.5 text-center">
+              <div className="text-xl">{stage.emoji}</div>
+              <div className="font-display font-bold text-[11px] text-deepsea leading-tight">{stage.name}</div>
+              <div className="text-[10px] font-bold text-deepsea/40">{stage.weeks}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Journey */}
@@ -428,11 +477,14 @@ export default function TrainingPlan({
               doneCount={quests.filter((q) => progress[q.key]).length}
               progress={progress}
               checkIn={checkIns[week.week]}
+              courageAnswer={courage[week.week] ?? {}}
               expandedKey={expandedKey}
               guide={guide}
               onToggleQuest={(key) => handleToggle(key, quests)}
               onSwapQuest={onSwapQuest}
               onCheckIn={onCheckIn}
+              onCourageChoice={onCourageChoice}
+              onCourageMission={onCourageMission}
               onExpand={setExpandedKey}
             />
           );

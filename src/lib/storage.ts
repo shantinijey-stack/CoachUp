@@ -21,6 +21,7 @@ export const INITIAL_STATE: AppState = {
   planProgress: {},
   checkIns: {},
   swaps: {},
+  courage: {},
 };
 
 export function loadState(): AppState {
@@ -43,6 +44,7 @@ export function loadState(): AppState {
       planProgress: { ...parsed.planProgress },
       checkIns: { ...parsed.checkIns },
       swaps: { ...parsed.swaps },
+      courage: { ...parsed.courage },
     };
   } catch {
     return INITIAL_STATE;
