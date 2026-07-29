@@ -1,0 +1,582 @@
+<title>CoachUp Kids · 90-Day Launch & Growth Plan</title>
+<style>
+  :root {
+    --paper: #FFF9F0;
+    --card: #ffffff;
+    --ink: #14384a;
+    --ink-soft: #4d6b7a;
+    --ink-faint: #8aa1ac;
+    --line: #ecdfce;
+    --tangerine: #F07E3C;
+    --coral: #E8564F;
+    --teal: #1f9e91;
+    --gold: #E0A32B;
+    --navy: #1B4965;
+    --p1: #F07E3C;  /* Phase 1 */
+    --p2: #1f9e91;  /* Phase 2 */
+    --p3: #E8564F;  /* Phase 3 */
+    --p4: #2f6d8f;  /* Phase 4 */
+    --good: #2f9e6f;
+    --shadow: 0 10px 30px -18px rgba(20,56,74,.4);
+    --radius: 18px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0f2430;
+      --card: #16323f;
+      --ink: #eef4f3;
+      --ink-soft: #a9c1c9;
+      --ink-faint: #6f8b95;
+      --line: #244653;
+      --tangerine: #FF9a5c;
+      --coral: #ff7a72;
+      --teal: #38c3b3;
+      --gold: #f0bd54;
+      --p1: #FF9a5c; --p2: #38c3b3; --p3: #ff7a72; --p4: #5aa8cf;
+      --shadow: 0 12px 34px -18px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#FFF9F0;--card:#fff;--ink:#14384a;--ink-soft:#4d6b7a;--ink-faint:#8aa1ac;--line:#ecdfce;
+    --tangerine:#F07E3C;--coral:#E8564F;--teal:#1f9e91;--gold:#E0A32B;
+    --p1:#F07E3C;--p2:#1f9e91;--p3:#E8564F;--p4:#2f6d8f;--shadow:0 10px 30px -18px rgba(20,56,74,.4);
+  }
+  :root[data-theme="dark"] {
+    --paper:#0f2430;--card:#16323f;--ink:#eef4f3;--ink-soft:#a9c1c9;--ink-faint:#6f8b95;--line:#244653;
+    --tangerine:#FF9a5c;--coral:#ff7a72;--teal:#38c3b3;--gold:#f0bd54;
+    --p1:#FF9a5c;--p2:#38c3b3;--p3:#ff7a72;--p4:#5aa8cf;--shadow:0 12px 34px -18px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display { font-family: ui-rounded, "Baloo 2", "SF Pro Rounded", system-ui, sans-serif; }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px 80px; }
+  .col { max-width: 680px; }
+
+  /* ---------- header ---------- */
+  header.masthead {
+    padding: 56px 20px 30px;
+    max-width: 940px; margin: 0 auto;
+  }
+  .brand { display:flex; align-items:center; gap:11px; font-weight:800; font-size:1.05rem; letter-spacing:.2px; }
+  .brand svg { width:34px; height:34px; flex:none; }
+  .brand .kids { color: var(--tangerine); }
+  .eyebrow {
+    margin: 30px 0 10px; font-size:.72rem; font-weight:800; letter-spacing:.18em;
+    text-transform:uppercase; color: var(--tangerine);
+  }
+  h1.title {
+    font-size: clamp(2.1rem, 6vw, 3.3rem); line-height:1.02; margin:0; font-weight:800;
+    letter-spacing:-.02em; text-wrap:balance; color:var(--ink);
+  }
+  .lede { font-size:1.13rem; color:var(--ink-soft); max-width:640px; margin:18px 0 0; }
+  .meta-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+  .chip {
+    font-size:.78rem; font-weight:700; padding:6px 13px; border-radius:999px;
+    background: var(--card); border:1px solid var(--line); color:var(--ink-soft);
+    box-shadow: var(--shadow);
+  }
+  .chip b { color: var(--ink); font-weight:800; }
+
+  /* ---------- section scaffolding ---------- */
+  section { max-width:940px; margin:0 auto; padding: 34px 20px 4px; }
+  h2.sec {
+    font-size: clamp(1.5rem,4vw,2rem); font-weight:800; letter-spacing:-.01em; margin:0 0 6px;
+    display:flex; align-items:baseline; gap:12px; text-wrap:balance;
+  }
+  h2.sec .num {
+    font-size:.85rem; font-weight:800; color:#fff; background:var(--phase,var(--tangerine));
+    width:30px; height:30px; border-radius:9px; display:inline-flex; align-items:center; justify-content:center;
+    flex:none; transform:translateY(-2px);
+  }
+  .sec-sub { color:var(--ink-soft); margin:0 0 18px; max-width:660px; }
+  h3.sub {
+    font-family: ui-rounded, "Baloo 2", system-ui, sans-serif;
+    font-size:1.16rem; font-weight:800; margin:26px 0 4px; color:var(--ink);
+    display:flex; align-items:center; gap:9px;
+  }
+  h3.sub .dot { width:9px; height:9px; border-radius:3px; background:var(--phase,var(--tangerine)); flex:none; }
+  p { margin: 8px 0; }
+  .col p, .col ul { max-width: 680px; }
+
+  /* ---------- checklist ---------- */
+  ul.check { list-style:none; padding:0; margin:10px 0 4px; max-width:680px; }
+  ul.check li {
+    position:relative; padding:7px 0 7px 30px; font-size:.97rem; color:var(--ink);
+    border-bottom:1px solid var(--line);
+  }
+  ul.check li:last-child { border-bottom:0; }
+  ul.check li::before {
+    content:""; position:absolute; left:0; top:11px; width:17px; height:17px; border-radius:5px;
+    border:2px solid var(--phase,var(--tangerine)); opacity:.55;
+  }
+  ul.check li::after {
+    content:"✓"; position:absolute; left:3px; top:6px; font-size:.8rem; font-weight:900;
+    color:var(--phase,var(--tangerine));
+  }
+  ul.check li b { font-weight:800; }
+
+  /* ---------- playbook callout ---------- */
+  .play {
+    background: color-mix(in srgb, var(--phase,var(--tangerine)) 10%, var(--card));
+    border:1px solid color-mix(in srgb, var(--phase,var(--tangerine)) 35%, var(--line));
+    border-radius:14px; padding:13px 16px; margin:14px 0 6px; max-width:680px;
+    font-size:.92rem; color:var(--ink-soft);
+  }
+  .play b { color:var(--ink); font-weight:800; }
+  .play .tag {
+    display:inline-block; font-size:.66rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--phase,var(--tangerine)); margin-right:8px;
+  }
+
+  /* ---------- phase strip ---------- */
+  .phase-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:8px 0 6px; }
+  @media (max-width:660px){ .phase-strip{ grid-template-columns:1fr 1fr; } }
+  .phase-strip .pc {
+    background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px;
+    box-shadow:var(--shadow); border-top:4px solid var(--pc,var(--tangerine));
+  }
+  .phase-strip .pc .wk { font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--pc); }
+  .phase-strip .pc .nm { font-weight:800; font-size:1rem; margin:3px 0 2px; }
+  .phase-strip .pc .ds { font-size:.82rem; color:var(--ink-soft); }
+
+  /* ---------- gantt ---------- */
+  .gantt-wrap { overflow-x:auto; margin:14px 0 6px; padding-bottom:8px; -webkit-overflow-scrolling:touch; }
+  .gantt {
+    display:grid; grid-template-columns:186px repeat(13, minmax(30px,1fr));
+    min-width:760px; border:1px solid var(--line); border-radius:14px; overflow:hidden;
+    background:var(--card); box-shadow:var(--shadow); font-size:.78rem;
+  }
+  .gantt .gh {
+    background:color-mix(in srgb,var(--navy) 6%,var(--card)); font-weight:800; color:var(--ink-soft);
+    text-align:center; padding:8px 0; border-bottom:1px solid var(--line); font-size:.72rem;
+  }
+  .gantt .gh.mlabel { text-align:left; padding-left:14px; }
+  .gantt .glabel {
+    padding:9px 10px 9px 14px; font-weight:700; color:var(--ink); border-bottom:1px solid var(--line);
+    display:flex; align-items:center; gap:7px; font-size:.8rem; background:var(--card);
+  }
+  .gantt .glabel .sw { width:8px;height:8px;border-radius:3px;flex:none; }
+  .gantt .cellrow { border-bottom:1px solid var(--line); position:relative; }
+  .gantt .bar {
+    align-self:center; height:19px; border-radius:6px; margin:6px 3px;
+    display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:.66rem;
+    white-space:nowrap; box-shadow:0 1px 0 rgba(0,0,0,.06);
+  }
+  .gantt .grid-bg { border-left:1px solid color-mix(in srgb,var(--line) 60%, transparent); border-bottom:1px solid var(--line); }
+  .b1{ background:var(--p1);} .b2{ background:var(--p2);} .b3{ background:var(--p3);} .b4{ background:var(--p4);}
+  .bghost{ background:repeating-linear-gradient(45deg,color-mix(in srgb,var(--p2) 55%,transparent),color-mix(in srgb,var(--p2) 55%,transparent) 5px,color-mix(in srgb,var(--p2) 30%,transparent) 5px,color-mix(in srgb,var(--p2) 30%,transparent) 10px); }
+  .ms {
+    align-self:center; justify-self:center; width:15px;height:15px; background:var(--gold);
+    transform:rotate(45deg); border-radius:3px; box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 25%,transparent);
+  }
+  .ms-row .glabel{ color:var(--gold); font-weight:800; }
+  .legend { display:flex; flex-wrap:wrap; gap:14px; margin:10px 2px 0; font-size:.78rem; color:var(--ink-soft); }
+  .legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .legend i{ width:12px;height:12px;border-radius:3px; display:inline-block; }
+  .legend .di{ transform:rotate(45deg); border-radius:2px; }
+  .scroll-hint{ font-size:.74rem; color:var(--ink-faint); margin:6px 2px 0; }
+
+  /* ---------- kpi ---------- */
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:13px; margin:14px 0 6px; }
+  .kpi {
+    background:var(--card); border:1px solid var(--line); border-radius:14px; padding:15px 16px; box-shadow:var(--shadow);
+  }
+  .kpi .k { font-size:.72rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
+  .kpi .v { font-family:ui-rounded,system-ui,sans-serif; font-size:1.5rem; font-weight:800; color:var(--ink); margin:2px 0; font-variant-numeric:tabular-nums; }
+  .kpi .v small{ font-size:.8rem; color:var(--teal); font-weight:800; }
+  .kpi .d { font-size:.82rem; color:var(--ink-soft); }
+
+  /* ---------- table ---------- */
+  .tbl-wrap{ overflow-x:auto; margin:12px 0; }
+  table { border-collapse:collapse; width:100%; min-width:520px; font-size:.88rem; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+  th,td{ text-align:left; padding:10px 13px; border-bottom:1px solid var(--line); }
+  th{ background:color-mix(in srgb,var(--navy) 6%,var(--card)); font-weight:800; color:var(--ink-soft); font-size:.74rem; letter-spacing:.05em; text-transform:uppercase; }
+  td b{ font-weight:800; }
+  tr:last-child td{ border-bottom:0; }
+
+  /* ---------- pricing cards ---------- */
+  .tiers{ display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin:14px 0 6px; }
+  @media (max-width:660px){ .tiers{ grid-template-columns:1fr; } }
+  .tier{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px; box-shadow:var(--shadow); }
+  .tier.feature{ border:2px solid var(--tangerine); }
+  .tier .tn{ font-weight:800; font-size:1.05rem; }
+  .tier .tp{ font-family:ui-rounded,system-ui,sans-serif; font-size:1.5rem; font-weight:800; margin:4px 0; }
+  .tier .tp small{ font-size:.8rem; color:var(--ink-faint); font-weight:700; }
+  .tier ul{ list-style:none; padding:0; margin:8px 0 0; font-size:.86rem; color:var(--ink-soft); }
+  .tier li{ padding:4px 0 4px 18px; position:relative; }
+  .tier li::before{ content:"›"; position:absolute; left:2px; color:var(--tangerine); font-weight:900; }
+  .tier .badge{ font-size:.64rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--tangerine); }
+
+  hr.rule{ border:0; border-top:1px solid var(--line); max-width:940px; margin:38px auto 0; }
+  .foot{ max-width:940px; margin:0 auto; padding:26px 20px 0; color:var(--ink-faint); font-size:.82rem; }
+  .foot b{ color:var(--ink-soft); }
+  a{ color:var(--coral); }
+
+  .toggle{
+    position:fixed; top:14px; right:14px; z-index:20; background:var(--card); border:1px solid var(--line);
+    color:var(--ink-soft); border-radius:999px; padding:7px 13px; font-size:.76rem; font-weight:800; cursor:pointer;
+    box-shadow:var(--shadow); font-family:inherit;
+  }
+  @media (prefers-reduced-motion: no-preference){ .bar,.ms{ transition:none; } }
+</style>
+
+<button class="toggle" id="themeToggle" aria-label="Toggle light or dark theme">◐ Theme</button>
+
+<header class="masthead">
+  <div class="brand display">
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <path d="M7 44 Q 24 35 41 44" stroke="var(--teal)" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+      <path d="M24 27.5 L15.5 39" stroke="var(--tangerine)" stroke-width="6.4" stroke-linecap="round"/>
+      <path d="M24 27.5 L32.5 39" stroke="var(--tangerine)" stroke-width="6.4" stroke-linecap="round"/>
+      <path d="M24 17.5 L24 28" stroke="var(--tangerine)" stroke-width="6.8" stroke-linecap="round"/>
+      <path d="M24 20 L12.5 13" stroke="var(--tangerine)" stroke-width="5.6" stroke-linecap="round"/>
+      <path d="M24 20 L35.5 13" stroke="var(--tangerine)" stroke-width="5.6" stroke-linecap="round"/>
+      <circle cx="24" cy="9.2" r="5" fill="var(--gold)"/>
+    </svg>
+    <span>CoachUp <span class="kids">Kids</span></span>
+  </div>
+
+  <div class="eyebrow">Product &amp; Go-to-Market Plan · 90 Days</div>
+  <h1 class="title display">From prototype to a loved, growing product in one focused quarter.</h1>
+  <p class="lede">A phase-by-phase plan to take CoachUp Kids — the playful discovery experience that reveals a child's physical, emotional and social readiness for sport — from its high-fidelity prototype to a public launch and an early retention engine.</p>
+
+  <div class="meta-row">
+    <span class="chip"><b>Audience</b> · busy, single &amp; sport parents + kids 4–12</span>
+    <span class="chip"><b>Platform</b> · Web/PWA first, iOS &amp; Android wrap</span>
+    <span class="chip"><b>Model</b> · Freemium → Subscription + coach marketplace</span>
+    <span class="chip"><b>Runway</b> · 13 weeks to public launch</span>
+  </div>
+</header>
+
+<!-- ============ STRATEGIC SNAPSHOT ============ -->
+<section>
+  <h2 class="sec display">Strategic snapshot</h2>
+  <div class="col">
+    <p class="sec-sub">Three decisions shape everything below. Lock these before sprint one.</p>
+  </div>
+
+  <h3 class="sub"><span class="dot"></span>The positioning wedge</h3>
+  <div class="col">
+    <p>Every other kids-sport app sells <em>a sport</em> or <em>talent</em>. CoachUp Kids sells <b>readiness and confidence before the sport is even chosen</b> — physical, emotional, social and mental. That is the ownable space, and it speaks directly to a parent's real anxiety: <em>"Will my child enjoy this, fit in, and not feel behind?"</em> Hold this line in every headline: not a talent test, not a ranking, not a sport-selector.</p>
+  </div>
+
+  <h3 class="sub"><span class="dot"></span>Recommended monetization</h3>
+  <div class="col"><p>Freemium is the right front door for anxious, price-sensitive parents: let the value prove itself first. Convert on the <b>ongoing journey</b>, not the one-time report.</p></div>
+  <div class="tiers">
+    <div class="tier">
+      <div class="badge">Free forever</div>
+      <div class="tn">Discovery Day</div>
+      <div class="tp">$0</div>
+      <ul><li>Full Discovery Day</li><li>CoachUp DNA™ report</li><li>One child profile</li><li>Shareable result</li></ul>
+    </div>
+    <div class="tier feature">
+      <div class="badge">Primary revenue</div>
+      <div class="tn">CoachUp Club</div>
+      <div class="tp">$7–9<small> /mo · or $59/yr</small></div>
+      <ul><li>12-week training seasons</li><li>Courage Curve &amp; check-ins</li><li>Growth reports &amp; badges</li><li>Up to 4 child profiles</li></ul>
+    </div>
+    <div class="tier">
+      <div class="badge">Marketplace upside</div>
+      <div class="tn">Trial &amp; Clubs</div>
+      <div class="tp">Referral<small> · per booking</small></div>
+      <ul><li>Book a trial class</li><li>Local partner coaches</li><li>Referral / listing fee</li><li>Future: club dashboard</li></ul>
+    </div>
+  </div>
+  <div class="play"><span class="tag">Advice</span>Do <b>not</b> gate the DNA report — it is your growth loop. A parent who shares a beautiful report is your cheapest acquisition channel. Charge for the <b>relationship</b> (seasons, courage, coach notes), never the assessment.</div>
+
+  <h3 class="sub"><span class="dot"></span>Platform &amp; timeline reality-check</h3>
+  <div class="col">
+    <p>The prototype is already a responsive React/Vite web app. Ship it as an installable <b>PWA first</b> (fastest path, no store review), then wrap with Capacitor for the App Store and Play Store in parallel with launch. A true 1-month build-and-launch is not realistic for a paid, multi-child product — but <b>13 weeks to a public launch is</b>, because the hardest 60% (the whole experience) already exists as a validated prototype.</p>
+  </div>
+</section>
+
+<!-- ============ MASTER GANTT ============ -->
+<section>
+  <h2 class="sec display">The 90-day timeline</h2>
+  <div class="col"><p class="sec-sub">Four phases across thirteen weeks. Pre-marketing and analytics run continuously; build and beta overlap deliberately.</p></div>
+
+  <div class="phase-strip">
+    <div class="pc" style="--pc:var(--p1)"><div class="wk">Weeks 1–4</div><div class="nm">Prepare</div><div class="ds">Validate, scope, design, tease</div></div>
+    <div class="pc" style="--pc:var(--p2)"><div class="wk">Weeks 3–9</div><div class="nm">Build</div><div class="ds">Architecture, sprints, beta</div></div>
+    <div class="pc" style="--pc:var(--p3)"><div class="wk">Weeks 9–11</div><div class="nm">Launch</div><div class="ds">ASO, campaign, GTM blitz</div></div>
+    <div class="pc" style="--pc:var(--p4)"><div class="wk">Weeks 10–13</div><div class="nm">Grow</div><div class="ds">Onboarding, metrics, V1.1</div></div>
+  </div>
+
+  <div class="gantt-wrap">
+    <div class="gantt" role="table" aria-label="Master project Gantt chart across 13 weeks">
+      <div class="gh mlabel">Workstream</div>
+      <div class="gh">W1</div><div class="gh">W2</div><div class="gh">W3</div><div class="gh">W4</div><div class="gh">W5</div><div class="gh">W6</div><div class="gh">W7</div><div class="gh">W8</div><div class="gh">W9</div><div class="gh">W10</div><div class="gh">W11</div><div class="gh">W12</div><div class="gh">W13</div>
+
+      <!-- Row template: label (col1) + bar (grid-column week+1) -->
+      <div class="glabel"><span class="sw b1"></span>Research &amp; validation</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b1" style="margin-left:0;margin-right:calc(84.6% + 3px)">Wk 1–2</div></div>
+
+      <div class="glabel"><span class="sw b1"></span>MVP scoping</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b1" style="margin-left:7.7%;margin-right:calc(76.9% + 3px)">Scope</div></div>
+
+      <div class="glabel"><span class="sw b1"></span>Brand &amp; pre-marketing</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b1" style="margin-left:7.7%;margin-right:3px">Waitlist &amp; teasers · ongoing</div></div>
+
+      <div class="glabel"><span class="sw b1"></span>UX / UI &amp; prototype</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b1" style="margin-left:7.7%;margin-right:calc(69.2% + 3px)">Design</div></div>
+
+      <div class="glabel"><span class="sw b2"></span>Technical architecture</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b2" style="margin-left:15.4%;margin-right:calc(69.2% + 3px)">Setup</div></div>
+
+      <div class="glabel"><span class="sw b2"></span>Frontend sprints</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b2" style="margin-left:23.1%;margin-right:calc(38.5% + 3px)">Build UI</div></div>
+
+      <div class="glabel"><span class="sw b2"></span>Backend &amp; API</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b2" style="margin-left:23.1%;margin-right:calc(38.5% + 3px)">Accounts, sync, billing</div></div>
+
+      <div class="glabel"><span class="sw b2"></span>Analytics instrumentation</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar bghost" style="margin-left:23.1%;margin-right:3px">Events · ongoing</div></div>
+
+      <div class="glabel"><span class="sw b2"></span>QA &amp; bug tracking</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b2" style="margin-left:46.2%;margin-right:calc(23.1% + 3px)">QA</div></div>
+
+      <div class="glabel"><span class="sw b2"></span>Closed → open beta</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b2" style="margin-left:53.8%;margin-right:calc(15.4% + 3px)">Beta</div></div>
+
+      <div class="glabel"><span class="sw b3"></span>ASO &amp; store prep</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b3" style="margin-left:61.5%;margin-right:calc(7.7% + 3px)">Listings</div></div>
+
+      <div class="glabel"><span class="sw b3"></span>Launch campaign</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b3" style="margin-left:76.9%;margin-right:calc(15.4% + 3px)">Blitz</div></div>
+
+      <div class="glabel"><span class="sw b4"></span>Paid &amp; organic marketing</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b4" style="margin-left:76.9%;margin-right:3px">Scale channels</div></div>
+
+      <div class="glabel"><span class="sw b4"></span>Onboarding &amp; retention</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b4" style="margin-left:69.2%;margin-right:3px">Lifecycle systems</div></div>
+
+      <div class="glabel"><span class="sw b4"></span>Iterate → V1.1</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b4" style="margin-left:84.6%;margin-right:3px">Ship fixes</div></div>
+
+      <!-- milestones -->
+      <div class="glabel" style="grid-row:17;grid-column:1;color:var(--gold);font-weight:800">◆ Milestones</div>
+      <div class="ms" style="grid-row:17;grid-column:3" title="MVP scope locked"></div>
+      <div class="ms" style="grid-row:17;grid-column:5" title="Design sign-off"></div>
+      <div class="ms" style="grid-row:17;grid-column:9" title="Feature complete"></div>
+      <div class="ms" style="grid-row:17;grid-column:10" title="Open beta"></div>
+      <div class="ms" style="grid-row:17;grid-column:12" title="Public launch"></div>
+      <div class="ms" style="grid-row:17;grid-column:14" title="First retention review"></div>
+    </div>
+  </div>
+  <div class="legend">
+    <span><i class="b1"></i>Phase 1 · Prepare</span>
+    <span><i class="b2"></i>Phase 2 · Build</span>
+    <span><i class="b3"></i>Phase 3 · Launch</span>
+    <span><i class="b4"></i>Phase 4 · Grow</span>
+    <span><i class="di" style="background:var(--gold)"></i>Milestone</span>
+  </div>
+  <div class="scroll-hint">Milestones, left→right: MVP scope locked (W2) · Design sign-off (W4) · Feature complete (W8) · Open beta (W9) · Public launch (W11) · First retention review (W13). Scroll the chart sideways on mobile.</div>
+</section>
+
+<!-- ============ PHASE 1 ============ -->
+<section style="--phase:var(--p1)">
+  <h2 class="sec display"><span class="num">1</span>Pre-launch &amp; preparation</h2>
+  <div class="col"><p class="sec-sub">Weeks 1–4. Prove the wedge, cut the scope hard, design the flow, and start building an audience before a line of production code ships.</p></div>
+
+  <h3 class="sub"><span class="dot"></span>Market research &amp; validation</h3>
+  <ul class="check">
+    <li>Map <b>8–10 competitors</b> across three buckets: talent/skills apps, general kids-activity apps, and parenting/child-development apps. Note what each charges and what they <em>don't</em> cover (emotional/social readiness).</li>
+    <li>Run a <b>parent survey (n≈100)</b> via school groups, parenting Facebook communities and Reddit. Ask about anxieties, not features: "What worries you about your child starting sport?"</li>
+    <li>Do <b>6–8 live parent interviews</b> (30 min). Show the prototype; watch where they lean in and where they hesitate on price.</li>
+    <li>Write a one-page <b>value-proposition canvas</b>: parent pains → CoachUp relievers → the one sentence they'd repeat to a friend.</li>
+    <li>Validate willingness-to-pay with a simple <b>Van Westendorp</b> price question in the survey.</li>
+  </ul>
+  <div class="play"><span class="tag">Advice</span>Recruit survey respondents from the <b>exact niches</b> you named — single parents, sport parents. Segment results by type; a sport parent and a cautious first-timer buy for opposite reasons, and your messaging will need both.</div>
+
+  <h3 class="sub"><span class="dot"></span>Product scoping — MVP vs. nice-to-have</h3>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Core MVP (must ship)</th><th>Nice-to-have (post-launch)</th></tr></thead>
+    <tbody>
+      <tr><td><b>Discovery Day</b> + CoachUp DNA™ report</td><td>Real illustrated guide characters &amp; audio</td></tr>
+      <tr><td>One <b>12-week season</b> + Growth Report</td><td>Seasons 2–3 depth &amp; graduation gate</td></tr>
+      <tr><td>Accounts, save/sync, <b>one child profile</b></td><td>Multi-child &amp; sibling profiles</td></tr>
+      <tr><td>Subscription billing (one plan)</td><td>Coach marketplace &amp; trial booking</td></tr>
+      <tr><td>Core Courage Curve (weeks 1–4)</td><td>Full courage + safeguarding review</td></tr>
+      <tr><td>Basic push/email lifecycle</td><td>Advanced personalization &amp; A/B engine</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="play"><span class="tag">Advice</span>Your prototype is <em>feature-rich already</em> — the risk is over-shipping, not under. Cut multi-child and the coach marketplace from launch. A focused free→paid loop with one child profile is faster to build, easier to measure, and enough to prove retention.</div>
+
+  <h3 class="sub"><span class="dot"></span>Design &amp; wireframing</h3>
+  <ul class="check">
+    <li>Turn prototype learnings into <b>2–3 tightened user flows</b>: first-run (Discovery→report), the paywall moment, and week-1 of a season.</li>
+    <li>Commission <b>real illustrations</b> for guides and the brand mark to replace emoji placeholders (biggest perceived-quality lift).</li>
+    <li>Run <b>5 usability tests</b> on the paywall placement specifically — where it sits decides your conversion.</li>
+    <li>Finalize the design system in tokens (colors, type, spacing) so build is assembly, not invention.</li>
+  </ul>
+
+  <h3 class="sub"><span class="dot"></span>Pre-marketing strategy</h3>
+  <ul class="check">
+    <li>Ship a <b>waitlist landing page</b> in week 1 (the current hero works) with email capture and the "sportiness to light" promise.</li>
+    <li>Lock <b>brand identity</b>: logo, palette, voice guide, social templates.</li>
+    <li>Publish <b>teaser content</b> — short "did you know movement confidence matters more than talent at age 6?" clips for Instagram/TikTok.</li>
+    <li>Line up <b>10–15 parent micro-influencers</b> and 3–5 schools/clubs for beta and launch amplification.</li>
+    <li>Target: <b>500+ waitlist emails</b> before public launch.</li>
+  </ul>
+</section>
+
+<!-- ============ PHASE 2 ============ -->
+<section style="--phase:var(--p2)">
+  <h2 class="sec display"><span class="num">2</span>Design &amp; development execution</h2>
+  <div class="col"><p class="sec-sub">Weeks 3–9. Wrap the prototype in a real backend, harden it, and get it into parents' hands early through beta.</p></div>
+
+  <h3 class="sub"><span class="dot"></span>Technical architecture</h3>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Layer</th><th>Recommendation</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><b>Frontend</b></td><td>Keep React + Vite; ship as PWA; wrap with Capacitor</td><td>Reuses the entire prototype; one codebase to three platforms</td></tr>
+      <tr><td><b>Backend / DB</b></td><td>Supabase (Postgres, Auth, storage) or Firebase</td><td>Auth, data, and sync out of the box — weeks saved</td></tr>
+      <tr><td><b>Payments</b></td><td>Stripe (web) + RevenueCat (app stores)</td><td>Unified subscriptions across web and native</td></tr>
+      <tr><td><b>Comms</b></td><td>OneSignal (push) + Resend/Customer.io (email)</td><td>Lifecycle messaging without custom infra</td></tr>
+      <tr><td><b>Analytics</b></td><td>PostHog (product) + Plausible (web)</td><td>Funnels, retention cohorts, privacy-friendly</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="play"><span class="tag">Advice</span>Store the child's data with a <b>privacy-first, parent-owned</b> model and be COPPA/GDPR-K aware from day one — for this audience, trust <em>is</em> the product. Say so on the paywall.</div>
+
+  <h3 class="sub"><span class="dot"></span>Sprint plan (2-week sprints)</h3>
+  <div class="gantt-wrap">
+    <div class="gantt" style="grid-template-columns:150px repeat(13,minmax(30px,1fr));min-width:720px" aria-label="Development sprint Gantt">
+      <div class="gh mlabel">Sprint focus</div>
+      <div class="gh">W1</div><div class="gh">W2</div><div class="gh">W3</div><div class="gh">W4</div><div class="gh">W5</div><div class="gh">W6</div><div class="gh">W7</div><div class="gh">W8</div><div class="gh">W9</div><div class="gh">W10</div><div class="gh">W11</div><div class="gh">W12</div><div class="gh">W13</div>
+      <div class="glabel">S0 · Foundations</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b2" style="margin-left:15.4%;margin-right:calc(69.2% + 3px)">Auth · schema</div></div>
+      <div class="glabel">S1 · Core flow live</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b2" style="margin-left:30.8%;margin-right:calc(53.8% + 3px)">Discovery + report</div></div>
+      <div class="glabel">S2 · Season + paywall</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b2" style="margin-left:46.2%;margin-right:calc(38.5% + 3px)">Plan + billing</div></div>
+      <div class="glabel">S3 · Polish + QA</div>
+      <div class="cellrow" style="grid-column:2/15"><div class="bar b2" style="margin-left:53.8%;margin-right:calc(23.1% + 3px)">Harden</div></div>
+      <div class="glabel" style="grid-row:6;grid-column:1;color:var(--gold)">◆ Feature complete</div>
+      <div class="ms" style="grid-row:6;grid-column:9" title="Feature complete W8"></div>
+    </div>
+  </div>
+  <ul class="check">
+    <li><b>S0 (W3–4):</b> repo hardening, auth, database schema, analytics events wired, CI/CD.</li>
+    <li><b>S1 (W5–6):</b> Discovery Day + DNA report fully backed by real accounts and save/sync.</li>
+    <li><b>S2 (W6–7):</b> one training season, Growth Report, and the subscription paywall + Stripe/RevenueCat.</li>
+    <li><b>S3 (W7–8):</b> polish, accessibility, edge cases, performance; <b>feature freeze end of W8</b>.</li>
+  </ul>
+
+  <h3 class="sub"><span class="dot"></span>Beta testing strategy</h3>
+  <ul class="check">
+    <li><b>Closed beta (W8):</b> 20–30 waitlist families via TestFlight / PWA link. Tight feedback loop.</li>
+    <li><b>Open beta (W9):</b> widen to 100–150; watch the funnel, not just opinions.</li>
+    <li>Instrument a <b>one-tap in-app feedback</b> button and triage in Linear/GitHub with severity labels.</li>
+    <li>Define <b>launch-blocker criteria</b>: crash-free &gt; 99%, Discovery completion &gt; 70%, paywall view→trial &gt; baseline.</li>
+    <li>Run a <b>safeguarding review</b> of Courage Curve content with a child-development specialist before public launch.</li>
+  </ul>
+  <div class="play"><span class="tag">Advice</span>Recruit beta families who will actually <b>run the home quests with their kids</b>, not just click through. Retention signal from real play is the only beta data that predicts post-launch churn.</div>
+</section>
+
+<!-- ============ PHASE 3 ============ -->
+<section style="--phase:var(--p3)">
+  <h2 class="sec display"><span class="num">3</span>Launch &amp; go-to-market</h2>
+  <div class="col"><p class="sec-sub">Weeks 9–11. Convert the audience you've been building into a concentrated launch moment, then keep the channels warm.</p></div>
+
+  <h3 class="sub"><span class="dot"></span>App Store Optimization (ASO)</h3>
+  <ul class="check">
+    <li><b>Keywords:</b> target "kids sports readiness", "child confidence", "movement skills kids", "kids activity", not competitive "kids sports" head terms.</li>
+    <li><b>Title:</b> <em>CoachUp Kids: Sport Readiness</em>. <b>Subtitle:</b> <em>Confidence, movement &amp; fun</em>.</li>
+    <li><b>Screenshots:</b> lead with the DNA report and the parent benefit caption, not UI chrome. First two frames win the install.</li>
+    <li><b>Preview video (15–20s):</b> a child laughing through a home quest → the report reveal → a calm parent. Emotion over feature tour.</li>
+    <li>Seed <b>early ratings</b> from beta families the day of launch.</li>
+  </ul>
+
+  <h3 class="sub"><span class="dot"></span>Launch campaign</h3>
+  <ul class="check">
+    <li><b>Product Hunt</b> launch (Tue–Thu): rally waitlist + team for first-3-hours momentum; lead with the "not a talent test" angle.</li>
+    <li><b>PR outreach</b> to parenting and edtech press + local news ("local founder helps kids fall in love with movement").</li>
+    <li><b>Social blitz</b> across the teaser channels; publish the founder story and the "why we don't rank kids" manifesto.</li>
+    <li>Activate <b>micro-influencers</b> and schools/clubs with a unique code + free Club month to share.</li>
+    <li>Send the <b>waitlist launch email</b> with an early-supporter discount.</li>
+  </ul>
+  <div class="play"><span class="tag">Advice</span>Launch <b>one concentrated week</b>, not a slow trickle. Concentrated attention drives store ranking, which drives organic installs — the compounding you can't buy. Have every asset ready the Friday before.</div>
+
+  <h3 class="sub"><span class="dot"></span>Paid &amp; organic marketing</h3>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Channel</th><th>Role</th><th>Starting move</th></tr></thead>
+    <tbody>
+      <tr><td><b>Meta (IG/FB)</b></td><td>Primary paid — parents live here</td><td>Video ads to lookalikes of waitlist; small $30–50/day test</td></tr>
+      <tr><td><b>TikTok</b></td><td>Organic reach + cheap video CPMs</td><td>"Movement confidence" education clips; boost winners</td></tr>
+      <tr><td><b>Google / ASA</b></td><td>Intent capture</td><td>Bid on brand + "kids confidence app" terms</td></tr>
+      <tr><td><b>Content / SEO</b></td><td>Long-term organic moat</td><td>Parent-guide articles on readiness &amp; age milestones</td></tr>
+      <tr><td><b>Community</b></td><td>Trust &amp; retention</td><td>A parent group; weekly quest challenges</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ============ PHASE 4 ============ -->
+<section style="--phase:var(--p4)">
+  <h2 class="sec display"><span class="num">4</span>Post-launch growth &amp; retention</h2>
+  <div class="col"><p class="sec-sub">Weeks 10–13 and beyond. The launch spike fades in days; the retention engine is what makes this a business.</p></div>
+
+  <h3 class="sub"><span class="dot"></span>Onboarding &amp; retention</h3>
+  <ul class="check">
+    <li><b>Activation sequence:</b> get every new parent to a completed Discovery Day + report in the first session — that's the "aha".</li>
+    <li><b>Push notifications:</b> weekly quest reminders in the guide's voice; celebrate streak-free wins, never guilt.</li>
+    <li><b>Email drip:</b> day 0 welcome, day 2 "how to run a quest", day 7 season nudge, day 14 upgrade story.</li>
+    <li><b>Churn reduction:</b> win-back for lapsed families; annual Discovery Day "re-run" as a birthday ritual.</li>
+    <li><b>Referral loop:</b> the shareable report is the invite; add "start your child's journey" to it.</li>
+  </ul>
+  <div class="play"><span class="tag">Advice</span>For a parent product, the real retention lever is the <b>child asking to play again</b>. Optimize the between-session hook (quest reminders, badges, the guide "remembering" them) harder than any adult-facing feature.</div>
+
+  <h3 class="sub"><span class="dot"></span>Metrics &amp; analytics — the KPI dashboard</h3>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="k">Activation</div><div class="v">≥ 70%</div><div class="d">Sign-ups completing Discovery Day in session 1</div></div>
+    <div class="kpi"><div class="k">Free → paid</div><div class="v">3–5%</div><div class="d">Trial start from paywall view (early benchmark)</div></div>
+    <div class="kpi"><div class="k">D30 retention</div><div class="v">≥ 25%</div><div class="d">Families active 30 days after install</div></div>
+    <div class="kpi"><div class="k">CAC</div><div class="v">&lt; $15</div><div class="d">Blended cost per acquired family — keep below ⅓ of LTV</div></div>
+    <div class="kpi"><div class="k">LTV</div><div class="v">&gt; $45</div><div class="d">Driven by annual-plan share &amp; retention</div></div>
+    <div class="kpi"><div class="k">DAU / MAU</div><div class="v">&gt; 20%</div><div class="d">Stickiness; realistic for weekly-cadence use</div></div>
+    <div class="kpi"><div class="k">Quest completion</div><div class="v">≥ 3<small>/wk</small></div><div class="d">The leading indicator of the child hook</div></div>
+    <div class="kpi"><div class="k">Referral (K)</div><div class="v">&gt; 0.3</div><div class="d">New families invited per active family</div></div>
+  </div>
+  <div class="play"><span class="tag">Advice</span>Pick <b>one North Star</b>: <em>weekly active families completing at least one quest</em>. It ties together acquisition, activation, and the child hook in a single number the whole team can move.</div>
+
+  <h3 class="sub"><span class="dot"></span>Feedback &amp; iteration — the V1.1 roadmap</h3>
+  <ul class="check">
+    <li><b>Weeks 11–12:</b> triage launch bugs daily; ship a stability patch within the first week.</li>
+    <li><b>Week 13:</b> first retention review — read the D7/D30 cohort and the paywall funnel; decide what V1.1 fixes.</li>
+    <li>Prioritize the <b>V1.1</b> backlog by impact × effort: likely multi-child profiles, real illustrations, and the coach-marketplace pilot.</li>
+    <li>Stand up a <b>public feature board</b> so parents feel heard and you crowdsource the roadmap.</li>
+    <li>Plan the <b>coach/club pilot</b> — the marketplace is the path from subscription business to platform.</li>
+  </ul>
+</section>
+
+<hr class="rule" />
+<div class="foot">
+  <p><b>How to read this plan.</b> Weeks are relative to your kickoff, not calendar dates. The four phases overlap on purpose — pre-marketing and analytics never stop, and beta runs while you're still polishing. The single biggest accelerator you already hold: a validated, high-fidelity prototype, which is why a public launch inside 13 weeks is realistic where it usually isn't.</p>
+  <p><b>First five moves, in order:</b> ① lock the free-vs-paid line ② ship the waitlist page ③ cut MVP scope with the table above ④ stand up Supabase + Stripe ⑤ recruit 30 beta families. Everything else follows.</p>
+  <p style="margin-top:16px;color:var(--ink-faint)">Prepared for CoachUp Kids · Senior PM &amp; Marketing Strategy view · a 90-day operating plan, not a spec.</p>
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('themeToggle');
+    var root = document.documentElement;
+    btn.addEventListener('click', function () {
+      var cur = root.getAttribute('data-theme');
+      if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
